@@ -28,6 +28,8 @@ module.exports = function(config) {
   // app.post("/graphic/:slug", require("./handlers/create"));
   // app.post("/graphic/:slug/deploy", require("./handlers/deploy"));
   // app.get("/graphic/:slug/copyedit", require("./handlers/copyedit"));
+  // app.get("/authorize", require("./handlers/google-oauth").authorize);
+  // app.get("/authenticated", require("./handlers/google-oath").authenticate);
   // app.get("/graphic/:slug/refresh-sheet", require("./handlers/reloadData"));
 
   app.listen(argv.port || 8000);
