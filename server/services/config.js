@@ -1,2 +1,9 @@
 var path = require("path");
-var os = require("os");
+
+module.exports = function(config) {
+
+  config.root = path.join(process.cwd(), config.path);
+
+  return config;
+
+}

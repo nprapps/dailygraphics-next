@@ -6,16 +6,25 @@ var argv = minimist(process.argv);
 
 module.exports = function(config) {
 
+  var configurator = require("./services/config");
+  config = configurator(config);
+
   app.set("config", config);
 
   app.set("views", process.cwd() + "/server/templates");
   app.engine("html", require("./services/render").render);
 
+  // configure reload
+  var reload = require("./services/reload");
+  reload(config);
+
+  app.use(express.static("server/static"));
+
   app.get("/", require("./handlers/root"));
-  app.get("/graphic/:slug", require("./handlers/graphic"));
-  // app.get("/graphic/:slug/index.html", require("./handlers/child");
-  // app.get("/graphic/:slug/*.js", require("./handlers/bundle"));
-  // app.get("/graphic/:slug/*.css", require("./handlers/style"));
+  app.get("/graphic/:slug", require("./handlers/parent"));
+  app.get("/graphic/:slug/index.html", require("./handlers/child"));
+  app.get("/graphic/:slug/*.js", require("./handlers/bundle"));
+  app.get("/graphic/:slug/*.css", require("./handlers/style"));
   // app.post("/graphic/:slug", require("./handlers/create"));
   // app.post("/graphic/:slug/deploy", require("./handlers/deploy"));
   // app.get("/graphic/:slug/copyedit", require("./handlers/copyedit"));

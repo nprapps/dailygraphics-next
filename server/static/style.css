@@ -1,0 +1,72 @@
+:root {
+  --off-black: #333;
+  --light-gray: #ebebeb;
+  --off-white: #f7f7f7;
+  --blue: #4774CC;
+  --local: green;
+  --staging: orange;
+  --production: red;
+  --dashes: 2px dashed #ddd;
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a, a.visited {
+  color: var(--blue);
+}
+
+button {
+  padding: 2px 8px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover, button:focus {
+  background: var(--light-gray);
+}
+
+/* components */
+
+.toolbar {
+  background: var(--off-black);
+  color: var(--off-white);
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.toolbar .title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.toolbar input {
+  display: block;
+  font-size: 16px;
+  border: 0;
+  background: var(--off-white);
+  padding: 0 10px;
+}
+
+/* home page */
+
+
+.root-list {
+  background: var(--off-white);
+}
+
+.root-list ul {
+  list-style-type: none;
+}

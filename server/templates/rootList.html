@@ -1,6 +1,18 @@
 <!doctype html>
 <html>
-  <body>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" href="https://media.npr.org/favicon.ico" />
+  </head>
+  <body class="root-list">
+    
+    <div class="toolbar">
+      <h1 class="title">NPR Daily Graphics</h1>
+      <button class="new-graphic">Create new graphic</button>
+      <input type="search" placeholder="Search list" />
+    </div>
+    
     <ul>
     <% graphics.forEach(function(g) { %>
       <li>

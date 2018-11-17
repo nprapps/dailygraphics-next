@@ -6,7 +6,7 @@ module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
 
-  var root = path.join(process.cwd(), config.root);
+  var root = path.join(config.root);
   var graphics = await fs.readdir(root);
   graphics = graphics.filter(g => !g.match(/^[._]/));
 
