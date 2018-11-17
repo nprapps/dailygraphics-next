@@ -10,7 +10,10 @@ module.exports = async function(request, response) {
 
   var { slug } = request.params;
   var filename = path.basename(request.path);
-  var b = browserify({ debug: env != "production" });
+  var b = browserify({
+    debug: env != "production",
+    paths: [ path.join(process.cwd(), "node_modules") ]
+  });
   b.transform(babelify, {
     global: true,
     presets: [
@@ -22,12 +25,10 @@ module.exports = async function(request, response) {
   });
   var sourceFile = path.join(config.root, slug, filename);
   b.add(sourceFile);
+
   var assembly = b.bundle();
-
-  response.set({
-    "Content-Type": "application/javascript"
-  });
-
   assembly.pipe(response);
+
+  assembly.on("error", err => console.log("Compile error: " + err.message));
 
 };
