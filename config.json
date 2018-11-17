@@ -1,3 +1,4 @@
 {
-  "path": "../graphics-js"
+  "path": "../graphics-js",
+  "templates": "../templates-js"
 }
