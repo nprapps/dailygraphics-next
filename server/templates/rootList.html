@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+  <body>
+    <ul>
+    <% graphics.forEach(function(g) { %>
+      <li>
+        <a href="/graphic/<%= g %>/"><%= g %></a>
+    <% }); %>
+    </ul>
+  </body>
+</html>
