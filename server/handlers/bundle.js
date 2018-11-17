@@ -11,8 +11,7 @@ module.exports = async function(request, response) {
   var { slug } = request.params;
   var filename = path.basename(request.path);
   var b = browserify({
-    debug: env != "production",
-    paths: [ path.join(process.cwd(), "node_modules") ]
+    debug: env != "production"
   });
   b.transform(babelify, {
     global: true,
