@@ -5,11 +5,16 @@ var cache = {};
 
 var templatePath = path.join(process.cwd(), "server/templates");
 
-var render = async function(path, data, callback) {
-  var source = await fs.readFile(path, "utf-8");
-  var template = compile(source);
-  var rendered = template(data);
-  callback(null, rendered);
-};
+module.exports = function(app) {
 
-module.exports = { render };
+  var render = async function(path, data, callback) {
+    var source = await fs.readFile(path, "utf-8");
+    var template = compile(source);
+    var rendered = template(data);
+    callback(null, rendered);
+  };
+
+  app.set("views", process.cwd() + "/server/templates");
+  app.engine("html", render);
+
+};

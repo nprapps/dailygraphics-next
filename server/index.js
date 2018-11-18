@@ -1,22 +1,23 @@
 var express = require("express");
 var app = express();
+var fs = require("fs").promises;
+var path = require("path");
 
 var minimist = require("minimist");
 var argv = minimist(process.argv);
 
-module.exports = function(config) {
+module.exports = async function(config) {
 
-  var configurator = require("./services/config");
-  config = configurator(config);
+  config.root = path.join(process.cwd(), config.path);
 
   app.set("config", config);
 
-  app.set("views", process.cwd() + "/server/templates");
-  app.engine("html", require("./services/render").render);
-
-  // configure reload
-  var reload = require("./services/reload");
-  reload(config);
+  // load services onto app
+  var services = await fs.readdir("server/services");
+  services.forEach(s => {
+    var initService = require(`./services/${s}`);
+    initService(app);
+  });
 
   app.use(express.static("server/static"));
 
