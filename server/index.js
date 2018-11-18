@@ -39,7 +39,7 @@ module.exports = async function(config) {
   // app.get("/graphic/:slug/refresh-sheet", require("./handlers/reloadData"));
 
   // catch-all for static assets
-  app.get(/graphic\/((.+)\.(\w+))$/, require("./handlers/files"));
+  app.get("/graphic/:slug/*", require("./handlers/files"));
 
   app.listen(argv.port || 8000);
 
