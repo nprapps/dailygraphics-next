@@ -3,10 +3,10 @@ var babelify = require("babelify");
 
 module.exports = function(app) {
 
-  app.set("processJS", function(sourceFile) {
+  app.set("processJS", function(sourceFile, production) {
     return new Promise((ok, fail) => {
       var b = browserify({
-        debug: process.NODE_ENV != "production"
+        debug: !production
       });
       b.transform(babelify, {
         global: true,
