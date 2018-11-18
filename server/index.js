@@ -21,17 +21,25 @@ module.exports = async function(config) {
 
   app.use(express.static("server/static"));
 
+  // basic page loading
   app.get("/", require("./handlers/root"));
   app.get("/graphic/:slug", require("./handlers/parent"));
   app.get("/graphic/:slug/index.html", require("./handlers/child"));
   app.get("/graphic/:slug/*.js", require("./handlers/bundle"));
   app.get("/graphic/:slug/*.css", require("./handlers/style"));
+
+  // admin functions
   // app.post("/graphic/:slug", require("./handlers/create"));
   // app.post("/graphic/:slug/deploy", require("./handlers/deploy"));
   // app.get("/graphic/:slug/copyedit", require("./handlers/copyedit"));
+
+  // Google integration
   // app.get("/authorize", require("./handlers/google-oauth").authorize);
   // app.get("/authenticated", require("./handlers/google-oath").authenticate);
   // app.get("/graphic/:slug/refresh-sheet", require("./handlers/reloadData"));
+
+  // catch-all for static assets
+  app.get(/graphic\/((.+)\.(\w+))$/, require("./handlers/files"));
 
   app.listen(argv.port || 8000);
 
