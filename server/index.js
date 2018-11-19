@@ -45,7 +45,7 @@ module.exports = async function(config) {
   // Google integration
   // app.get("/authorize", require("./handlers/google-oauth").authorize);
   // app.get("/authenticated", require("./handlers/google-oath").authenticate);
-  // app.get("/graphic/:slug/refresh-sheet", require("./handlers/reloadData"));
+  app.post("/graphic/:slug/refresh-sheet", require("./handlers/evictSheet"));
 
   // catch-all for static assets
   app.get("/graphic/:slug/*", require("./handlers/files"));

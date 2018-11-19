@@ -20,3 +20,21 @@ embedCode.addEventListener("click", function() {
   document.execCommand("copy");
   showToast("Embed code copied");
 });
+
+var preview = $.one(".preview-container");
+
+var clickedBreakpoint = function() {
+  var breakpoint = this.dataset.break;
+  preview.setAttribute("data-width", breakpoint);
+};
+
+$("button.breakpoint").forEach(el => el.addEventListener("click", clickedBreakpoint));
+
+var reloadButton = $.one(".refresh-sheet");
+
+reloadButton.addEventListener("click", function() {
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "./refresh-sheet");
+  xhr.send();
+  xhr.onload = () => window.location.reload();
+});
