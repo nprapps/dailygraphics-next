@@ -20,7 +20,6 @@ var authorize = async function(request, response) {
     parsed.searchParams.set("redirect_uri", redirect);
     authURL = parsed.toString();
   }
-  console.log(authURL);
 
   response.status(302);
   response.set("Location", authURL);
