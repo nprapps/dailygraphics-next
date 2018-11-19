@@ -7,7 +7,8 @@ module.exports = function(app) {
   var config = app.get("config")
 
   var server = livereload.createServer({
-    extraExts: ["less"]
+    extraExts: ["less"],
+    exclusions: [/node_modules\//]
   });
   server.watch(config.root);
 

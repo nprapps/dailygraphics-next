@@ -16,7 +16,10 @@ module.exports = async function(config) {
   app.set("config", config);
   app.set("cache", new MemoryPalace());
 
-  var server = app.listen(argv.port || 8000);
+  var port = argv.port || 8000;
+  app.set("port", port);
+
+  var server = app.listen(port);
   app.set("server", server);
 
   // load services onto app
@@ -43,8 +46,8 @@ module.exports = async function(config) {
   // app.get("/graphic/:slug/copyedit", require("./handlers/copyedit"));
 
   // Google integration
-  // app.get("/authorize", require("./handlers/google-oauth").authorize);
-  // app.get("/authenticated", require("./handlers/google-oath").authenticate);
+  app.get("/authorize", require("./handlers/googleAuth").authorize);
+  app.get("/authenticate", require("./handlers/googleAuth").authenticate);
   app.post("/graphic/:slug/refresh-sheet", require("./handlers/evictSheet"));
 
   // catch-all for static assets

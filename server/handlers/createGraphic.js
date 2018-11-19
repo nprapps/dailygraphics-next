@@ -1,6 +1,10 @@
 var fs = require("fs").promises;
 var path = require("path");
 var copyDir = require("../../lib/copyDirectory");
+var readJSON = require("../../lib/readJSON");
+
+var { google } = require("googleapis");
+var { getClient } = require("../../lib/googleAuth");
 
 module.exports = async function(request, response) {
   var app = request.app;
@@ -14,6 +18,10 @@ module.exports = async function(request, response) {
 
   var base = path.join(config.templateRoot, "_base");
   var src = path.join(config.templateRoot, template);
+
+  var manifestPath = path.join(src, "manifest.json");
+  var manifest = await readJSON(manifestPath);
+  var { templateSheet } = manifest;
 
   try {
     await fs.mkdir(dest);

@@ -2,6 +2,7 @@ var path = require("path");
 var fs = require("fs").promises;
 var compile = require("lodash.template");
 
+var readJSON = require("../../lib/readJSON");
 var getSheet = require("../../lib/getSheet");
 
 module.exports = async function(request, response) {
@@ -13,7 +14,7 @@ module.exports = async function(request, response) {
   var { slug } = request.params;
 
   var manifestPath = path.join(config.root, slug, "manifest.json");
-  var manifest = JSON.parse(await fs.readFile(manifestPath, "utf-8"));
+  var manifest = await readJSON(manifestPath);
   var { sheet } = manifest;
 
   var data = {
