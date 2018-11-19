@@ -7,17 +7,33 @@
   </head>
   <body class="root-list">
     
-    <div class="toolbar">
-      <h1 class="title">NPR Daily Graphics</h1>
-      <button class="new-graphic">Create new graphic</button>
-      <input type="search" placeholder="Search list" />
+    <header class="toolbar">
+      <h1 class="title">daily.graphics</h1>
+      <button class="new-graphic">new()</button>
+      <input type="search" placeholder="Search list" class="search-graphics"/>
+    </header>
+    <div class="create-shade">
+      <form method="POST" action="/graphic">
+        <select id="template" name="template">
+          <% templates.forEach(t => { %>
+          <option value="<%= t %>"><%= t %></option>
+          <% }) %>
+        </select>
+        <input type="text" required name="slug">
+        <button type="submit">Create</button>
+      </form>
     </div>
     
-    <ul>
+    <ol class="graphics-list">
     <% graphics.forEach(function(g) { %>
-      <li>
-        <a href="/graphic/<%= g %>/"><%= g %></a>
+      <li data-slug="<%= g %>" class="item">
+        <div class="contents">
+          <a href="/graphic/<%= g %>/"><%= g %></a>
+          <button class="clone-graphic" data-slug="<%= g %>">clone</a>
+        </div>
     <% }); %>
-    </ul>
+    </ol>
+
+    <script src="rootPage.js"></script>
   </body>
 </html>

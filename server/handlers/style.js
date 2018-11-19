@@ -12,10 +12,16 @@ module.exports = async function(request, response) {
   filename = filename.replace(".css", ".less");
   var file = path.join(config.root, slug, filename);
 
-  var rendered = await makeCSS(file);
+  try {
+    var rendered = await makeCSS(file);
 
-  response.set({
-    "Content-Type": "text/css"
-  });
-  response.send(rendered);
+    response.set({
+      "Content-Type": "text/css"
+    });
+    response.send(rendered);
+  } catch (err) {
+    response.status(500);
+    response.send(err.message);
+    console.log(err);
+  }
 };

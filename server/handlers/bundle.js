@@ -10,12 +10,18 @@ module.exports = async function(request, response) {
   var filename = path.basename(request.path);
   var sourceFile = path.join(config.root, slug, filename);
 
-  var output = await makeJS(sourceFile);
+  try {
+    var output = await makeJS(sourceFile);
 
-  response.set({
-    "Content-Type": "application/javascript"
-  })
-  response.send(output);
+    response.set({
+      "Content-Type": "application/javascript"
+    })
+    response.send(output);
+  } catch (err) {
+    response.status(500);
+    response.send(err.message);
+    console.log(err.message);
+  }
   
 
 };

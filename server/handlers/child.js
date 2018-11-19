@@ -11,7 +11,9 @@ module.exports = async function(request, response) {
 
   var source = await fs.readFile(path.join(config.root, slug, "index.html"));
   var template = compile(source);
-  var output = template();
+  var output = template({
+    COPY: { labels: {}, data: [] }
+  });
   output += `<script src="http://localhost:35729/livereload.js"></script>`;
 
   response.send(output);

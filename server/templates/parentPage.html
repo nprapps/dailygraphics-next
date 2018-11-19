@@ -3,12 +3,41 @@
 <head>
   <meta charset="utf-8">
   <title><%= slug %></title>
-  <link rel="shortcut icon" href="https://media.npr.org/favicon.ico" />
+  <link rel="stylesheet" href="/style.css">
+  <link rel="shortcut icon" href="https://media.npr.org/favicon.ico">
 </head>
-<body>
-  <div class="preview-container">
+<body class="preview-page">
+  <header class="toolbar">
+    <a class="back" aria-hidden="true" href="/">&laquo;</a>
+    <h1 class="title"><%= slug %></h1>
+    <button class="breakpoint" data-break="mobile">Mobile (360px)</button>
+    <button class="breakpoint" data-break="desktop">Desktop (730px)</button>
+    <button class="breakpoint" data-break="fluid">Fluid</button>
+    <span class="spacer"></span>
+    <button class="refresh-sheet">Refresh sheet</button>
+    <button class="deploy-graphic">Deploy</button>
+  </header>
+
+  <div class="preview-container" data-width="mobile">
     <div data-pym-loader data-child-src="./index.html" id="preview">Loading...</div>
   </div>
+  
+  <hr>
+
+  <section class="metadata">
+
+    <h2>Embed code</h2>
+    <textarea class="embed-code" readonly="readonly" rows="4" cols="80"><%=
+`<p data-pym-loader data-child-src="https://apps.npr.org/dailygraphics/graphics/{{slug}}"id="responsive-embed-{{slug}}"> Loading... </p> <script type="text/javascript" src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>`
+.replace(/\</g, "&lt;")
+.replace(/\>/g, "&gt;")
+.replace(/\{\{slug\}\}/g, slug) %></textarea>
+
+  </section>
+
+  <div class="toast"></div>
+
+  <script src="/parentPage.js"></script>
   <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>
 </body>
 </html>
