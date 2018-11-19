@@ -1,5 +1,6 @@
 var express = require("express");
 var app = express();
+var bodyparser = require("body-parser");
 var fs = require("fs").promises;
 var path = require("path");
 
@@ -20,16 +21,18 @@ module.exports = async function(config) {
   });
 
   app.use(express.static("server/static"));
+  app.use(bodyparser.json());
+  app.use(bodyparser.urlencoded({ extended: true }));
 
   // basic page loading
   app.get("/", require("./handlers/root"));
-  app.get("/graphic/:slug", require("./handlers/parent"));
+  app.get("/graphic/:slug/", require("./handlers/parent"));
   app.get("/graphic/:slug/index.html", require("./handlers/child"));
   app.get("/graphic/:slug/*.js", require("./handlers/bundle"));
   app.get("/graphic/:slug/*.css", require("./handlers/style"));
 
   // admin functions
-  // app.post("/graphic/:slug", require("./handlers/create"));
+  app.post("/graphic", require("./handlers/createGraphic"));
   // app.post("/graphic/:slug/deploy", require("./handlers/deploy"));
   // app.get("/graphic/:slug/copyedit", require("./handlers/copyedit"));
 
