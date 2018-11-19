@@ -7,11 +7,17 @@ var path = require("path");
 var minimist = require("minimist");
 var argv = minimist(process.argv);
 
+var MemoryPalace = require("../lib/cache.js");
+
 module.exports = async function(config) {
 
   config.root = path.join(process.cwd(), config.path);
 
   app.set("config", config);
+  app.set("cache", new MemoryPalace());
+
+  var server = app.listen(argv.port || 8000);
+  app.set("server", server);
 
   // load services onto app
   var services = await fs.readdir("server/services");
@@ -43,7 +49,5 @@ module.exports = async function(config) {
 
   // catch-all for static assets
   app.get("/graphic/:slug/*", require("./handlers/files"));
-
-  app.listen(argv.port || 8000);
 
 };
