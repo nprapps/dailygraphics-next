@@ -37,3 +37,16 @@ reloadButton.addEventListener("click", function() {
   xhr.send();
   xhr.onload = () => window.location.reload();
 });
+
+var deployButton = $.one(".deploy-graphic");
+deployButton.addEventListener("click", async function() {
+  showToast("Deploying graphic...");
+  var response = await fetch("./deploy", { method: "POST" });
+  var json = await response.json();
+  if (json.success) {
+    showToast("Deploy successful!");
+  } else {
+    showToast("Deploy failed, check console for more info");
+    console.log(json.error);
+  }
+})
