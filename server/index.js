@@ -39,7 +39,7 @@ module.exports = async function(config) {
 
   // admin functions
   app.post("/graphic", require("./handlers/createGraphic"));
-  // app.post("/graphic/:slug/deploy", require("./handlers/deploy"));
+  app.post("/graphic/:slug/deploy", require("./handlers/deploy"));
   // app.get("/graphic/:slug/copyedit", require("./handlers/copyedit"));
 
   // Google integration
