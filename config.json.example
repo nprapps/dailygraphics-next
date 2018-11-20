@@ -1,4 +1,10 @@
 {
-  "path": "../graphics-js",
-  "templatePath": "../templates-next"
+  "graphicsPath": "../graphics-js",
+  "templatePath": "../templates-next",
+  "driveFolder": "folder ID or blank for default",
+  "s3": {
+    "bucket": "",
+    "prefix": "dailygraphics/graphics"
+  },
+  "analyticsID": ""
 }
