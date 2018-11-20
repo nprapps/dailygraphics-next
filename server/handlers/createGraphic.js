@@ -1,13 +1,11 @@
 var fs = require("fs").promises;
 var path = require("path");
-var copyDir = require("../../lib/copyDirectory");
-var readJSON = require("../../lib/readJSON");
-
-var { copySheet } = require("../../lib/sheetOps");
 
 module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
+  var { copySheet } = app.get("google").sheets;
+  var { copyDir, readJSON } = app.get("fs");
 
   var { template, slug } = request.body;
   var now = new Date();

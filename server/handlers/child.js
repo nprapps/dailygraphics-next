@@ -2,14 +2,14 @@ var path = require("path");
 var fs = require("fs").promises;
 var compile = require("lodash.template");
 
-var readJSON = require("../../lib/readJSON");
-var { getSheet } = require("../../lib/sheetOps");
-
 module.exports = async function(request, response) {
 
   var app = request.app;
   var config = app.get("config");
   var sheetCache = app.get("cache").partition("sheets");
+
+  var { readJSON } = app.get("fs");
+  var { getSheet } = app.get("google").sheets;
 
   var { slug } = request.params;
 

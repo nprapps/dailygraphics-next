@@ -1,9 +1,10 @@
-var { getClient, scopes, updateTokenFile } = require("../../lib/googleAuth");
 var { google } = require("googleapis");
 var { URL } = require("url");
 
 var authorize = async function(request, response) {
   var app = request.app;
+
+  var { getClient, scopes } = app.get("google").auth;
 
   var client = await getClient();
   var authURL = client.generateAuthUrl({
@@ -23,6 +24,8 @@ var authorize = async function(request, response) {
 var authenticate = async function(request, response) {
   var app = request.app;
   var server = app.get("server");
+  var { getClient, updateTokenFile } = app.get("google").auth;
+
   var client = await getClient();
 
   var requestURL = request.url[0] == "/" ? "http://" + request.hostname + request.url : request.url;

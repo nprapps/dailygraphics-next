@@ -7,14 +7,11 @@ var path = require("path");
 var minimist = require("minimist");
 var argv = minimist(process.argv);
 
-var MemoryPalace = require("../lib/cache.js");
-
 module.exports = async function(config) {
 
   config.root = path.join(process.cwd(), config.graphicsPath);
 
   app.set("config", config);
-  app.set("cache", new MemoryPalace());
 
   var port = argv.port || 8000;
   app.set("port", port);

@@ -27,6 +27,5 @@ module.exports = async function(request, response) {
     response.send(err.message);
     consoles.error(err.message);
   }
-  
 
 };
