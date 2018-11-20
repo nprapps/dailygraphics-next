@@ -1,5 +1,16 @@
-module.exports = function(request, response) {
+var readJSON = require("../../lib/readJSON");
+var path = require("path");
 
-  response.render("parentPage.html", request.params);
+module.exports = async function(request, response) {
+  var app = request.app;
+  var config = app.get("config");
+
+  var { slug } = request.params;
+  var manifestPath = path.join(config.root, slug, "manifest.json");
+  var manifest;
+  manifest = await readJSON(manifestPath) || {};
+  var { sheet } = manifest;
+
+  response.render("parentPage.html", { slug, sheet });
 
 }

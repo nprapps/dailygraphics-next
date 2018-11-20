@@ -15,12 +15,6 @@ var authorize = async function(request, response) {
   var port = app.get("port");
   var redirect = `http://${host}:${port}/authenticate/`;
 
-  var parsed = new URL(authURL);
-  if (!parsed.searchParams.get("redirect_uri")) {
-    parsed.searchParams.set("redirect_uri", redirect);
-    authURL = parsed.toString();
-  }
-
   response.status(302);
   response.set("Location", authURL);
   response.send();

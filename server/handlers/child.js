@@ -3,7 +3,7 @@ var fs = require("fs").promises;
 var compile = require("lodash.template");
 
 var readJSON = require("../../lib/readJSON");
-var getSheet = require("../../lib/getSheet");
+var { getSheet } = require("../../lib/sheetOps");
 
 module.exports = async function(request, response) {
 

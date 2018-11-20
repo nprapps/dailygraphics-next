@@ -11,7 +11,7 @@ var MemoryPalace = require("../lib/cache.js");
 
 module.exports = async function(config) {
 
-  config.root = path.join(process.cwd(), config.path);
+  config.root = path.join(process.cwd(), config.graphicsPath);
 
   app.set("config", config);
   app.set("cache", new MemoryPalace());

@@ -19,7 +19,7 @@ module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
 
-  var root = config.root = path.resolve(process.cwd(), config.path);
+  var root = config.root;
   var graphics = await getFolders(root);
 
   var templateRoot = config.templateRoot = path.resolve(process.cwd(), config.templatePath);

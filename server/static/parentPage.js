@@ -23,12 +23,11 @@ embedCode.addEventListener("click", function() {
 
 var preview = $.one(".preview-container");
 
-var clickedBreakpoint = function() {
-  var breakpoint = this.dataset.break;
+var breakSelect = $.one("select.breakpoint");
+breakSelect.addEventListener("change", function() {
+  var breakpoint = this.value;
   preview.setAttribute("data-width", breakpoint);
-};
-
-$("button.breakpoint").forEach(el => el.addEventListener("click", clickedBreakpoint));
+});
 
 var reloadButton = $.one(".refresh-sheet");
 
