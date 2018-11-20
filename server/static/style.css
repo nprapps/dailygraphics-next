@@ -192,9 +192,15 @@ select {
   color: green;
 }
 
+.preview-page .prod-link.button {
+  color: red;
+}
+
 .preview-page .preview-container {
   border: 2px dashed var(--light-gray);
   margin: 32px auto;
+  /* exception so we can add borders with impunity */
+  box-sizing: content-box;
 }
 
 .preview-page .preview-container[data-width="sidebar"] { width: 180px }

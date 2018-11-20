@@ -11,6 +11,6 @@ module.exports = async function(request, response) {
   manifest = await readJSON(manifestPath) || {};
   var { sheet } = manifest;
 
-  response.render("parentPage.html", { slug, sheet });
+  response.render("parentPage.html", { slug, sheet, config });
 
 }

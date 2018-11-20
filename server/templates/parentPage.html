@@ -9,16 +9,26 @@
 <body class="preview-page">
   <header class="toolbar">
     <a class="back" aria-hidden="true" href="/">&laquo;</a>
+
     <h1 class="title"><%= slug %></h1>
+    
     <select class="breakpoint">
       <option value="sidebar">Sidebar (180px)</option>
       <option value="mobile" selected>Mobile (360px)</option>
       <option value="desktop">Desktop (730px)</option>
     </select>
+    
     <% if (typeof sheet != "undefined") { %>
     <a target="_blank" class="edit-sheet button" href="https://docs.google.com/spreadsheets/d/<%= sheet %>/edit#gid=0">Sheet</a>
     <% } %>
+
+    <a target="_blank" class="prod-link button"
+      href="http://<%= config.s3.bucket %>/<%= config.s3.prefix %>/<%= slug %>">
+      Live
+    </a>
+    
     <span class="spacer"></span>
+    
     <button class="refresh-sheet">Refresh sheet</button>
     <button class="deploy-graphic">Deploy</button>
   </header>
