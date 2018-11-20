@@ -1,11 +1,10 @@
 var path = require("path");
 var fs = require("fs").promises;
 
-var deploy = require("../../lib/deployGraphic");
-
 module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
+  var { deploy } = app.get("graphicOps");
   var { slug } = request.params;
 
   try {
@@ -13,6 +12,7 @@ module.exports = async function(request, response) {
     response.send({ success: true });
   } catch (error) {
     response.send({ error });
+    console.log(error);
   }
 
 }

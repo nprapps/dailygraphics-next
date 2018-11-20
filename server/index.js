@@ -10,6 +10,7 @@ var argv = minimist(process.argv);
 module.exports = async function(config) {
 
   config.root = path.join(process.cwd(), config.graphicsPath);
+  config.templateRoot = path.join(process.cwd(), config.templatePath);
 
   app.set("config", config);
 

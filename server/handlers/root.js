@@ -19,11 +19,8 @@ module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
 
-  var root = config.root;
-  var graphics = await getFolders(root);
-
-  var templateRoot = config.templateRoot = path.resolve(process.cwd(), config.templatePath);
-  var templates = await getFolders(templateRoot);
+  var graphics = await getFolders(config.root);
+  var templates = await getFolders(config.templateRoot);
 
   response.render("rootList.html", { graphics, templates });
 
