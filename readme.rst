@@ -59,5 +59,4 @@ TK
 Known issues
 ------------
 
-* Graphics currently share dependencies via ``node_modules``. Browserify supports resolving modules from multiple locations, so it should be possible to have a local ``node_modules`` for each template, but this isn't yet enabled.
 * There's currently a lot of missing feedback when errors occur, such as if you don't have Google API access authorized yet. We're working on it.

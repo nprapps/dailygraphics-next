@@ -15,7 +15,7 @@ module.exports = async function(request, response) {
 
   try {
     var cached = jsCache.get(sourceFile);
-    var output = cached || await makeJS(sourceFile);
+    var output = cached || await makeJS(sourceFile, { root: config.root });
 
     response.set({
       "Content-Type": "application/javascript"
