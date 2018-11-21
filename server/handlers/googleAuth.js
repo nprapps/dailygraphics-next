@@ -9,7 +9,8 @@ var authorize = async function(request, response) {
   var client = await getClient();
   var authURL = client.generateAuthUrl({
     access_type: "offline",
-    scope: scopes.join(" ")
+    scope: scopes.join(" "),
+    approval_prompt: "force"
   });
 
   var host = request.hostname;
