@@ -45,6 +45,8 @@ As resources are loaded, the server will process them according to their type:
 * JS - transpiled with Babel to support `newer JS features <https://babeljs.io/docs/en/learn>`_ and bundled with Browserify. You can ``require()`` NPM modules into your scripts--they'll be loaded first from the graphic subfolder, if there's a ``node_modules`` there, and then from any modules installed in the graphics repo itself. Generally, you should use a local ``node_modules`` only in cases where your graphic requires a different library version from other graphics.
 * CSS - compiled from LESS files, based on filename (loading ``graphics.css`` will compile and load ``graphics.less`` from disk).
 
+Errors detected during JS or LESS compilation will be routed to the dev tools console for easy debugging if your browser supports WebSockets. 
+
 Each graphic should also have a ``manifest.json`` file in its folder, which is used to store configuration data for Sheets and deployment. The "sheets" key in that file tells the server which Google Sheet to use for loading labels and data.
 
 Template creation
@@ -54,7 +56,7 @@ For the most part, templates are just folders containing files that should be co
 
 If your template uses NPM libraries that aren't globally installed in your graphics repo, run ``npm init -y`` in its folder to create a package.json file, then install the desired versions--for example, if an older graphic uses D3 v3 and doesn't already include the dependency, you could ``npm install d3@3`` to create a local ``node_modules`` just for graphic.
 
-You will also need to add a "templateSheet" key to your ``manifest.json`` in the template folder (for existing graphics, you can often just rename the "sheet" key). When the template is instantiated, the server will duplicate that Sheet into a new copy and add the resulting ID to the manifest for the graphic.
+You will also need to add a "templateSheet" key to your ``manifest.json`` in the template folder (for existing graphics, you can often just rename the "sheet" key). When the template is instantiated, the server will duplicate that Sheet into a new copy and add the resulting ID to the manifest for the graphic. Graphics retain the original "templateSheet" key in their manifest when instantiated from a template.
 
 Deployment
 ----------
@@ -85,10 +87,27 @@ TK
 Migrating from the original dailygraphics rig
 ---------------------------------------------
 
-TK
+When moving graphics and templates over from the classic rig, there are three changes you'll need to make:
+
+* Add a ``manifest.json`` with the sheet/template sheet (formerly defined as ``COPY_GOOGLE_DOC_KEY`` in ``graphic_config.py``)
+* Convert the Jinja2 templating to EJS templates. This is usually pretty straightforward translation of tags:
+
+    - ``{{ key }}`` becomes ``<%= key %>``
+    - ``{% if condition %} ... {% endif %}`` becomes ``<% if (condition) { %> ... <% } %>``
+    - ``{% for item in list %} ... {% endfor %}`` becomes ``<% list.forEach(item => { %> ... <% }) %>``
+
+* Load scripts using Browserify instead of the ``JS.include`` template helpers:
+
+    - Create a normal script tag that points toward the "base" script, which will load the others. This is usually ``graphic.js``.
+    - For scripts that load onto the global object, you can just require their relative path, such as ``require("./lib/pym.js")``
+    - Scripts that are module-aware can be imported to a variable, such as ``var d3 = require("./lib/d3.min")``
+    - Scripts that relied on global scope, such as ``helpers.js``, will need their functions assigned to the window object (e.g., ``var classify = window.classify = ...``).
+
+Since most classic dailygraphics already bundled their own JS libraries, you shouldn't need to worry about NPM for these.
 
 Known issues
 ------------
 
 * There's currently a fair amount of missing feedback when errors occur, such as if you don't have Google API access authorized yet. We're working on it.
-* 
+* We don't yet support template partials, since file I/O is async whenever possible. A rewrite of the Lodash templating to add support for async/await seems easily doable, but it will take a little time.
+* The CLI doesn't technically exist yet.
