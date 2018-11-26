@@ -1,6 +1,6 @@
 {
   "graphicsPath": "../graphics-js",
-  "templatePath": "../templates-next",
+  "templatePath": "../dailygraphics-templates",
   "driveFolder": "folder ID or blank for default",
   "s3": {
     "bucket": "",
