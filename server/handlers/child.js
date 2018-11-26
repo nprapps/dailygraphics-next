@@ -1,11 +1,11 @@
 var path = require("path");
 var fs = require("fs").promises;
-var compile = require("lodash.template");
 
 module.exports = async function(request, response) {
 
   var app = request.app;
   var config = app.get("config");
+  var processHTML = app.get("processHTML");
   var sheetCache = app.get("cache").partition("sheets");
 
   var { readJSON } = app.get("fs");
@@ -29,9 +29,8 @@ module.exports = async function(request, response) {
     if (!cached) sheetCache.set(sheet, data.COPY);
   };
 
-  var source = await fs.readFile(path.join(config.root, slug, "index.html"));
-  var template = compile(source);
-  var output = template(data);
+  var file = path.join(config.root, slug, "index.html")
+  var output = await processHTML(file, data);
   output += `<script src="http://localhost:35729/livereload.js"></script>`;
 
   response.send(output);
