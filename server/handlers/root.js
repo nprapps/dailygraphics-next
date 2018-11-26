@@ -9,7 +9,12 @@ var getFolders = async function(dir) {
     if (entry.match(/^[._]|node_modules/)) continue;
     var stat = await fs.stat(path.join(dir, entry));
     if (!stat.isDirectory()) continue;
-    matching.push(entry);
+    try {
+      var manifest = await fs.stat(path.join(dir, entry, "manifest.json"));
+      matching.push(entry);
+    } catch (err) {
+      console.log(`Template for "${entry}" is missing manifest.json, not loaded`);
+    }
   }
   return matching;
 };
