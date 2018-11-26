@@ -18,14 +18,14 @@ We recognize that environment variables are not perfectly secure (since installe
 * AWS_SECRET_ACCESS_KEY
 * AWS_DEFAULT_REGION
 
-In addition to the directory that contains this app, you'll also need two other directories: one for graphic templates, and the other for the actual daily work product. The paths to these from the ``dailygraphics-next`` repo should be set in your ``config.json`` file as ``templatePath`` and ``graphicsPath``, respectively. We provide a repo of templates used at NPR `here <https://github.com/nprapps/templates-next>`_.
+In addition to the directory that contains this app, you'll also need two other directories: one for graphic templates, and the other for the actual daily work product. The paths to these from the ``dailygraphics-next`` repo should be set in your ``config.json`` file as ``templatePath`` and ``graphicsPath``, respectively. We provide a repo of templates used at NPR `here <https://github.com/nprapps/dailygraphics-templates>`_.
 
 To start the web UI, run ``npm start`` to kick off the server, and visit ``localhost:8000`` in your browser.
 
 Authorizing Google access
 -------------------------
 
-Similar to the original dailygraphics rig, you need to authorize this app's API access to access and create Drive files (for the spreadsheets that back each page). Visit ``localhost:8000/authorize`` to start the process--it will route you to a Google sign-in page, then back to the app if it was successful.
+Similar to the original dailygraphics rig, you need to authorize this app's API access to access and create Drive files (for the spreadsheets that back each page). When the initial list page loads, it should redirect you to a Google log-in screen--just follow the instructions to complete the process. You'll need to create a Google API app, enable Drive access, and store its authentication values in the ``GOOGLE_OAUTH_CLIENT_ID`` and ``GOOGLE_OAUTH_CONSUMER_SECRET`` environment variables. Your OAuth tokens are stored in your home directory as ``.google_oauth_tokens``.
 
 Creating a graphic
 ------------------
@@ -41,7 +41,7 @@ Each graphic is shown in a preview page, already embedded via Pym.js. The previe
 
 As resources are loaded, the server will process them according to their type:
 
-* HTML - processed using `Lodash templating <https://lodash.com/docs/4.17.11#template>`_. Sheets data is available as ``COPY``, just as in the classic rig.
+* HTML - processed using `Lodash templating <https://lodash.com/docs/4.17.11#template>`_. Sheets data is available as ``COPY``, just as in the classic rig, and filter functions are available on the ``t`` utility collection (e.g., ``t.classify(row.name)`` or ``t.comma(row.value)``). You can import template partials using ``await t.include("filename.html")``, where the filename is relative to the template doing the inclusion.
 * JS - transpiled with Babel to support `newer JS features <https://babeljs.io/docs/en/learn>`_ and bundled with Browserify. You can ``require()`` NPM modules into your scripts--they'll be loaded first from the graphic subfolder, if there's a ``node_modules`` there, and then from any modules installed in the graphics repo itself. Generally, you should use a local ``node_modules`` only in cases where your graphic requires a different library version from other graphics.
 * CSS - compiled from LESS files, based on filename (loading ``graphics.css`` will compile and load ``graphics.less`` from disk).
 
@@ -90,6 +90,7 @@ Migrating from the original dailygraphics rig
 When moving graphics and templates over from the classic rig, there are three changes you'll need to make:
 
 * Add a ``manifest.json`` with the sheet/template sheet (formerly defined as ``COPY_GOOGLE_DOC_KEY`` in ``graphic_config.py``)
+* Copy your child template into a ``_content.html`` file, which is (by default) loaded in the base template's ``index.html``.
 * Convert the Jinja2 templating to EJS templates. This is usually pretty straightforward translation of tags:
 
     - ``{{ key }}`` becomes ``<%= key %>``
@@ -109,5 +110,4 @@ Known issues
 ------------
 
 * There's currently a fair amount of missing feedback when errors occur, such as if you don't have Google API access authorized yet. We're working on it.
-* We don't yet support template partials, since file I/O is async whenever possible. A rewrite of the Lodash templating to add support for async/await seems easily doable, but it will take a little time.
 * The CLI doesn't technically exist yet.
