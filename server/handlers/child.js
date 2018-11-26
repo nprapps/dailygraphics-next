@@ -19,6 +19,7 @@ module.exports = async function(request, response) {
 
   var data = {
     slug,
+    config,
     COPY: {}
   };
 
