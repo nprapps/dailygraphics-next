@@ -11,8 +11,7 @@ module.exports = async function(request, response) {
   var lessCache = app.get("cache").partition("less");
 
   var { slug } = request.params;
-  var filename = path.basename(request.path);
-  filename = filename.replace(".css", ".less");
+  var filename = request.params[0] + ".less";
   var file = path.join(config.root, slug, filename);
 
   try {

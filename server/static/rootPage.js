@@ -9,7 +9,6 @@ var filterGraphics = function() {
   var re = new RegExp(value);
   graphicItems.forEach(li => {
     var { slug } = li.dataset;
-    console.log(slug);
     li.classList.toggle("hide", !slug.match(re));
   });
 };

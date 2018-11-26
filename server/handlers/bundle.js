@@ -8,7 +8,7 @@ module.exports = async function(request, response) {
   var consoles = app.get("browserConsole");
 
   var { slug } = request.params;
-  var filename = path.basename(request.path);
+  var filename = request.params[0] + ".js";
   var sourceFile = path.join(config.root, slug, filename);
 
   var jsCache = app.get("cache").partition("js");
