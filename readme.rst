@@ -8,7 +8,7 @@ Getting started
 
 To run this project, you'll need Node 8.0 or higher installed. On OS X and Linux, `nvm <https://github.com/creationix/nvm>`_ is a good way to install and update Node. Clone this repo, and run ``npm i`` to install its dependencies.
 
-Configuration for this project is split between ``config.json`` (an example of which is provided) for values that are organization-specific but not sensitive, and environment variables for values that should be confidential. 
+Configuration for this project is split between ``config.json`` (an example of which is provided) for values that are organization-specific but not sensitive, and environment variables for values that should be confidential.
 
 We recognize that environment variables are not perfectly secure (since installed packages have access to them from the ``process`` global), but they're also impossible to check into GitHub accidentally. You should have set:
 
