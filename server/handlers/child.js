@@ -36,7 +36,7 @@ module.exports = async function(request, response) {
   try {
     output = await processHTML(file, data);
   } catch (err) {
-    consoles.error(err.message);
+    consoles.error(`Error in HTML template: ${err.message}`);
     output = "";
   }
   output += `<script src="http://localhost:35729/livereload.js"></script>`;
