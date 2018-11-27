@@ -10,6 +10,7 @@ module.exports = async function(request, response) {
 
   var { readJSON } = app.get("fs");
   var { getSheet } = app.get("google").sheets;
+  var consoles = app.get("browserConsole");
 
   var { slug } = request.params;
 
@@ -30,8 +31,14 @@ module.exports = async function(request, response) {
     if (!cached) sheetCache.set(sheet, data.COPY);
   };
 
-  var file = path.join(config.root, slug, "index.html")
-  var output = await processHTML(file, data);
+  var file = path.join(config.root, slug, "index.html");
+  var output = "";
+  try {
+    output = await processHTML(file, data);
+  } catch (err) {
+    consoles.error(err.message);
+    output = "";
+  }
   output += `<script src="http://localhost:35729/livereload.js"></script>`;
 
   response.send(output);

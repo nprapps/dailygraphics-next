@@ -111,3 +111,4 @@ Known issues
 
 * There's currently a fair amount of missing feedback when errors occur, such as if you don't have Google API access authorized yet. We're working on it.
 * The CLI doesn't technically exist yet.
+* There's no current support for falling back to the base template's "index.html" if one doesn't exist in the current graphic, which would be useful for implementing large-scale changes to graphics, but it does make individual graphics a bit more robust.
