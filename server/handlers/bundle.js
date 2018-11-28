@@ -15,13 +15,16 @@ module.exports = async function(request, response) {
 
   try {
     var cached = jsCache.get(sourceFile);
-    var output = cached || await makeJS(sourceFile, { root: config.root });
+    if (!cached) {
+      var made = await makeJS(sourceFile, { root: config.root });
+      jsCache.set(sourceFile, made.src);
+    }
+    var output = cached || made.src;
 
     response.set({
       "Content-Type": "application/javascript"
     })
     response.send(output);
-    if (!cached) jsCache.set(sourceFile, output);
   } catch (err) {
     response.status(500);
     response.send(err.message);
