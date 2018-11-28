@@ -213,7 +213,7 @@ select {
   padding: 16px;
 }
 
-.preview-page .embed-code {
+.preview-page .copy-on-click {
   border: none;
   padding: 16px 8px;
   background: var(--light-gray);
@@ -242,4 +242,8 @@ select {
 .preview-page .toast.show {
   display: block;
   animation: fade 400ms linear;
+}
+
+.preview-page.deployed .hide-deployed {
+  display: none;
 }

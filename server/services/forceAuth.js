@@ -5,7 +5,7 @@ module.exports = function(app) {
   var check = async function(request, response, next) {
     try {
       // this will throw if user isn't logged in
-      await testConnection();
+      request.user = await testConnection();
       next();
     } catch (err) {
       console.log(err);

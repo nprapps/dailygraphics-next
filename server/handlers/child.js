@@ -6,7 +6,6 @@ module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
   var processHTML = app.get("processHTML");
-  var sheetCache = app.get("cache").partition("sheets");
 
   var { readJSON } = app.get("fs");
   var { getSheet } = app.get("google").sheets;
@@ -25,10 +24,7 @@ module.exports = async function(request, response) {
   };
 
   if (sheet) {
-    var cached = sheetCache.get(sheet);
-    if (cached) console.log(`Using cached copy for sheet ${sheet}`);
-    data.COPY = cached || await getSheet(sheet);
-    if (!cached) sheetCache.set(sheet, data.COPY);
+    data.COPY = await getSheet(sheet);
   };
 
   var file = path.join(config.root, slug, "index.html");
@@ -36,7 +32,7 @@ module.exports = async function(request, response) {
   try {
     output = await processHTML(file, data);
   } catch (err) {
-    consoles.error(`Error in HTML template: ${err.message}`);
+    consoles.error(`Error in ${err.filename}: ${err.message}`);
     output = "";
   }
   output += `<script src="http://localhost:35729/livereload.js"></script>`;

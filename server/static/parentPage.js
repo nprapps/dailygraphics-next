@@ -13,21 +13,14 @@ var showToast = function(str, delay = 4000) {
   toastTimeout = setTimeout(() => toast.classList.remove("show"), delay);
 };
 
-var embedCode = $.one(".embed-code");
-embedCode.addEventListener("click", function() {
+var copyTexts = $(".copy-on-click");
+copyTexts.forEach(c => c.addEventListener("click", function() {
   this.selectionStart = 0;
   this.selectionEnd = this.value.length;
   document.execCommand("copy");
-  showToast("Embed code copied");
-});
-
-var preview = $.one(".preview-container");
-
-var breakSelect = $.one("select.breakpoint");
-breakSelect.addEventListener("change", function() {
-  var breakpoint = this.value;
-  preview.setAttribute("data-width", breakpoint);
-});
+  var name = this.getAttribute("aria-label");
+  showToast(`${name} copied to clipboard`);
+}));
 
 var reloadButton = $.one(".refresh-sheet");
 
