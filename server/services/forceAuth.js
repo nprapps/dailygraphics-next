@@ -8,7 +8,7 @@ module.exports = function(app) {
       request.user = await testConnection();
       next();
     } catch (err) {
-      console.log(err);
+      console.log(`Unable to authorize Google connection ("${err.message}")`);
       // not connected, reroute to auth
       response.status(302);
       response.set("Location", "/authorize");
