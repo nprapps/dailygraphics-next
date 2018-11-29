@@ -1,10 +1,11 @@
-var express = require("express");
-var app = express();
 var bodyparser = require("body-parser");
+var express = require("express");
 var fs = require("fs").promises;
+var minimist = require("minimist");
 var path = require("path");
 
-var minimist = require("minimist");
+var app = express();
+
 var argv = minimist(process.argv);
 
 module.exports = async function(config) {
@@ -41,7 +42,6 @@ module.exports = async function(config) {
   // admin functions
   app.post("/graphic", require("./handlers/createGraphic"));
   app.post("/graphic/:slug/deploy", require("./handlers/deploy"));
-  // app.get("/graphic/:slug/copyedit", require("./handlers/copyedit"));
 
   // Google integration
   app.get("/authorize", require("./handlers/googleAuth").authorize);

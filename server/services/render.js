@@ -1,6 +1,5 @@
-var path = require("path");
 var compile = require("lodash.template");
-var cache = {};
+var path = require("path");
 
 // exception to loading from service, to prevent races
 var processHTML = require("../../lib/processHTML");

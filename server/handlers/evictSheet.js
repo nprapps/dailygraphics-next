@@ -1,5 +1,3 @@
-
-
 module.exports = function(request, response) {
   var app = request.app;
   var cache = app.get("cache").partition("sheets");

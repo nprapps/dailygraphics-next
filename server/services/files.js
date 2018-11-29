@@ -1,8 +1,8 @@
 module.exports = function(app) {
   var files = {
-    readJSON: require("../../lib/readJSON"),
     copyDir: require("../../lib/copyDirectory"),
-    expandMatch: require("../../lib/expandMatch")
+    expandMatch: require("../../lib/expandMatch"),
+    readJSON: require("../../lib/readJSON")
   };
 
   app.set("fs", files);
