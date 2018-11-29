@@ -10,6 +10,7 @@ var authorize = async function(request, response) {
   var authURL = client.generateAuthUrl({
     access_type: "offline",
     scope: scopes.join(" "),
+    // setting prompt and access_type to these values forces the API to give us a refresh token back
     prompt: "consent"
   });
 
@@ -34,8 +35,9 @@ var authenticate = async function(request, response) {
   var code = query.get("code");
   if (!code) return;
   try {
+    // this will also trigger the new token event and update our token file
     var { tokens } = await client.getToken(code);
-    await updateTokenFile(tokens);
+    // await updateTokenFile(tokens);
     response.status(302);
     response.set("Location", "/");
     response.send();
