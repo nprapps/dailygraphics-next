@@ -6,9 +6,12 @@ module.exports = function(app) {
     sheets: {
       copySheet,
       testConnection,
-      getSheet: async function(sheet) {
-        var cached = sheetCache.get(sheet);
-        if (cached) console.log(`Using cached copy for sheet ${sheet}`);
+      getSheet: async function(sheet, options = {}) {
+        var cached = null;
+        if (!options.force) {
+          var cached = sheetCache.get(sheet);
+          if (cached) console.log(`Using cached copy for sheet ${sheet}`);
+        }
         var found = cached || await getSheet(sheet);
         sheetCache.set(sheet, found);
         return found;
