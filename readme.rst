@@ -47,14 +47,14 @@ As resources are loaded, the server will process them according to their type:
 
 Errors detected during JS or LESS compilation will be routed to the dev tools console for easy debugging if your browser supports WebSockets. 
 
-Each graphic should also have a ``manifest.json`` file in its folder, which is used to store configuration data for Sheets and deployment. The "sheets" key in that file tells the server which Google Sheet to use for loading labels and data.
+Each graphic should also have a ``manifest.json`` file in its folder, which is used to store configuration data for Sheets and deployment. The "sheets" key in that file tells the server which Google Sheet to use for loading labels and data. It will also have a snapshot of the Node modules installed when it was created--this isn't used for anything, but is meant as a helpful record when recreating graphics later.
 
 Template creation
 -----------------
 
 For the most part, templates are just folders containing files that should be copied into a graphics directory. So building a template is pretty much just building a graphic, then stripping out anything that isn't generic and copying it into your template directory. The process is recursive, and will copy subfolders as well as any filenames that don't start with a dot. 
 
-If your template uses NPM libraries that aren't globally installed in your graphics repo, run ``npm init -y`` in its folder to create a package.json file, then install the desired versions--for example, if an older graphic uses D3 v3 and doesn't already include the dependency, you could ``npm install d3@3`` to create a local ``node_modules`` just for graphic.
+If your template uses NPM libraries that aren't globally installed in your graphics repo, run ``npm init -y`` in its folder to create a package.json file, then install the desired versions--for example, if an older graphic uses D3 v3 and doesn't already include the dependency, you could ``npm install d3@3`` to create a local ``node_modules`` just for one graphic type.
 
 You will also need to add a "templateSheet" key to your ``manifest.json`` in the template folder (for existing graphics, you can often just rename the "sheet" key). When the template is instantiated, the server will duplicate that Sheet into a new copy and add the resulting ID to the manifest for the graphic. Graphics retain the original "templateSheet" key in their manifest when instantiated from a template.
 
