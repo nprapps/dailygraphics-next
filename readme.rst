@@ -69,7 +69,7 @@ Deployment
 
 Deployment should be as simple as configuring the bucket and path prefix in your ``config.json`` file, and then clicking the "deploy" button when previewing a particular graphic. However, understanding the mechanics of a deployment will help you debug new templates and deployment issues.
 
-When the server runs a deployemnt, it loads the ``manifest.json`` file from the graphic folder and uses the "files" array as a set of `minimatch globbing patterns <https://github.com/isaacs/minimatch>`_ to figure out which source files should actually be published. Note that unlike in the browser translation layer, where requests for ``.css`` are turned into ``.less``, the files array should actually specify ``.less`` filenames (they'll be translated back to CSS during the deploy). A typical deployment "files" array may look something like this, which grabs the main files for the graphic and any images or data that's located in the folder (not including the manifest itself):
+When the server runs a deployemnt, it loads the ``manifest.json`` file from the graphic folder and uses the "files" array as a set of `minimatch globbing patterns <https://github.com/isaacs/minimatch>`_ to figure out which source files should actually be published. Note that unlike in the browser translation layer, where requests for ``.css`` are turned into ``.less``, the files array should actually specify ``.less`` filenames (they'll be translated back to CSS during the deploy). A typical deployment "files" array may look something like this, which grabs the main files for the graphic and any images or data that's located in the folder (not including the manifest itself)::
 
     "files": [
       "index.html",
