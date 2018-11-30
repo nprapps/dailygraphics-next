@@ -1,5 +1,5 @@
-var $ = (s, d = document) => Array.from(d.querySelectorAll(s));
-$.one = (s, d = document) => d.querySelector(s);
+import { showToast } from "./toast.js";
+import { $ } from "./qsa.js";
 
 var searchInput = $.one(".search-graphics");
 var graphicItems = $(".graphics-list .item");
@@ -23,4 +23,10 @@ toggleCreate.addEventListener("click", function() {
   var updated = !pressed;
   this.setAttribute("aria-pressed", updated);
   createShade.classList.toggle("show", updated);
+  if (updated) {
+    $.one(`#template`).focus();
+  }
 });
+
+var submitButton = $.one(`.create-shade button[type="submit"]`);
+submitButton.addEventListener("click", () => showToast("Creating graphic... please wait"));

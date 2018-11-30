@@ -116,6 +116,28 @@ select {
   margin: 0 8px;
 }
 
+@keyframes fade {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+.toast {
+  background: var(--dark-gray);
+  color: var(--off-white);
+  font-weight: bold;
+  font-size: 16px;
+  position: fixed;
+  bottom: 20px;
+  right: 0;
+  padding: 16px 32px;
+  display: none;
+}
+
+.toast.show {
+  display: block;
+  animation: fade 400ms linear;
+}
+
 /* home page */
 
 .root-list {
@@ -221,28 +243,6 @@ select {
   font-family: monospace;
   display: block;
   width: 100%;
-}
-
-@keyframes fade {
-  from { opacity: 0 }
-  to { opacity: 1 }
-}
-
-.preview-page .toast {
-  background: var(--dark-gray);
-  color: var(--off-white);
-  font-weight: bold;
-  font-size: 16px;
-  position: fixed;
-  bottom: 20px;
-  right: 0;
-  padding: 16px 32px;
-  display: none;
-}
-
-.preview-page .toast.show {
-  display: block;
-  animation: fade 400ms linear;
 }
 
 .preview-page.deployed .hide-deployed {
