@@ -20,6 +20,8 @@ We recognize that environment variables are not perfectly secure (since installe
 
 In addition to the directory that contains this app, you'll also need two other directories: one for graphic templates, and the other for the actual daily work product. The paths to these from the ``dailygraphics-next`` repo should be set in your ``config.json`` file as ``templatePath`` and ``graphicsPath``, respectively. We provide a repo of templates used at NPR `here <https://github.com/nprapps/dailygraphics-templates>`_.
 
+*Note:* If you're at NPR, we have a private ``graphics-js`` repo already created--you should clone that repo and run ``npm install`` in that folder to get our current dependencies. At other organizations, you should run `npm init -y` and then install any libraries that your graphics use, so that they can be loaded by the client-side code. For example, in the templates that we've created, you would want to run ``npm install d3-array d3-axis d3-scale d3-selection`` to get the most common D3 packages for import.
+
 To start the web UI, run ``npm start`` to kick off the server, and visit ``localhost:8000`` in your browser.
 
 Authorizing Google access
