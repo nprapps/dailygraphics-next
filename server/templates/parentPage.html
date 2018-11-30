@@ -61,7 +61,10 @@
 .replace(/\>/g, "&gt;")
 .replace(/\{\{slug\}\}/g, slug) %></textarea>
 
-    <% if (typeof COPY != "undefined") { %>
+    <% 
+    if (typeof COPY != "undefined") { 
+      var m = s => (COPY.metadata && COPY.metadata[s]) || `__${s.toUpperCase()}__`;
+    %>
     <h2>Copyedit e-mail</h2>
     <textarea 
       class="copyedit-email copy-on-click"
@@ -69,14 +72,14 @@
       rows="<%= 16 + Object.keys(COPY.labels).length * 3 %>"
       aria-label="Copyedit e-mail"
     >
-This graphic accompanies __AUTHOR__'s story, running __TIME__, about __SUBJECT__.
+This graphic accompanies <%= m("author") %>'s story, running <%= m("time") %>, about <%= m("subject") %>.
 
-Story URL (not yet published): http://www.npr.org/templates/story/story.php?storyId=__SEAMUS_ID__&live=1
+Story URL (not yet published): http://www.npr.org/templates/story/story.php?storyId=<%= m("seamus_id") %>&live=1
 
-Expected run date: __TIME__
+Expected run date: <%= m("time") %>
 
 Primary graphics contact: <%= typeof user == "undefined" ? "__GRAPHICS_CONTACT__" : user.displayName %>
-Primary editorial contact: __EDITORIAL_CONTACT__
+Primary editorial contact: <%= m("editorial_contact") %>
 
 ---- GRAPHIC <%= slug %> ----
 
