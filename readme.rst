@@ -58,6 +58,8 @@ If your template uses NPM libraries that aren't globally installed in your graph
 
 You will also need to add a "templateSheet" key to your ``manifest.json`` in the template folder (for existing graphics, you can often just rename the "sheet" key). When the template is instantiated, the server will duplicate that Sheet into a new copy and add the resulting ID to the manifest for the graphic. Graphics retain the original "templateSheet" key in their manifest when instantiated from a template.
 
+For more details on templates, visit the `templates repo <https://github.com/nprapps/dailygraphics-templates>`_.
+
 Deployment
 ----------
 
