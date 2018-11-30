@@ -18,9 +18,11 @@ We recognize that environment variables are not perfectly secure (since installe
 * AWS_SECRET_ACCESS_KEY
 * AWS_DEFAULT_REGION
 
-In addition to the directory that contains this app, you'll also need two other directories: one for graphic templates, and the other for the actual daily work product. The paths to these from the ``dailygraphics-next`` repo should be set in your ``config.json`` file as ``templatePath`` and ``graphicsPath``, respectively. We provide a repo of templates used at NPR `here <https://github.com/nprapps/dailygraphics-templates>`_.
+In addition to the directory that contains this app, you'll also need two other directories. One is for the templates that are used to create each graphic (in the legacy rig, these were stored in the ``dailygraphics/graphic_templates`` folder). We provide a repo of templates used at NPR `here <https://github.com/nprapps/dailygraphics-templates>`_, and you should feel free to clone it. In the ``config.json file``, the "templateRoot" value should be the path to this folder.
 
-*Note:* If you're at NPR, we have a private ``graphics-js`` repo already created--you should clone that repo and run ``npm install`` in that folder to get our current dependencies. At other organizations, you should run `npm init -y` and then install any libraries that your graphics use, so that they can be loaded by the client-side code. For example, in the templates that we've created, you would want to run ``npm install d3-array d3-axis d3-scale d3-selection`` to get the most common D3 packages for import.
+The other directory is for your graphics themselves, and it should be referenced with the "graphicsPath" key of your ``config.json`` file. This folder is also where you should install any libraries used by your graphics via NPM. For example, with our templates, you'll want to run ``npm install d3-array d3-axis d3-scale d3-selection`` to get the most common D3 packages.
+
+*Note:* If you're at NPR, we have a private ``graphics-js`` repo already created--you should clone that repo and run ``npm install`` in that folder to get our current dependencies.
 
 To start the web UI, run ``npm start`` to kick off the server, and visit ``localhost:8000`` in your browser.
 
@@ -109,6 +111,13 @@ When moving graphics and templates over from the classic rig, there are three ch
     - Scripts that relied on global scope, such as ``helpers.js``, will need their functions assigned to the window object (e.g., ``var classify = window.classify = ...``).
 
 Since most classic dailygraphics already bundled their own JS libraries, you shouldn't need to worry about NPM for these.
+
+Troubleshooting
+---------------
+
+*My chart doesn't appear, and I see an error like "ERROR:  Cannot find module 'd3-axis' from 'graphics-js/lots-of-dots-20181130'"*
+
+This usually means your graphic requires a library that you don't have installed. In the error above, we're missing ``d3-axis``. To fix it, open a terminal in the graphics folder and install the module from NPM (e.g., ``npm install d3-axis``).
 
 Known issues
 ------------
