@@ -56,7 +56,7 @@
       cols="80"
       aria-label="Embed code"
     ><%=
-`<p data-pym-loader data-child-src="https://apps.npr.org/dailygraphics/graphics/{{slug}}"id="responsive-embed-{{slug}}"> Loading... </p> <script type="text/javascript" src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>`
+`<p data-pym-loader data-child-src="https://apps.npr.org/dailygraphics/graphics/{{slug}}" id="responsive-embed-{{slug}}"> Loading... </p> <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>`
 .replace(/\</g, "&lt;")
 .replace(/\>/g, "&gt;")
 .replace(/\{\{slug\}\}/g, slug) %></textarea>
@@ -66,6 +66,10 @@
       var m = s => (COPY.metadata && COPY.metadata[s]) || `__${s.toUpperCase()}__`;
     %>
     <h2>Copyedit e-mail</h2>
+
+    <p>
+      Note: if you have a <var>metadata</var> tab in your sheets for this graphic, it will be used to fill in the blanks below.
+
     <textarea 
       class="copyedit-email copy-on-click"
       readonly="readonly"
@@ -84,10 +88,21 @@ Primary editorial contact: <%= m("editorial_contact") %>
 ---- GRAPHIC <%= slug %> ----
 
 Spreadsheet URL: https://docs.google.com/spreadsheets/d/<%= sheet %>/edit#gid=0
-Production URL: https://apps.npr.org/dailygraphics/graphics/<%= slug %>/#desktop
+Production URL: https://apps.npr.org/dailygraphics/graphics/<%= slug %>/preview.html
 <% Object.keys(COPY.labels).forEach(key => __p += `\n${key}: ${COPY.labels[key]}\n`); %>
     </textarea>
     <% } %>
+
+    <h2>Direct link</h2>
+
+    Underneath the graphic embed, in the text of the story, add a prompt with a direct link to the graphic (without this preview frame, embed code, etc.). You can copy/paste the text below directly into Seamus (new editor) and the formatting should be preserved.
+
+    <blockquote class="direct-link">
+      <em><strong> <a
+        href="https://apps.npr.org/dailygraphics/graphics/<%= slug %>?mode=childlink&utm_source=nprnews&utm_medium=app&utm_campaign=storyredirect">
+        Don't see the graphic above? Click here.
+      </a></em></strong>
+    </blockquote>
 
   </section>
 

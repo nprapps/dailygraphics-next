@@ -3,7 +3,7 @@
   --lightest-gray: #ebebeb;
   --light-gray: #ddd;
   --middle-gray: #888;
-  --dark-gray: #555;
+  --dark-gray: #666;
   --off-white: #f7f7f7;
   --blue: #4774CC;
   --local: green;
@@ -247,4 +247,18 @@ select {
 
 .preview-page.deployed .hide-deployed {
   display: none;
+}
+
+.preview-page .direct-link {
+  background: var(--off-white);
+  display: block;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.preview-page .direct-link a {
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
 }
