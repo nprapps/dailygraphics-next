@@ -56,9 +56,7 @@ Each graphic should also have a ``manifest.json`` file in its folder, which is u
 Template creation
 -----------------
 
-For the most part, templates are just folders containing files that should be copied into a graphics directory. So building a template is pretty much just building a graphic, then stripping out anything that isn't generic and copying it into your template directory. The process is recursive, and will copy subfolders as well as any filenames that don't start with a dot. 
-
-If your template uses NPM libraries that aren't globally installed in your graphics repo, run ``npm init -y`` in its folder to create a package.json file, then install the desired versions--for example, if an older graphic uses D3 v3 and doesn't already include the dependency, you could ``npm install d3@3`` to create a local ``node_modules`` just for one graphic type.
+For the most part, templates are just folders containing files that should be copied into a graphics directory. So building a template is pretty much just building a graphic, then stripping out anything that isn't generic and copying it into your template directory. The process is recursive, and will copy subfolders as well as any filenames that don't start with a dot.
 
 You will also need to add a "templateSheet" key to your ``manifest.json`` in the template folder (for existing graphics, you can often just rename the "sheet" key). When the template is instantiated, the server will duplicate that Sheet into a new copy and add the resulting ID to the manifest for the graphic. Graphics retain the original "templateSheet" key in their manifest when instantiated from a template.
 
@@ -117,7 +115,7 @@ Troubleshooting
 
 *My chart doesn't appear, and I see an error like "ERROR:  Cannot find module 'd3-axis' from 'graphics-js/lots-of-dots-20181130'"*
 
-This usually means your graphic requires a library that you don't have installed. In the error above, we're missing ``d3-axis``. To fix it, open a terminal in the graphics folder and install the module from NPM (e.g., ``npm install d3-axis``).
+This usually means your graphic requires a library that you don't have installed. In the case above, we're missing ``d3-axis``. To fix it, open a terminal in the graphics folder and install the module from NPM (e.g., ``npm install d3-axis``).
 
 Known issues
 ------------
