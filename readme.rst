@@ -3,6 +3,17 @@ DailyGraphics-next
 
 Tools for writing and deploying daily interactive news graphics. Based substantially on NPR's `original daily graphics rig <https://github.com/nprapps/dailygraphics>`_. Built on Express, LESS, Browserify, and Google Sheets.
 
+What does it do?
+----------------
+
+All the good stuff from the original rig, plus:
+
+* Live reload of JS/CSS/HTML in the preview page
+* Build errors shown in the browser console, to minimize context switching
+* Create and deploy graphics directly from the web UI, not the command line
+* Modern JS tooling, including Babel for new JS features and source maps for easier debugging
+* Improved Sheets integration, including typecasting for numerical/boolean values
+
 Getting started
 ---------------
 
