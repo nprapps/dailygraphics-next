@@ -118,7 +118,15 @@ var breakSelect = document.querySelector("select.breakpoint");
 breakSelect.addEventListener("change", function() {
   var breakpoint = this.value;
   preview.setAttribute("data-width", breakpoint);
+  window.location.hash = breakpoint;
 });
+
+if (window.location.hash) {
+  var w = window.location.hash.replace(/#/, "")
+  preview.setAttribute("data-width", w);
+  breakSelect.value = w;
+}
+
   </script>
 </body>
 </html>
