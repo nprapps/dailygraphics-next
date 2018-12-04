@@ -15,7 +15,7 @@ module.exports = async function(request, response) {
   var data = { slug, sheet, config, user, deployed: false };
 
   if (sheet) {
-    data.COPY = await getSheet(sheet, { force: true });
+    data.COPY = await getSheet(sheet, { force: !config.forceSheetCache });
   };
 
   response.render("parentPage.html", data);

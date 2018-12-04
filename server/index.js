@@ -12,6 +12,7 @@ module.exports = async function(config) {
 
   config.root = path.join(process.cwd(), config.graphicsPath);
   config.templateRoot = path.join(process.cwd(), config.templatePath);
+  config.forceSheetCache = argv["force-sheet-cache"];
 
   app.set("config", config);
 

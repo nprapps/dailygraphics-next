@@ -35,7 +35,12 @@ The other directory is for your graphics themselves, and it should be referenced
 
 *Note:* If you're at NPR, we have a private ``graphics-js`` repo already created--you should clone that repo and run ``npm install`` in that folder to get our current dependencies.
 
-To start the web UI, run ``npm start`` to kick off the server, and visit ``localhost:8000`` in your browser.
+To start the web UI, run ``npm start`` to kick off the server, and visit ``localhost:8000`` in your browser. Some command-line flags are also supported:
+
+* ``--port XXXX`` - sets the port that the server will listen on to XXXX.
+* ``--force-sheet-cache`` - forces graphics preview pages to cache Google Sheets, so that you must press the "Refresh sheet" button when data is changed instead of simply reloading the page. Good for slow connections.
+
+Due to the way NPM scripts work, flags must be passed after a ``--`` separator. For example, running the rig on port 7777 would look like ``npm start -- --port 7777``.
 
 Authorizing Google access
 -------------------------
