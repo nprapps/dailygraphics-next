@@ -1,7 +1,8 @@
 {
   "graphicsPath": "../graphics-js",
   "templatePath": "../dailygraphics-templates",
-  "driveFolder": "folder ID or blank for default",
+  // leave driveFolder blank to create new sheets in the same folder as their templates
+  "driveFolder": "",
   "s3": {
     "bucket": "",
     "prefix": "dailygraphics/graphics"
