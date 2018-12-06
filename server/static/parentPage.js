@@ -31,4 +31,10 @@ deployButton.addEventListener("click", async function() {
     showToast("Deploy failed, check console for more info");
     console.log(json.error);
   }
-})
+});
+
+var captureButton = $.one(".capture-fallback");
+captureButton.addEventListener("click", async function() {
+  var response = await fetch("./captureFallback", { method: "POST" });
+  showToast("Captured fallback.png!");
+});
