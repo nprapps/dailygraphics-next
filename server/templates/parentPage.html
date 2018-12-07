@@ -26,18 +26,41 @@
     </select>
     
     <% if (typeof sheet != "undefined") { %>
-    <a target="_blank" class="edit-sheet button" href="https://docs.google.com/spreadsheets/d/<%= sheet %>/edit#gid=0">Sheet</a>
+    <a target="_blank" class="edit-sheet button" href="https://docs.google.com/spreadsheets/d/<%= sheet %>/edit#gid=0">
+      <div aria-hidden="true" class="inline-svg">
+        <%= await t.includeStatic("../static/icons/baseline-folder_shared-24px.svg") %>
+      </div>
+      <span class="tooltip">Sheet</span>
+    </a>
     <% } %>
 
     <a target="_blank" class="prod-link button hide-deployed"
       href="http://<%= config.s3.bucket %>/<%= config.s3.prefix %>/<%= slug %>/preview.html">
-      Live
+      <div aria-hidden-="true" class="inline-svg">
+        <%= await t.includeStatic("../static/icons/baseline-open_in_browser-24px.svg") %>
+      </div>
+      <span class="tooltip">View in production</span>
     </a>
     <span class="spacer hide-deployed"></span>
     
-    <button class="refresh-sheet hide-deployed">Refresh sheet</button>
-    <button class="capture-fallback hide-deployed">Capture fallback</button>
-    <button class="deploy-graphic hide-deployed">Deploy</button>
+    <button class="refresh-sheet hide-deployed">
+      <div aria-hidden="true" class="inline-svg">
+        <%= await t.includeStatic("../static/icons/baseline-autorenew-24px.svg") %>
+      </div>
+      <span class="tooltip">Refresh sheet</span>
+    </button>
+    <button class="capture-fallback hide-deployed">
+      <div aria-hidden="true" class="inline-svg">
+        <%= await t.includeStatic("../static/icons/baseline-camera_alt-24px.svg") %>
+      </div>
+      <span class="tooltip">Capture fallback</span>
+    </button>
+    <button class="deploy-graphic hide-deployed">
+      <div aria-hidden="true" class="inline-svg">
+        <%= await t.includeStatic("../static/icons/baseline-cloud_upload-24px.svg") %>
+      </div>
+      <span class="tooltip">Deploy to production</span>
+    </button>
 
   </header>
 

@@ -26,6 +26,16 @@ html, body {
   box-sizing: border-box;
 }
 
+.sr-only {
+  clip: rect(0, 0, 0, 0);
+  height: 0;
+  width: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
 a, a.visited {
   color: var(--blue);
 }
@@ -37,6 +47,7 @@ hr {
 }
 
 button, .button {
+  position: relative;
   padding: 2px 12px;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -61,6 +72,32 @@ button:hover, button:focus,
 button[aria-pressed="true"] {
   background: var(--blue);
   color: var(--off-white);
+}
+
+.inline-svg {
+  fill: currentColor;
+}
+
+button .tooltip,
+.button .tooltip {
+  opacity: 0;
+  position: absolute;
+  top: calc(100% + 4px);
+  right: -4px;
+  background: white;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, .1);
+  padding: 4px 8px;
+  pointer-events: none;
+  transition: opacity .1s .5s linear;
+  text-align: center;
+}
+
+button:hover .tooltip,
+button:focus .tooltip,
+.button:hover .tooltip,
+.button:focus .tooltip {
+  display: block;
+  opacity: 1;
 }
 
 input {
@@ -261,4 +298,8 @@ select {
   font-weight: bold;
   text-decoration: none;
   font-size: 14px;
+}
+
+.preview-page .deploy-graphic {
+  color: var(--production);
 }
