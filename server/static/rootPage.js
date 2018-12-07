@@ -29,4 +29,11 @@ toggleCreate.addEventListener("click", function() {
 });
 
 var submitButton = $.one(`.create-shade button[type="submit"]`);
-submitButton.addEventListener("click", () => showToast("Creating graphic... please wait"));
+submitButton.addEventListener("click", function() {
+  var slug = $.one(`[name="slug"]`);
+  if (slug.value) {
+    showToast("Creating graphic... please wait");
+  } else {
+    showToast("Please enter a slug for your graphic");
+  }
+});
