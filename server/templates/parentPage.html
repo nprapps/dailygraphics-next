@@ -106,7 +106,7 @@ Story URL (not yet published): http://www.npr.org/templates/story/story.php?stor
 
 Expected run date: <%= m("time") %>
 
-Primary graphics contact: <%= typeof user == "undefined" ? "__GRAPHICS_CONTACT__" : user.displayName %>
+Primary graphics contact: <%= "user" in config ? config.user.displayName : "__GRAPHICS_CONTACT__" %>
 Primary editorial contact: <%= m("editorial_contact") %>
 
 ---- GRAPHIC <%= slug %> ----

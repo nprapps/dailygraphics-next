@@ -5,7 +5,9 @@ module.exports = function(app) {
   var check = async function(request, response, next) {
     try {
       // this will throw if user isn't logged in
-      request.user = await testConnection();
+      var app = request.app;
+      var config = app.get("config");
+      config.user = request.user = await testConnection();
       next();
     } catch (err) {
       console.log(`Unable to authorize Google connection ("${err.message}")`);
