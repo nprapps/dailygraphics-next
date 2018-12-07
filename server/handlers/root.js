@@ -13,7 +13,7 @@ var getFolders = async function(dir) {
       var manifest = await fs.stat(path.join(dir, entry, "manifest.json"));
       matching.push(entry);
     } catch (err) {
-      console.log(`Template for "${entry}" is missing manifest.json, not loaded`);
+      console.log(`"${entry}" is missing manifest.json, not loaded`);
     }
   }
   return matching;
