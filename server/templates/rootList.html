@@ -17,7 +17,7 @@
       <form method="POST" action="/graphic">
         <select id="template" name="template">
           <% templates.forEach(t => { %>
-          <option value="<%= t %>"><%= t %></option>
+          <option value="<%= t %>"><%= t.replace(/(_|^)(\w)/g, (_, p, s) => " " + s.toUpperCase()) %></option>
           <% }) %>
         </select>
         <input type="text" required name="slug">
