@@ -3,9 +3,10 @@ toast.className = "toast";
 document.body.appendChild(toast);
 
 var toastTimeout = null;
-export var showToast = function(str, delay = 4000) {
+export var showToast = function(str, displayAttr = "", delay = 4000) {
   if (toastTimeout) clearTimeout(toastTimeout);
   toast.innerHTML = str;
   toast.classList.add("show");
+  toast.setAttribute("data-type", displayAttr);
   toastTimeout = setTimeout(() => toast.classList.remove("show"), delay);
 };

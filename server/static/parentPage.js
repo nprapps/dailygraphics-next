@@ -2,6 +2,8 @@ import "/remoteConsole.js";
 import { showToast } from "./toast.js";
 import { $ } from "./qsa.js";
 
+var delay = (d = 1000) => new Promise(ok => setTimeout(ok, d));
+
 var copyTexts = $(".copy-on-click");
 copyTexts.forEach(c => c.addEventListener("click", function() {
   this.selectionStart = 0;
@@ -27,7 +29,8 @@ deployButton.addEventListener("click", async function() {
   showToast("Capturing fallback.png...");
   var capture = await fetch("./captureFallback", { method: "POST" });
   if (!capture.ok) {
-    return showToast("Unable to capture fallback image!");
+    showToast("Unable to capture fallback image!", "error");
+    await delay(3000);
   }
   showToast("Deploying graphic...");
   var response = await fetch("./deploy", { method: "POST" });

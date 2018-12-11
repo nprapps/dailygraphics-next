@@ -9,6 +9,7 @@
   --local: green;
   --staging: orange;
   --production: red;
+  --error: darkred;
   --dashes: 2px dashed #ddd;
   font-family: sans-serif;
   line-height: 1.5;
@@ -174,6 +175,10 @@ select {
 .toast.show {
   display: block;
   animation: fade 400ms linear;
+}
+
+.toast[data-type="error"] {
+  background: var(--error);
 }
 
 /* home page */
