@@ -1,13 +1,13 @@
 var fs = require("fs").promises;
 var path = require("path");
+var processHTML = require("../../lib/processHTML");
+var readJSON = require("../../lib/readJSON");
 
 module.exports = async function(request, response) {
 
   var app = request.app;
   var config = app.get("config");
-  var processHTML = app.get("processHTML");
 
-  var { readJSON } = app.get("fs");
   var { getSheet } = app.get("google").sheets;
   var consoles = app.get("browserConsole");
 

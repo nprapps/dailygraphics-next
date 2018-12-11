@@ -1,10 +1,10 @@
 var fs = require("fs").promises;
 var path = require("path");
+var makeJS = require("../../lib/processJS");
 
 module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
-  var makeJS = app.get("processJS");
   var consoles = app.get("browserConsole");
 
   var { slug } = request.params;

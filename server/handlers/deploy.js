@@ -1,10 +1,10 @@
 var fs = require("fs").promises;
 var path = require("path");
+var deploy = require("../../lib/deployGraphic");
 
 module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
-  var { deploy } = app.get("graphicOps");
   var { slug } = request.params;
 
   try {

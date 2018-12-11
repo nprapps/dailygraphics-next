@@ -1,9 +1,9 @@
 var path = require("path");
+var readJSON = require("../../lib/readJSON");
 
 module.exports = async function(request, response) {
   var { app, user } = request;
   var config = app.get("config");
-  var { readJSON } = app.get("fs");
   var { getSheet } = app.get("google").sheets;
 
   var { slug } = request.params;

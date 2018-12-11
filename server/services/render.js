@@ -1,7 +1,6 @@
 var compile = require("lodash.template");
 var path = require("path");
 
-// exception to loading from service, to prevent races
 var processHTML = require("../../lib/processHTML");
 
 var viewPath = path.join(process.cwd(), "server/templates");

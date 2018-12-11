@@ -4,7 +4,7 @@ Dailygraphics server
 This directory contains the web GUI for the rig. It's is written on top of Express, and its code is organized as follows:
 
 * ``/handlers`` - middleware callback functions that get registered to routes
-* ``/services`` - modules made available via ``app.get()`` application-wide, including aliases for code in ``/lib`` (it's easier to ``get()`` than to do a lengthy ``require()`` up the tree)
+* ``/services`` - modules made available via ``app.get()`` application-wide
 * ``/static`` - asset files for the admin UI
 * ``/templates`` - server views, such as the graphic listing and the preview page
 
