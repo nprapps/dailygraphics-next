@@ -66,6 +66,7 @@ button, .button {
 
 button:hover, button:focus,
 .button:hover, .button:focus {
+  outline: none;
   border: 1px solid var(--middle-gray);
 }
 

@@ -22,6 +22,8 @@ reloadButton.addEventListener("click", function() {
 
 var deployButton = $.one(".deploy-graphic");
 deployButton.addEventListener("click", async function() {
+  var confirmation = window.confirm("Are you sure you want to deploy?");
+  if (!confirmation) return;
   showToast("Capturing fallback.png...");
   var capture = await fetch("./captureFallback", { method: "POST" });
   if (!capture.ok) {
