@@ -8,13 +8,15 @@ var help = function() {
   console.log(`
 Commands available from the command line:
   - ${chalk.blue("create TYPE SLUG")} - create a graphic from the template TYPE and with the desired slug
+  - ${chalk.blue("deploy SLUG")} - deploy the chosen graphic to S3
   - ${chalk.blue("help")} - you're looking at it
   `);
 };
 
 var commands = {
   help,
-  create: require("./create")
+  create: require("./create"),
+  deploy: require("./deploy")
 }
 
 var run = async function() {
