@@ -14,10 +14,21 @@ All the good stuff from the original rig, plus:
 * Modern JS tooling, including Babel for new JS features and source maps for easier debugging
 * Improved Sheets integration, including typecasting for numerical/boolean values
 
-Getting started
----------------
+Quickstart
+----------
 
-To run this project, you'll need Node 8.0 or higher installed. On OS X and Linux, `nvm <https://github.com/creationix/nvm>`_ is a good way to install and update Node. Clone this repo, and run ``npm i`` to install its dependencies.
+To run this project, you'll need Node 8.0 or higher installed. On OS X and Linux, `nvm <https://github.com/creationix/nvm>`_ is a good way to install and update Node.
+
+Once you've done that:
+
+1. Clone this repo, and run ``npm i`` to install its dependencies.
+2. Clone the `templates repo <https://github.com/nprapps/dailygraphics-templates>`_ to install a selection of premade graphic types.
+3. Clone or create a folder to contain your actual graphic files. *Note:* If you're at NPR, we have a private ``graphics-js`` repo already created--you should clone that repo and run ``npm install`` in that folder to get our current dependencies.
+4. Configure ``config.json`` so that the paths for the graphics and template folders match the folders from steps 2 and 3.
+5. Run ``npm start`` to begin running the server, and open ``localhost:8000`` in your browser to view the admin UI.
+
+Getting started (in more detail)
+--------------------------------
 
 Configuration for this project is split between ``config.json`` (an example of which is provided) for values that are organization-specific but not sensitive, and environment variables for values that should be confidential.
 
@@ -31,11 +42,9 @@ We recognize that environment variables are not perfectly secure (since installe
 
 In addition to the directory that contains this app, you'll also need two other directories. One is for the templates that are used to create each graphic (in the legacy rig, these were stored in the ``dailygraphics/graphic_templates`` folder). We provide a repo of templates used at NPR `here <https://github.com/nprapps/dailygraphics-templates>`_, and you should feel free to clone it. In the ``config.json file``, the "templateRoot" value should be the path to this folder.
 
-The other directory is for your graphics themselves, and it should be referenced with the "graphicsPath" key of your ``config.json`` file. This folder is also where you should install any libraries used by your graphics via NPM. For example, with our templates, you'll want to run ``npm install d3-array d3-axis d3-scale d3-selection`` to get the most common D3 packages.
+The other directory is for your graphics themselves, and it should be referenced with the "graphicsPath" key of your ``config.json`` file. This folder is also where you should install any libraries used by your graphics via NPM. For example, if you're using our templates, you'll want to run ``npm install d3-array d3-axis d3-scale d3-selection`` to get the most common D3 packages.
 
-*Note:* If you're at NPR, we have a private ``graphics-js`` repo already created--you should clone that repo and run ``npm install`` in that folder to get our current dependencies.
-
-To start the web UI, run ``npm start`` to kick off the server, and visit ``localhost:8000`` in your browser. Some command-line flags are also supported:
+The server supports a couple of command-line arguments to customize its behavior:
 
 * ``--port XXXX`` - sets the port that the server will listen on to XXXX.
 * ``--force-sheet-cache`` - forces graphics preview pages to cache Google Sheets, so that you must press the "Refresh sheet" button when data is changed instead of simply reloading the page. Good for slow connections.
@@ -102,7 +111,9 @@ These files are run through the same translation steps as when they're sent to t
 Using the CLI
 -------------
 
-TK
+It's possible to perform all necessary tasks from the web interface, but if you want to use the command line (say, for scripting multiple deployments), the CLI interface uses the same service code as the web does. From the project root, you can run ``node cli COMMAND`` to perform a given task. 
+
+For example, ``node cli create bar_chart testgraphic`` will create a graphic from the "bar_chart" template with the name "testgraphic". ``node cli`` or ``node cli help`` will list available commands and their arguments. Currently, commands exist for creating and deploying graphics, but others will be added as the rig becomes more capable.
 
 Migrating from the original dailygraphics rig
 ---------------------------------------------
@@ -137,5 +148,4 @@ Known issues
 ------------
 
 * There's currently a fair amount of missing feedback when errors occur, such as if you don't have Google API access authorized yet. We're working on it.
-* The CLI doesn't technically exist yet.
 * There's no current support for falling back to the base template's "index.html" if one doesn't exist in the current graphic, which would be useful for implementing large-scale changes to graphics, but it does make individual graphics a bit more robust.
