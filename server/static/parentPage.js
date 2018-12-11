@@ -22,6 +22,11 @@ reloadButton.addEventListener("click", function() {
 
 var deployButton = $.one(".deploy-graphic");
 deployButton.addEventListener("click", async function() {
+  showToast("Capturing fallback.png...");
+  var capture = await fetch("./captureFallback", { method: "POST" });
+  if (!capture.ok) {
+    return showToast("Unable to capture fallback image!");
+  }
   showToast("Deploying graphic...");
   var response = await fetch("./deploy", { method: "POST" });
   var json = await response.json();
@@ -33,8 +38,8 @@ deployButton.addEventListener("click", async function() {
   }
 });
 
-var captureButton = $.one(".capture-fallback");
-captureButton.addEventListener("click", async function() {
-  var response = await fetch("./captureFallback", { method: "POST" });
-  showToast("Captured fallback.png!");
-});
+// var captureButton = $.one(".capture-fallback");
+// captureButton.addEventListener("click", async function() {
+//   var response = await fetch("./captureFallback", { method: "POST" });
+//   showToast("Captured fallback.png!");
+// });

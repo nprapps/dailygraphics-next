@@ -6,12 +6,13 @@ module.exports = async function(request, response) {
   var port = app.get("port");
   var { slug } = request.params;
   var puppetry = app.get("puppetry");
-  var url = `localhost:${port}/graphic/${slug}/index.html`;
+  var url = `http://localhost:${port}/graphic/${slug}/index.html`;
   var destination = path.join(config.root, slug, "fallback.png");
 
   try {
-    console.log("trying capture");
+    console.log("Trying capture...");
     await puppetry.snapGraphic(url, destination);
+    console.log("Capture complete!")
     response.status(200);
     response.send();
   } catch (err) {
