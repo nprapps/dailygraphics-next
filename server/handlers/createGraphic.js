@@ -5,14 +5,14 @@ var create = require("../../lib/createGraphic");
 module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
-  var { template, slug } = request.body;
+  var { template, slug, sheet } = request.body;
   if (!slug) {
     response.status(302);
     response.set("Location", "/?error=Missing slug for new graphic");
     return response.send();
   }
 
-  var fullSlug = await create(config, template, slug);
+  var fullSlug = await create(config, template, slug, sheet);
 
   response.status(302);
   response.set({
