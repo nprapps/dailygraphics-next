@@ -16,7 +16,7 @@ var filterGraphics = function() {
 searchInput.addEventListener("keyup", filterGraphics);
 filterGraphics();
 
-var createShade = $.one(".create-shade");
+var createShade = $.one(".create.shade");
 var toggleCreate = $.one(".new-graphic");
 toggleCreate.addEventListener("click", function() {
   var pressed = this.getAttribute("aria-pressed") == "true";
@@ -28,7 +28,7 @@ toggleCreate.addEventListener("click", function() {
   }
 });
 
-var submitButton = $.one(`.create-shade button[type="submit"]`);
+var submitButton = $.one(`.create.shade button[type="submit"]`);
 submitButton.addEventListener("click", function() {
   var slug = $.one(`[name="slug"]`);
   if (slug.value) {

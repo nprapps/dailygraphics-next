@@ -13,7 +13,7 @@
       <button class="new-graphic">new()</button>
       <input type="search" placeholder="Search list" class="search-graphics"/>
     </header>
-    <div class="create-shade">
+    <div class="create shade">
       <form method="POST" action="/graphic">
         <select id="template" name="template">
           <% templates.forEach(t => { %>
@@ -21,6 +21,9 @@
           <% }) %>
         </select>
         <input type="text" required name="slug">
+        <label for="createSheet">Create Sheet</label>
+        <input type="checkbox" name="createSheet" id="createSheet" checked="checked">
+        <input type="text" name="sheetID" placeholder="Existing Sheet ID">
         <button type="submit">Create</button>
       </form>
     </div>

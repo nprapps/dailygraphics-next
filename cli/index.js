@@ -7,7 +7,7 @@ var readJSON = require("../lib/readJSON");
 var help = function() {
   console.log(`
 Commands available from the command line:
-  - ${chalk.blue("create TYPE SLUG")} - create a graphic from the template TYPE and with the desired slug
+  - ${chalk.blue("create TYPE SLUG [SHEET]")} - create a graphic named SLUG from the template TYPE. SHEET is optional.
   - ${chalk.blue("deploy SLUG")} - deploy the chosen graphic to S3
   - ${chalk.blue("help")} - you're looking at it
   `);

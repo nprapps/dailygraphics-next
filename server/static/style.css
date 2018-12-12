@@ -181,6 +181,51 @@ select {
   background: var(--error);
 }
 
+@keyframes slide-down {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+.shade {
+  text-align: right;
+  background: var(--dark-gray);
+  color: var(--off-white);
+  padding: 16px;
+  margin-bottom: 32px;
+  box-shadow: 0 16px 8px rgba(0, 0, 0, .2);
+  display: none;
+  font-size: 16px;
+}
+
+.shade.show {
+  animation: slide-down 800ms;
+  display: block;
+}
+
+.shade form {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.shade label {
+  font-size: 14px;
+  font-weight: normal;
+  margin-right: 0;
+  text-style: italic;
+}
+
+.shade label,
+.shade input,
+.shade select,
+.shade button {
+  margin: 0 8px;
+}
+
+.shade label + input[type="checkbox"] {
+  margin-left: 0;
+}
+
 /* home page */
 
 .root-list {
@@ -209,38 +254,8 @@ select {
   text-decoration: none;
 }
 
-@keyframes slide-down {
-  from { transform: translateY(-100%); }
-  to { transform: translateY(0); }
-}
-
-.root-list .create-shade {
-  text-align: right;
-  background: var(--dark-gray);
-  color: var(--off-white);
-  padding: 16px;
-  margin-bottom: 32px;
-  box-shadow: 0 16px 8px rgba(0, 0, 0, .2);
+.root-list .create.shade input[name="createSheet"]:checked + input[name="sheetID"] {
   display: none;
-  font-size: 16px;
-}
-
-.root-list .create-shade.show {
-  animation: slide-down 800ms;
-  display: block;
-}
-
-.root-list .create-shade form {
-  display: flex;
-  justify-content: flex-end;
-  align-items: stretch;
-}
-
-.root-list .create-shade label,
-.root-list .create-shade input,
-.root-list .create-shade select,
-.root-list .create-shade button {
-  margin: 0 8px;
 }
 
 /* preview page */
