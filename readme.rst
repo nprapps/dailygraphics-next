@@ -6,11 +6,11 @@ Tools for writing and deploying daily interactive news graphics. Based substanti
 What does it do?
 ----------------
 
-All the good stuff from the original rig, plus:
+All the good stuff from the classic rig, plus:
 
 * Live reload of JS/CSS/HTML in the preview page
 * Build errors shown in the browser console, to minimize context switching
-* Create and deploy graphics directly from the web UI, not the command line
+* Create and deploy graphics directly from the web UI, not just the command line
 * Modern JS tooling, including Babel for new JS features and source maps for easier debugging
 * Improved Sheets integration, including typecasting for numerical/boolean values
 
@@ -39,6 +39,8 @@ We recognize that environment variables are not perfectly secure (since installe
 * AWS_ACCESS_KEY_ID
 * AWS_SECRET_ACCESS_KEY
 * AWS_DEFAULT_REGION
+
+The Google OAuth variables should match the client ID and secret for an API app that can access your account. `This post <http://blog.apps.npr.org/2015/03/02/app-template-oauth.html>`_ has details on setting that up.
 
 In addition to the directory that contains this app, you'll also need two other directories. One is for the templates that are used to create each graphic (in the legacy rig, these were stored in the ``dailygraphics/graphic_templates`` folder). We provide a repo of templates used at NPR `here <https://github.com/nprapps/dailygraphics-templates>`_, and you should feel free to clone it. In the ``config.json file``, the "templateRoot" value should be the path to this folder.
 
