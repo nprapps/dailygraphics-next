@@ -1,6 +1,7 @@
 var toast = document.createElement("div");
 toast.className = "toast";
 toast.setAttribute("aria-live", "assertive");
+toast.setAttribute("role", "log");
 document.body.appendChild(toast);
 
 var toastTimeout = null;
