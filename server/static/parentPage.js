@@ -48,3 +48,18 @@ deployButton.addEventListener("click", async function() {
 //   var response = await fetch("./captureFallback", { method: "POST" });
 //   showToast("Captured fallback.png!");
 // });
+
+var showDuplicate = $.one(".show-duplicate");
+var duplicateShade = $.one(".copy.shade");
+showDuplicate.addEventListener("click", function() {
+  duplicateShade.classList.toggle("show");
+  if (duplicateShade.classList.contains("show")) {
+    // move focus
+    $.one(`.copy.shade [name=slug]`).focus();
+  }
+});
+
+var duplicateSubmit = $.one(".copy.shade .submit");
+duplicateSubmit.addEventListener("click", function() {
+  showToast("Duplicating graphic, please wait...");
+});

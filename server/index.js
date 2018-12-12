@@ -44,6 +44,7 @@ module.exports = async function(config) {
   app.post("/graphic", require("./handlers/createGraphic"));
   app.post("/graphic/:slug/deploy", require("./handlers/deploy"));
   app.post("/graphic/:slug/captureFallback", require("./handlers/captureFallback"));
+  app.post("/graphic/:original/duplicate", require("./handlers/duplicateGraphic"));
 
   // Google integration
   app.get("/authorize", require("./handlers/googleAuth").authorize);
