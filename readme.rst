@@ -113,7 +113,7 @@ Using the CLI
 
 It's possible to perform all necessary tasks from the web interface, but if you want to use the command line (say, for scripting multiple deployments), the CLI interface uses the same service code as the web does. From the project root, you can run ``node cli COMMAND`` to perform a given task. 
 
-For example, ``node cli create bar_chart testgraphic`` will create a graphic from the "bar_chart" template with the name "testgraphic". ``node cli`` or ``node cli help`` will list available commands and their arguments. Currently, commands exist for creating and deploying graphics, but others will be added as the rig becomes more capable.
+For example, ``node cli create bar_chart testgraphic`` will create a graphic from the "bar_chart" template with the name "testgraphic". ``node cli`` or ``node cli help`` will list available commands and their arguments. Currently, commands exist for creating, copying, and deploying graphics, but others will be added as the rig becomes more capable.
 
 Migrating from the original dailygraphics rig
 ---------------------------------------------
