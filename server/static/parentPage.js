@@ -53,7 +53,9 @@ var showDuplicate = $.one(".show-duplicate");
 var duplicateShade = $.one(".copy.shade");
 showDuplicate.addEventListener("click", function() {
   duplicateShade.classList.toggle("show");
-  if (duplicateShade.classList.contains("show")) {
+  var shown = duplicateShade.classList.contains("show");
+  this.setAttribute("aria-pressed", shown);
+  if (shown) {
     // move focus
     $.one(`.copy.shade [name=slug]`).focus();
   }

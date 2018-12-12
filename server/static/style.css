@@ -92,6 +92,7 @@ button .tooltip,
   pointer-events: none;
   transition: opacity .1s .5s linear;
   text-align: center;
+  color: var(--dark-gray);
 }
 
 button:hover .tooltip,

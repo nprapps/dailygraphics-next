@@ -14,7 +14,7 @@
 </head>
 <body class="preview-page <%= deployed ? "deployed" : "" %>">
   <header class="toolbar">
-    <a class="back hide-deployed" aria-hidden="true" href="/">&laquo;</a>
+    <a class="back hide-deployed" aria-label="Back to graphic index" href="/">&laquo;</a>
 
     <h1 class="title"><%= slug %></h1>
     
@@ -51,7 +51,7 @@
 
     <span class="spacer hide-deployed"></span>
 
-    <button class="show-duplicate hide-deployed">
+    <button class="show-duplicate hide-deployed" aria-pressed="false">
       <div aria-hidden="true" class="inline-svg">
         <%= await t.includeStatic("../static/icons/baseline-create_new_folder-24px.svg") %>
       </div>
