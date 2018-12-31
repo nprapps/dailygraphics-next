@@ -23,8 +23,10 @@ Once you've done that:
 
 1. Clone this repo, and run ``npm i`` to install its dependencies.
 2. Clone the `templates repo <https://github.com/nprapps/dailygraphics-templates>`_ to install a selection of premade graphic types.
-3. Clone or create a folder to contain your actual graphic files. *Note:* If you're at NPR, we have a private ``graphics-js`` repo already created--you should clone that repo and run ``npm install`` in that folder to get our current dependencies.
-4. Configure ``config.json`` so that the paths for the graphics and template folders match the folders from steps 2 and 3.
+3. Clone or create a folder to contain your actual graphic files (by default this is ``graphics-js``, in the same parent folder where you put the rig and template repos). 
+   a. If you're at NPR, we have a private ``graphics-js`` repo already created--you should clone that repo and run ``npm install`` in that folder to get our current dependencies.
+   b. For non-NPR users, you should create a ``package.json`` in the graphics folder and install the common libraries there: ``npm init -y && npm install d3-array d3-axis d3-scale d3-selection d3-shape d3-svg``.
+4. You should now have three sibling folders: the rig, the templates, and a graphics repo. Configure ``config.json`` in the rig folder so that the paths for the graphics and template folders match the folders from steps 2 and 3.
 5. Run ``npm start`` to begin running the server, and open ``localhost:8000`` in your browser to view the admin UI.
 
 Getting started (in more detail)
