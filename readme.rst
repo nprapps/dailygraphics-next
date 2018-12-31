@@ -17,7 +17,7 @@ All the good stuff from the classic rig, plus:
 Quickstart
 ----------
 
-To run this project, you'll need Node 8.0 or higher installed. On OS X and Linux, `nvm <https://github.com/creationix/nvm>`_ is a good way to install and update Node.
+To run this project, you'll need Node 10.0 or higher installed. On OS X and Linux, `nvm <https://github.com/creationix/nvm>`_ is a good way to install and update Node.
 
 Once you've done that:
 
