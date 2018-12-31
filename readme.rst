@@ -27,7 +27,7 @@ Once you've done that:
 
    a. If you're at NPR, we have a private ``graphics-js`` repo already created--you should clone that repo and run ``npm install`` in that folder to get our current dependencies.
    b. For non-NPR users, you should create a ``package.json`` in the graphics folder and install the common libraries there: ``npm init -y && npm install d3-array d3-axis d3-scale d3-selection d3-shape d3-svg``.
-   
+
 4. You should now have three sibling folders: the rig, the templates, and a graphics repo. Configure ``config.json`` in the rig folder so that the paths for the graphics and template folders match the folders from steps 2 and 3.
 5. Run ``npm start`` to begin running the server, and open ``localhost:8000`` in your browser to view the admin UI.
 
@@ -113,6 +113,8 @@ When the server runs a deployemnt, it loads the ``manifest.json`` file from the 
     ]
 
 These files are run through the same translation steps as when they're sent to the browser, then uploaded to S3. Your ``config.json`` should specify an "s3" object with a bucket, as well as a "prefix" that will be added at the front of the graphics slug. For example, if your bucket and prefix are set to "apps.npr.org" and "dailygraphics/graphics", respectively, a graphic with a slug of "bar-chart-20190101" would be uploaded to ``s3://apps.npr.org/dailygraphics/graphics/bar-chart-20190101``.
+
+As a final convenience feature, the rig will automatically spin up a headless browser and capture a "fallback.png" image for you prior to deployment. This happens automatically and can't be disabled at this time. If you prefer hand-crafted fallback images, you may want to save them as a different filename and update the templates to point there instead.
 
 Using the CLI
 -------------
