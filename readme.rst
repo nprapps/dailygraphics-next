@@ -1,7 +1,7 @@
-DailyGraphics-next
+Dailygraphics-next
 ==================
 
-Tools for writing and deploying daily interactive news graphics. Based substantially on NPR's `original daily graphics rig <https://github.com/nprapps/dailygraphics>`_. Built on Express, LESS, Browserify, and Google Sheets.
+Tools for writing and deploying daily interactive news graphics. Based substantially on NPR's `original daily graphics rig <https://github.com/nprapps/dailygraphics>`_. Built on Express, LESS, Browserify and Google Sheets.
 
 What does it do?
 ----------------
@@ -23,12 +23,12 @@ Once you've done that:
 
 1. Clone this repo, and run ``npm i`` to install its dependencies.
 2. Clone the `templates repo <https://github.com/nprapps/dailygraphics-templates>`_ to install a selection of premade graphic types.
-3. Clone or create a folder to contain your actual graphic files (by default this is ``graphics-js``, in the same parent folder where you put the rig and template repos). 
+3. Clone or create a folder to contain your actual graphic files (by default this is ``graphics-js``, in the same parent folder where you put the rig and template repos).
 
    a. If you're at NPR, we have a private ``graphics-js`` repo already created--you should clone that repo and run ``npm install`` in that folder to get our current dependencies.
    b. For non-NPR users, you should create a ``package.json`` in the graphics folder and install the common libraries there: ``npm init -y && npm install d3-array d3-axis d3-scale d3-selection d3-shape d3-svg``.
 
-4. You should now have three sibling folders: the rig, the templates, and a graphics repo. Configure ``config.json`` in the rig folder so that the paths for the graphics and template folders match the folders from steps 2 and 3.
+4. You should now have three sibling folders: the rig, the templates and a graphics repo. Configure ``config.json`` in the rig folder so that the paths for the graphics and template folders match the folders from steps 2 and 3.
 5. Run ``npm start`` to begin running the server, and open ``localhost:8000`` in your browser to view the admin UI.
 
 Getting started (in more detail)
@@ -57,10 +57,18 @@ The server supports a couple of command-line arguments to customize its behavior
 
 Due to the way NPM scripts work, flags must be passed after a ``--`` separator. For example, running the rig on port 7777 would look like ``npm start -- --port 7777``.
 
+### Terminal shortcut
+
+Do you use [iTerm2](https://iterm2.com) as your terminal app? [Here's a sample AppleScript](e) to automatically launch a three-paned terminal window (one for the dailygraphics-next repo, one for the local webserver and another for the graphics repo) and pull the latest code from GitHub. You can save this locally, customize it to match your own configuration and add an alias for it to your `.bash_profile`.
+
+```
+alias dgnext="osascript ~/PATH-TO-FILE/iterm_dgnext.scpt"
+```
+
 Authorizing Google access
 -------------------------
 
-Similar to the original dailygraphics rig, you need to authorize this app's API access to access and create Drive files (for the spreadsheets that back each page). When the initial list page loads, it should redirect you to a Google log-in screen--just follow the instructions to complete the process. You'll need to create a Google API app, enable Drive access, and store its authentication values in the ``GOOGLE_OAUTH_CLIENT_ID`` and ``GOOGLE_OAUTH_CONSUMER_SECRET`` environment variables. Your OAuth tokens are stored in your home directory as ``.google_oauth_tokens``.
+Similar to the original dailygraphics rig, you need to authorize this app's API access to access and create Drive files (for the spreadsheets that back each page). When the initial list page loads, it should redirect you to a Google log-in screen--just follow the instructions to complete the process. You'll need to create a Google API app, enable Drive access and store its authentication values in the ``GOOGLE_OAUTH_CLIENT_ID`` and ``GOOGLE_OAUTH_CONSUMER_SECRET`` environment variables. Your OAuth tokens are stored in your home directory as ``.google_oauth_tokens``.
 
 Creating a graphic
 ------------------
@@ -80,7 +88,7 @@ As resources are loaded, the server will process them according to their type:
 * JS - transpiled with Babel to support `newer JS features <https://babeljs.io/docs/en/learn>`_ and bundled with Browserify. You can ``require()`` NPM modules into your scripts--they'll be loaded first from the graphic subfolder, if there's a ``node_modules`` there, and then from any modules installed in the graphics repo itself. Generally, you should use a local ``node_modules`` only in cases where your graphic requires a different library version from other graphics.
 * CSS - compiled from LESS files, based on filename (loading ``graphics.css`` will compile and load ``graphics.less`` from disk).
 
-Errors detected during JS or LESS compilation will be routed to the dev tools console for easy debugging if your browser supports WebSockets. 
+Errors detected during JS or LESS compilation will be routed to the dev tools console for easy debugging if your browser supports WebSockets.
 
 Each graphic should also have a ``manifest.json`` file in its folder, which is used to store configuration data for Sheets and deployment. The "sheets" key in that file tells the server which Google Sheet to use for loading labels and data. It will also have a snapshot of the Node modules installed when it was created--this isn't used for anything, but is meant as a helpful record when recreating graphics later.
 
@@ -119,9 +127,9 @@ As a final convenience feature, the rig will automatically spin up a headless br
 Using the CLI
 -------------
 
-It's possible to perform all necessary tasks from the web interface, but if you want to use the command line (say, for scripting multiple deployments), the CLI interface uses the same service code as the web does. From the project root, you can run ``node cli COMMAND`` to perform a given task. 
+It's possible to perform all necessary tasks from the web interface, but if you want to use the command line (say, for scripting multiple deployments), the CLI interface uses the same service code as the web does. From the project root, you can run ``node cli COMMAND`` to perform a given task.
 
-For example, ``node cli create bar_chart testgraphic`` will create a graphic from the "bar_chart" template with the name "testgraphic". ``node cli`` or ``node cli help`` will list available commands and their arguments. Currently, commands exist for creating, copying, and deploying graphics, but others will be added as the rig becomes more capable.
+For example, ``node cli create bar_chart testgraphic`` will create a graphic from the "bar_chart" template with the name "testgraphic". ``node cli`` or ``node cli help`` will list available commands and their arguments. Currently, commands exist for creating, copying and deploying graphics, but others will be added as the rig becomes more capable.
 
 Migrating from the original dailygraphics rig
 ---------------------------------------------
