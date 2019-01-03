@@ -57,9 +57,9 @@ The server supports a couple of command-line arguments to customize its behavior
 
 Due to the way NPM scripts work, flags must be passed after a ``--`` separator. For example, running the rig on port 7777 would look like ``npm start -- --port 7777``.
 
-### Terminal shortcut
+**Terminal shortcut**
 
-Do you use [iTerm2](https://iterm2.com) as your terminal app? [Here's a sample AppleScript](e) to automatically launch a three-paned terminal window (one for the dailygraphics-next repo, one for the local webserver and another for the graphics repo) and pull the latest code from GitHub. You can save this locally, customize it to match your own configuration and add an alias for it to your `.bash_profile`.
+Do you use `iTerm2 <https://iterm2.com>`_ as your terminal app? `Here's a sample AppleScript <https://gist.github.com/alykat/31feba18413c8ca481d8b38547469e15>`_ to automatically launch a three-paned terminal window (one for the dailygraphics-next repo, one for the local webserver and another for the graphics repo) and pull the latest code from GitHub. You can save this locally, customize it to match your own configuration and add an alias for it to your `.bash_profile`.
 
 ```
 alias dgnext="osascript ~/PATH-TO-FILE/iterm_dgnext.scpt"
