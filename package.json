@@ -20,6 +20,7 @@
     "browser-pack-flat": "^3.2.0",
     "browserify": "^16.2.3",
     "carlo": "^0.9.41",
+    "chalk": "^2.4.2",
     "common-shakeify": "^0.5.2",
     "exorcist": "^1.0.1",
     "express": "^4.16.4",
