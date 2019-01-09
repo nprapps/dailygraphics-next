@@ -14,8 +14,9 @@ module.exports = async function(request, response) {
 
   var embedPath = path.join(config.templateRoot, "embed.html");
   var copyeditPath = path.join(config.templateRoot, "copyedit.html");
+  var directLinkPath = path.join(config.templateRoot, "link.html");
 
-  var data = { embedPath, copyeditPath, slug, sheet, config, deployed: false };
+  var data = { embedPath, copyeditPath, directLinkPath, slug, sheet, config, deployed: false };
 
   if (sheet) {
     data.COPY = await getSheet(sheet, { force: !config.forceSheetCache });
