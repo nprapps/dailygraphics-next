@@ -12,7 +12,10 @@ module.exports = async function(request, response) {
   manifest = await readJSON(manifestPath) || {};
   var { sheet } = manifest;
 
-  var data = { slug, sheet, config, deployed: false };
+  var embedPath = path.join(config.templateRoot, "embed.html");
+  var copyeditPath = path.join(config.templateRoot, "copyedit.html");
+
+  var data = { embedPath, copyeditPath, slug, sheet, config, deployed: false };
 
   if (sheet) {
     data.COPY = await getSheet(sheet, { force: !config.forceSheetCache });
