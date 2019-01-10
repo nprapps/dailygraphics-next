@@ -5,10 +5,12 @@ var livereload = require("livereload");
 module.exports = function(app) {
 
   var config = app.get("config")
+  if (config.argv.liveReload === false) return;
 
   var server = livereload.createServer({
     extraExts: ["less"],
-    exclusions: [/node_modules\//]
+    exclusions: [/node_modules\//],
+    port: config.argv.liveReload
   });
   server.watch(config.root);
 

@@ -12,7 +12,12 @@ module.exports = async function(config) {
 
   config.root = path.join(process.cwd(), config.graphicsPath);
   config.templateRoot = path.join(process.cwd(), config.templatePath);
-  config.forceSheetCache = argv["force-sheet-cache"];
+  config.argv = { _: argv._ };
+  for (var k in argv) {
+    if (k == "_") continue;
+    var upcase = k.replace(/-(\w)/g, (_, m) => m.toUpperCase());
+    config.argv[upcase] = argv[k];
+  }
 
   app.set("config", config);
 

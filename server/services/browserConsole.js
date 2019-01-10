@@ -2,6 +2,9 @@ var ws = require("ws");
 
 module.exports = function(app) {
 
+  var config = app.get("config");
+  if (config.argv.websockets === false) return;
+
   var http = app.get("server");
   var server = new ws.Server({ noServer: true });
 

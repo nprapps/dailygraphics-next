@@ -50,10 +50,13 @@ In addition to the directory that contains this app, you'll also need two other 
 
 The other directory is for your graphics themselves, and it should be referenced with the "graphicsPath" key of your ``config.json`` file. This folder is also where you should install any libraries used by your graphics via NPM. For example, if you're using our templates, you'll want to run ``npm install d3-array d3-axis d3-scale d3-selection`` to get the most common D3 packages.
 
-The server supports a couple of command-line arguments to customize its behavior:
+The server supports a number of command-line arguments to customize its behavior:
 
 * ``--port XXXX`` - sets the port that the server will listen on to XXXX.
+* ``--live-reload XXXX`` - sets the port for the live reload server.
 * ``--force-sheet-cache`` - forces graphics preview pages to cache Google Sheets, so that you must press the "Refresh sheet" button when data is changed instead of simply reloading the page. Good for slow connections.
+* ``--no-live-reload`` - Turns off live reload when files are edited. 
+* ``--no-websockets`` - Turns off the websocket debugging connection. Along with disabling live reload, this may be good in a hosted installation environment.
 
 Due to the way NPM scripts work, flags must be passed after a ``--`` separator. For example, running the rig on port 7777 would look like ``npm start -- --port 7777``.
 

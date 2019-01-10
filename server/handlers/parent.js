@@ -19,7 +19,7 @@ module.exports = async function(request, response) {
   var data = { embedPath, copyeditPath, directLinkPath, slug, sheet, config, deployed: false };
 
   if (sheet) {
-    data.COPY = await getSheet(sheet, { force: !config.forceSheetCache });
+    data.COPY = await getSheet(sheet, { force: !config.argv.forceSheetCache });
   };
 
   response.render("parentPage.html", data);
