@@ -90,7 +90,7 @@
       rows="4"
       cols="80"
       aria-label="Embed code"
-    ><%- await t.process(embedPath, { slug }) %></textarea>
+    ><%- await t.process(embedPath, { config, slug }) %></textarea>
 
     <% 
     if (typeof COPY != "undefined") { 
@@ -113,7 +113,7 @@
     Underneath the graphic embed, in the text of the story, add a prompt with a direct link to the graphic (without this preview frame, embed code, etc.). You can copy/paste the text below directly into Seamus (new editor) and the formatting should be preserved.
 
     <blockquote class="direct-link">
-      <%= await t.process(directLinkPath, { slug }) %>
+      <%= await t.process(directLinkPath, { config, slug }) %>
     </blockquote>
 
   </section>
