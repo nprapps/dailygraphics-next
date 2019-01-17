@@ -59,4 +59,6 @@ module.exports = async function(config) {
   // catch-all for static assets
   app.get("/graphic/:slug/*", require("./handlers/files"));
 
+  console.log(`You got this! Open http://localhost:${port} in your browser to begin.`);
+
 };
