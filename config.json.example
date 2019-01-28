@@ -7,5 +7,6 @@
     "bucket": "apps.npr.org",
     "prefix": "dailygraphics/graphics"
   },
-  "analyticsID": ""
+  // this is the NPR Visuals Google Analytics property. update to use your own.
+  "analyticsID": "UA-5828686-75"
 }
