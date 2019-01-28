@@ -17,14 +17,14 @@
     <a class="back hide-deployed" aria-label="Back to graphic index" href="/">&laquo;</a>
 
     <h1 class="title"><%= slug %></h1>
-    
+
     <select class="breakpoint" aria-label="Preview width">
       <option value="sidebar">Sidebar (180px)</option>
       <option value="mobile" selected>Mobile (360px)</option>
       <option value="desktop">Desktop (730px)</option>
       <option value="fluid">Fluid</option>
     </select>
-    
+
     <% if (typeof sheet != "undefined") { %>
     <a target="_blank" class="edit-sheet button" href="https://docs.google.com/spreadsheets/d/<%= sheet %>/edit#gid=0">
       <div aria-hidden="true" class="inline-svg">
@@ -42,7 +42,7 @@
     </button>
 
     <a target="_blank" class="prod-link button hide-deployed"
-      href="http://<%= config.s3.bucket %>/<%= config.s3.prefix %>/<%= slug %>/preview.html">
+      href="https://<%= config.s3.bucket %>/<%= config.s3.prefix %>/<%= slug %>/preview.html">
       <div aria-hidden-="true" class="inline-svg">
         <%= await t.includeStatic("../static/icons/baseline-open_in_browser-24px.svg") %>
       </div>
@@ -78,7 +78,7 @@
   <div class="preview-container" data-width="mobile">
     <div data-pym-loader data-child-src="./index.html" id="preview">Loading...</div>
   </div>
-  
+
   <hr>
 
   <section class="metadata">
@@ -92,15 +92,15 @@
       aria-label="Embed code"
     ><%- await t.process(embedPath, { config, slug }) %></textarea>
 
-    <% 
-    if (typeof COPY != "undefined") { 
+    <%
+    if (typeof COPY != "undefined") {
     %>
     <h2>Copyedit e-mail</h2>
 
     <p>
       Note: if you have a <var>metadata</var> tab in your sheets for this graphic, it will be used to fill in the blanks below.
 
-    <textarea 
+    <textarea
       class="copyedit-email copy-on-click"
       readonly="readonly"
       rows="<%= 16 + Object.keys(COPY.labels).length * 3 %>"
