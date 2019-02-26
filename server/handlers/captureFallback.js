@@ -9,9 +9,11 @@ module.exports = async function(request, response) {
   var url = `http://localhost:${port}/graphic/${slug}/index.html`;
   var destination = path.join(config.root, slug, "fallback.png");
 
+  var puppet = puppetry(config);
+
   try {
     console.log("Trying capture...");
-    await puppetry.snapGraphic(url, destination);
+    await puppet.snapGraphic(url, destination);
     console.log("Capture complete!")
     response.status(200);
     response.send();

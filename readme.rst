@@ -57,6 +57,7 @@ The server supports a number of command-line arguments to customize its behavior
 * ``--force-sheet-cache`` - forces graphics preview pages to cache Google Sheets, so that you must press the "Refresh sheet" button when data is changed instead of simply reloading the page. Good for slow connections.
 * ``--no-live-reload`` - Turns off live reload when files are edited. 
 * ``--no-websockets`` - Turns off the websocket debugging connection. Along with disabling live reload, this may be good in a hosted installation environment.
+* ``--disable-headless`` - Show the Chrome window when capturing fallback images, which can help on some computers
 
 Due to the way NPM scripts work, flags must be passed after a ``--`` separator. For example, running the rig on port 7777 would look like ``npm start -- --port 7777``.
 
