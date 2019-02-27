@@ -22,6 +22,7 @@
     "browserify": "^16.2.3",
     "carlo": "^0.9.41",
     "chalk": "^2.4.2",
+    "chrome-launcher": "^0.10.5",
     "common-shakeify": "^0.5.2",
     "exorcist": "^1.0.1",
     "express": "^4.16.4",
@@ -35,6 +36,7 @@
     "minimatch": "^3.0.4",
     "minimist": "^1.2.0",
     "nodemon": "^1.18.6",
+    "puppeteer-core": "^1.12.2",
     "typogr": "^0.6.8",
     "uglifyify": "^5.0.1",
     "ws": "^6.1.2"
