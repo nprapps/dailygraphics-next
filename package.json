@@ -20,7 +20,6 @@
     "body-parser": "^1.18.3",
     "browser-pack-flat": "^3.2.0",
     "browserify": "^16.2.3",
-    "carlo": "^0.9.41",
     "chalk": "^2.4.2",
     "chrome-launcher": "^0.10.5",
     "common-shakeify": "^0.5.2",
