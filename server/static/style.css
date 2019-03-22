@@ -128,18 +128,35 @@ select {
   justify-content: space-between;
   z-index: 999;
   position: relative;
+  flex-wrap: wrap;
 }
 
-.toolbar .title {
+.toolbar h1 {
   font-size: 24px;
   font-weight: bold;
   margin: 0;
+  display: inline;
+}
+
+.toolbar .title {
   flex: 1;
 }
 
+@media (max-width: 900px) {
+  .toolbar {
+    justify-content: flex-end;
+  }
+
+  .toolbar .title {
+    flex: 0 0 100%;
+    padding-bottom: 8px;
+  }
+}
+
 .toolbar button,
-.toolbar .button {
-  margin: 0 4px;
+.toolbar .button,
+.toolbar select {
+  margin: 0 4px 4px;
   font-size: 12px;
 }
 

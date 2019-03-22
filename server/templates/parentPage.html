@@ -14,9 +14,10 @@
 </head>
 <body class="preview-page <%= deployed ? "deployed" : "" %>">
   <header class="toolbar">
-    <a class="back hide-deployed" aria-label="Back to graphic index" href="/">&laquo;</a>
-
-    <h1 class="title"><%= slug %></h1>
+    <div class="title">
+      <a class="back hide-deployed" aria-label="Back to graphic index" href="/">&laquo;</a>
+      <h1><%= slug %></h1>
+    </div>
 
     <select class="breakpoint" aria-label="Preview width">
       <option value="sidebar">Sidebar (180px)</option>
