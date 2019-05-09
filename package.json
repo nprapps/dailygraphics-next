@@ -1,7 +1,7 @@
 {
-  "name": "dailygraphics-js",
+  "name": "dailygraphics-next",
   "version": "1.0.0",
-  "description": "",
+  "description": "CQRC's graphics workflow, adapted from NPR's dailygraphics-next",
   "main": "index.js",
   "scripts": {
     "start": "eval \"`aws-auth-helper prodbeanstalk`\" node .",
