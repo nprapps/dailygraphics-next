@@ -14,7 +14,7 @@ module.exports = async function(request, response) {
   try {
     console.log("Trying capture...");
     await puppet.snapGraphic(url, destination);
-    console.log("Capture complete!")
+    console.log("Capture complete!");
     response.status(200);
     response.send();
   } catch (err) {
@@ -22,4 +22,4 @@ module.exports = async function(request, response) {
     response.status(500);
     response.send(err);
   }
-}
+};

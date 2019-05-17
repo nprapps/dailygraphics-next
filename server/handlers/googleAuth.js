@@ -6,7 +6,6 @@ var authorize = async function(request, response) {
 
   var { getClient, scopes } = app.get("google").auth;
 
-
   var host = request.hostname;
   var port = app.get("port");
   var redirect = `http://${host}:${port}/authenticate/`;

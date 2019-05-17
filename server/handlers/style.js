@@ -15,7 +15,7 @@ module.exports = async function(request, response) {
 
   try {
     var cached = lessCache.get(file);
-    var rendered = cached || await makeCSS(file);
+    var rendered = cached || (await makeCSS(file));
 
     response.set({
       "Content-Type": "text/css"

@@ -20,7 +20,6 @@ var getFolders = async function(dir) {
 };
 
 module.exports = async function(request, response) {
-
   var app = request.app;
   var config = app.get("config");
 
@@ -28,5 +27,4 @@ module.exports = async function(request, response) {
   var templates = await getFolders(config.templateRoot);
 
   response.render("rootList.html", { graphics, templates });
-
 };

@@ -11,10 +11,9 @@ module.exports = async function(request, response) {
     response.status(302);
     response.set("Location", `/graphic/${duplicate}/`);
     response.send();
-  } catch(err) {
+  } catch (err) {
     response.status(500);
     console.log(err);
     response.send({ error: err.message });
   }
-
-}
+};

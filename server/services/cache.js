@@ -30,5 +30,4 @@ module.exports = function(app) {
   };
 
   app.set("cache", new MemoryPalace());
-
 };

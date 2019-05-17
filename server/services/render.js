@@ -6,7 +6,6 @@ var processHTML = require("../../lib/processHTML");
 var viewPath = path.join(process.cwd(), "server/templates");
 
 module.exports = function(app) {
-
   var render = async function(path, data, callback) {
     var rendered = await processHTML(path, data);
     callback(null, rendered);
@@ -14,5 +13,4 @@ module.exports = function(app) {
 
   app.set("views", viewPath);
   app.engine("html", render);
-
 };

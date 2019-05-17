@@ -19,10 +19,9 @@ var commands = {
   create: require("./create"),
   deploy: require("./deploy"),
   copy: require("./copy")
-}
+};
 
 var run = async function() {
-
   var argv = minimist(process.argv);
   var [node, here, script = "help", ...positional] = argv._;
 
@@ -32,7 +31,6 @@ var run = async function() {
 
   var command = commands[script];
   command(config, argv, positional);
-
 };
 
 run();

@@ -5,13 +5,15 @@ import { $ } from "./qsa.js";
 var delay = (d = 1000) => new Promise(ok => setTimeout(ok, d));
 
 var copyTexts = $(".copy-on-click");
-copyTexts.forEach(c => c.addEventListener("click", function() {
-  this.selectionStart = 0;
-  this.selectionEnd = this.value.length;
-  document.execCommand("copy");
-  var name = this.getAttribute("aria-label");
-  showToast(`${name} copied to clipboard`);
-}));
+copyTexts.forEach(c =>
+  c.addEventListener("click", function() {
+    this.selectionStart = 0;
+    this.selectionEnd = this.value.length;
+    document.execCommand("copy");
+    var name = this.getAttribute("aria-label");
+    showToast(`${name} copied to clipboard`);
+  })
+);
 
 var reloadButton = $.one(".refresh-sheet");
 

@@ -12,13 +12,13 @@ module.exports = function(app) {
           var cached = sheetCache.get(sheet);
           if (cached) console.log(`Using cached copy for sheet ${sheet}`);
         }
-        var found = cached || await getSheet(sheet);
+        var found = cached || (await getSheet(sheet));
         sheetCache.set(sheet, found);
         return found;
       }
     },
     auth: require("../../lib/googleAuth")
-  }
+  };
 
   app.set("google", google);
-}
+};

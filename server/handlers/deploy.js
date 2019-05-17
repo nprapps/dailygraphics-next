@@ -14,5 +14,4 @@ module.exports = async function(request, response) {
     response.send({ error });
     console.log(error);
   }
-
-}
+};
