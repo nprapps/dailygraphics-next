@@ -21,5 +21,14 @@ module.exports = function(app) {
     cache.clear();
   };
 
-  ["add", "change", "unlink"].forEach(e => server.watcher.on(e, evictCache));
+  var bindServer = function() {
+    ["add", "change", "unlink"].forEach(e => server.watcher.on(e, evictCache));
+  };
+
+  server.reopen = function() {
+    server.watch(config.root);
+    server.listen();
+    bindServer();
+  };
+
 };
