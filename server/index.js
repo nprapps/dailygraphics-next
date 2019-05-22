@@ -9,7 +9,6 @@ var app = express();
 var argv = minimist(process.argv);
 
 module.exports = async function(config) {
-
   config.root = path.join(process.cwd(), config.graphicsPath);
   config.templateRoot = path.join(process.cwd(), config.templatePath);
   config.argv = { _: argv._ };
@@ -60,5 +59,4 @@ module.exports = async function(config) {
   app.get("/graphic/:slug/*", require("./handlers/files"));
 
   console.log(`You got this! Open http://localhost:${port} in your browser to begin.`);
-
 };

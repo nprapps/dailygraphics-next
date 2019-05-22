@@ -17,4 +17,4 @@ module.exports = async function(request, response) {
   }
 
   response.sendFile(file);
-}
+};

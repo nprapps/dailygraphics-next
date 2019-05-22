@@ -4,7 +4,6 @@ var processHTML = require("../../lib/processHTML");
 var readJSON = require("../../lib/readJSON");
 
 module.exports = async function(request, response) {
-
   var app = request.app;
   var config = app.get("config");
 
@@ -25,7 +24,7 @@ module.exports = async function(request, response) {
 
   if (sheet) {
     data.COPY = await getSheet(sheet);
-  };
+  }
 
   var file = path.join(config.root, slug, "index.html");
   var output = "";
@@ -40,5 +39,4 @@ module.exports = async function(request, response) {
   }
 
   response.send(output);
-
 };

@@ -4,4 +4,4 @@ module.exports = function(request, response) {
   cache.clear();
   response.status(200);
   response.send({ success: true });
-}
+};

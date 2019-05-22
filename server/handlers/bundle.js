@@ -23,12 +23,11 @@ module.exports = async function(request, response) {
 
     response.set({
       "Content-Type": "application/javascript"
-    })
+    });
     response.send(output);
   } catch (err) {
     response.status(500);
     response.send(err.message);
     consoles.error(err.message);
   }
-
 };

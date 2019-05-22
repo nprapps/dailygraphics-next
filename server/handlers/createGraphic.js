@@ -18,8 +18,7 @@ module.exports = async function(request, response) {
 
   response.status(302);
   response.set({
-    "Location": `/graphic/${fullSlug}/`
+    Location: `/graphic/${fullSlug}/`
   });
   response.send();
-
 };
