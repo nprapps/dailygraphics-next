@@ -16,6 +16,7 @@ module.exports = function(app) {
   app.set("livereload", server);
 
   var evictCache = function(file) {
+    console.log(file);
     var ext = path.extname(file).slice(1);
     var cache = app.get("cache").partition(ext);
     cache.clear();
@@ -30,5 +31,7 @@ module.exports = function(app) {
     server.listen();
     bindServer();
   };
+
+  bindServer();
 
 };
