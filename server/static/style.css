@@ -156,7 +156,7 @@ select {
 .toolbar button,
 .toolbar .button,
 .toolbar select {
-  margin: 0 4px 4px;
+  margin: 0 4px 0;
   font-size: 12px;
 }
 
