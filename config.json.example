@@ -2,7 +2,7 @@
   "graphicsPath": "../graphics-js",
   "templatePath": "../dailygraphics-templates",
   // leave driveFolder blank to create new sheets in the same folder as their templates
-  "driveFolder": "",
+  "driveFolder": "0B2rSjDbnpA5XTThSNDZkWlJTX1E",
   "s3": {
     "bucket": "apps.npr.org",
     "prefix": "dailygraphics/graphics"
