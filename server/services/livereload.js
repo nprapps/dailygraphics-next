@@ -8,7 +8,7 @@ module.exports = function(app) {
 
   var server = livereload.createServer({
     extraExts: ["less"],
-    exclusions: [/node_modules\//],
+    exclusions: [/node_modules\//, /fallback.png/],
     port: config.argv.liveReload
   });
   server.watch(config.root);
