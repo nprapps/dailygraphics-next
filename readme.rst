@@ -40,11 +40,14 @@ We recognize that environment variables are not perfectly secure (since installe
 
 * GOOGLE_OAUTH_CLIENT_ID
 * GOOGLE_OAUTH_CONSUMER_SECRET
+
+The Google OAuth variables should match the client ID and secret for an API app that can access your account. `This post <http://blog.apps.npr.org/2015/03/02/app-template-oauth.html>`_ has details on setting that up.
+
+If you're deploying to S3, which is the default for the rig, you'll also need to set:
+
 * AWS_ACCESS_KEY_ID
 * AWS_SECRET_ACCESS_KEY
 * AWS_DEFAULT_REGION
-
-The Google OAuth variables should match the client ID and secret for an API app that can access your account. `This post <http://blog.apps.npr.org/2015/03/02/app-template-oauth.html>`_ has details on setting that up.
 
 In addition to the directory that contains this app, you'll also need two other directories. One is for the templates that are used to create each graphic (in the legacy rig, these were stored in the ``dailygraphics/graphic_templates`` folder). We provide a repo of templates used at NPR `here <https://github.com/nprapps/dailygraphics-templates>`_, and you should feel free to clone it. In the ``config.json file``, the "templateRoot" value should be the path to this folder.
 
@@ -124,6 +127,13 @@ When the server runs a deployemnt, it loads the ``manifest.json`` file from the 
 
 These files are run through the same translation steps as when they're sent to the browser, then uploaded to S3. Your ``config.json`` should specify an "s3" object with a bucket, as well as a "prefix" that will be added at the front of the graphics slug. For example, if your bucket and prefix are set to "apps.npr.org" and "dailygraphics/graphics", respectively, a graphic with a slug of "bar-chart-20190101" would be uploaded to ``s3://apps.npr.org/dailygraphics/graphics/bar-chart-20190101``.
 
+In addition to publishing to S3, it's possible to simply deploy to a local folder instead. To do so, add the following items to your config.json::
+
+    "deployTo": "local",
+    "exportPath": "../exports"
+
+With this configuration, when you press the deploy button, the rig will create a subfolder in ``../exports`` for your graphic, and write all the files from the graphic into it, including the preview page. Graphics folders created this way can be distributed via FTP, packaged in a ZIP, or synced to network storage, since they're self-contained units.
+
 As a final convenience feature, the rig will automatically spin up a headless browser and capture a "fallback.png" image for you prior to deployment. This happens automatically and can't be disabled at this time. If you prefer hand-crafted fallback images, you may want to save them as a different filename and update the templates to point there instead.
 
 Using the CLI
@@ -161,6 +171,10 @@ Troubleshooting
 *My chart doesn't appear, and I see an error like "ERROR:  Cannot find module 'd3-axis' from 'graphics-js/lots-of-dots-20181130'"*
 
 This usually means your graphic requires a library that you don't have installed. In the case above, we're missing ``d3-axis``. To fix it, open a terminal in the graphics folder and install the module from NPM (e.g., ``npm install d3-axis``).
+
+*I updated the rig, and now it's complaining that it can't find a module when it starts up*
+
+Oops! Looks like we added a dependency, and didn't let you know about it. Run ``npm i`` in the ``dailygraphics-next`` directory to install whatever was missing.
 
 Known issues
 ------------
