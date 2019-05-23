@@ -97,6 +97,8 @@ Errors detected during JS or LESS compilation will be routed to the dev tools co
 
 Each graphic should also have a ``manifest.json`` file in its folder, which is used to store configuration data for Sheets and deployment. The "sheets" key in that file tells the server which Google Sheet to use for loading labels and data. It will also have a snapshot of the Node modules installed when it was created--this isn't used for anything, but is meant as a helpful record when recreating graphics later.
 
+For most graphics, the Google Sheet workbook will contain a "labels" sheet (for headline and chatter text), a "metadata" sheet (which populates the copy edit e-mail on the preview page), and "data" (which actually generates the graphics). However, the rig will download any sheet it finds, unless the name starts with an underscore, like "_scratch". You can use this to hide large working sheets from the rig, preventing them from slowing down the initial preview page with data that's not directly relevant to the graphic itself.
+
 Template creation
 -----------------
 
