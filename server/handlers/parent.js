@@ -14,15 +14,8 @@ module.exports = async function(request, response) {
   var { sheet } = manifest;
   var queryParams = qs.encode(request.query);
 
-  var embedPath = path.join(config.templateRoot, "embed.html");
-  var copyeditPath = path.join(config.templateRoot, "copyedit.html");
-  var directLinkPath = path.join(config.templateRoot, "link.html");
-
   var data = {
     queryParams,
-    embedPath,
-    copyeditPath,
-    directLinkPath,
     slug,
     sheet,
     config,
