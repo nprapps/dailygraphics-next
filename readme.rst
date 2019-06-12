@@ -58,7 +58,7 @@ The server supports a number of command-line arguments to customize its behavior
 * ``--port XXXX`` - sets the port that the server will listen on to XXXX.
 * ``--live-reload XXXX`` - sets the port for the live reload server.
 * ``--force-sheet-cache`` - forces graphics preview pages to cache Google Sheets, so that you must press the "Refresh sheet" button when data is changed instead of simply reloading the page. Good for slow connections.
-* ``--no-live-reload`` - Turns off live reload when files are edited. 
+* ``--no-live-reload`` - Turns off live reload when files are edited.
 * ``--no-websockets`` - Turns off the websocket debugging connection. Along with disabling live reload, this may be good in a hosted installation environment.
 * ``--disable-headless`` - Show the Chrome window when capturing fallback images, which can help on some computers
 
@@ -74,6 +74,8 @@ Authorizing Google access
 -------------------------
 
 Similar to the original dailygraphics rig, you need to authorize this app's API access to access and create Drive files (for the spreadsheets that back each page). When the initial list page loads, it should redirect you to a Google log-in screen--just follow the instructions to complete the process. You'll need to create a Google API app, enable Drive access and store its authentication values in the ``GOOGLE_OAUTH_CLIENT_ID`` and ``GOOGLE_OAUTH_CONSUMER_SECRET`` environment variables. Your OAuth tokens are stored in your home directory as ``.google_oauth_tokens``.
+
+To do this step, you must run the rig on port 8000 (the default port). After you've done this step, you can run the rig on a different port.
 
 Creating a graphic
 ------------------
