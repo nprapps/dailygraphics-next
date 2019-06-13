@@ -10,10 +10,14 @@ module.exports = function(app) {
         var cached = null;
         if (!options.force) {
           var cached = sheetCache.get(sheet);
-          if (cached) console.log(`Using cached copy for sheet ${sheet}`);
+          if (cached) {
+            console.log(`Using cached copy for sheet ${sheet}`);
+            // make a fresh copy, so that refreshes don't mess with the data
+            cached = JSON.parse(JSON.stringify(cached));
+          }
         }
         var found = cached || (await getSheet(sheet));
-        sheetCache.set(sheet, found);
+        if (!cached) sheetCache.set(sheet, found);
         return found;
       }
     },
