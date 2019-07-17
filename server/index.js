@@ -40,7 +40,7 @@ module.exports = async function(config) {
   // basic page loading
   app.get("/", require("./handlers/root"));
   app.get("/graphic/:slug/", require("./handlers/parent"));
-  app.get("/graphic/:slug/index.html", require("./handlers/child"));
+  app.get("/graphic/:slug/*.html", require("./handlers/child"));
   app.get("/graphic/:slug/*.js", require("./handlers/bundle"));
   app.get("/graphic/:slug/*.css", require("./handlers/style"));
 

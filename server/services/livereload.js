@@ -17,7 +17,7 @@ module.exports = function(app) {
 
   var evictCache = function(file) {
     var ext = path.extname(file).slice(1);
-    console.log(`Changed: ${file}\nEvicting cache for .${ext} files and triggering live reload...`);
+    console.log(`Changed: ${file}`);
     var cache = app.get("cache").partition(ext);
     cache.clear();
   };

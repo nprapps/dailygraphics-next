@@ -26,7 +26,8 @@ module.exports = async function(request, response) {
     data.COPY = await getSheet(sheet);
   }
 
-  var file = path.join(config.root, slug, "index.html");
+  var basename = request.params[0] + ".html";
+  var file = path.join(config.root, slug, basename);
   var output = "";
   try {
     output = await processHTML(file, data);
