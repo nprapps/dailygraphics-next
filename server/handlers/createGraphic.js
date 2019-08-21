@@ -14,7 +14,13 @@ module.exports = async function(request, response) {
 
   var sheet = createSheet ? null : sheetID;
 
+  // suspend file watching
+  var livereload = app.get("livereload");
+  livereload.close();
+
+  // create files and restart watchers
   var fullSlug = await create(config, template, slug, sheet);
+  livereload.reopen();
 
   response.status(302);
   response.set({
