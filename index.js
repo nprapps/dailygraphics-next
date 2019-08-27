@@ -1,8 +1,9 @@
 var init = async function() {
   var server = require("./server");
   var readJSON = require("./lib/readJSON");
+  var configuration = require("./lib/configuration");
 
-  var config = await readJSON("./config.json");
+  var config = await configuration.load("./config.json");
 
   var environmentWhitelist = [
     "GOOGLE_OAUTH_CLIENT_ID",
