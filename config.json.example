@@ -4,8 +4,14 @@
   // leave driveFolder blank to create new sheets in the same folder as their templates
   "driveFolder": "0B2rSjDbnpA5XTThSNDZkWlJTX1E",
   "s3": {
-    "bucket": "apps.npr.org",
-    "prefix": "dailygraphics/graphics"
+    "live": {
+      "bucket": "apps.npr.org",
+      "prefix": "dailygraphics/graphics"
+    },
+    "stage": {
+      "bucket": "stage-apps.npr.org",
+      "prefix": "dailygraphics/graphics"
+    }
   },
   // this is the NPR Visuals Google Analytics property. update to use your own.
   "analyticsID": "UA-5828686-75"

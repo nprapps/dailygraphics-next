@@ -2,7 +2,7 @@ var chalk = require("chalk");
 var minimist = require("minimist");
 var path = require("path");
 
-var readJSON = require("../lib/readJSON");
+var configuration = require("../lib/configuration");
 
 var help = function() {
   console.log(`
@@ -27,9 +27,7 @@ var run = async function() {
   var argv = minimist(process.argv);
   var [node, here, script = "help", ...positional] = argv._;
 
-  var config = await readJSON("config.json");
-  config.root = path.join(process.cwd(), config.graphicsPath);
-  config.templateRoot = path.join(process.cwd(), config.templatePath);
+  var config = await configuration.load("config.json");
 
   var command = commands[script];
   command(config, argv, positional);

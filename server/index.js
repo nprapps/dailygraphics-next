@@ -1,26 +1,15 @@
 var bodyparser = require("body-parser");
 var express = require("express");
 var fs = require("fs").promises;
-var minimist = require("minimist");
 var path = require("path");
 
 var app = express();
 
-var argv = minimist(process.argv);
-
 module.exports = async function(config) {
-  config.root = path.join(process.cwd(), config.graphicsPath);
-  config.templateRoot = path.join(process.cwd(), config.templatePath);
-  config.argv = { _: argv._ };
-  for (var k in argv) {
-    if (k == "_") continue;
-    var upcase = k.replace(/-(\w)/g, (_, m) => m.toUpperCase());
-    config.argv[upcase] = argv[k];
-  }
 
   app.set("config", config);
 
-  var port = argv.port || 8000;
+  var port = config.argv.port || 8000;
   app.set("port", port);
 
   var server = app.listen(port);
