@@ -43,7 +43,7 @@
     </button>
 
     <a target="_blank" class="prod-link button hide-deployed"
-      href="https://<%= config.s3.live.bucket || config.s3.bucket %>/<%= config.s3.live.prefix || config.s3.prefix %>/<%= slug %>/preview.html">
+      href="https://<%=  config.s3.bucket || config.s3.live.bucket %>/<%= config.s3.prefix || config.s3.live.prefix%>/<%= slug %>/preview.html">
       <div aria-hidden-="true" class="inline-svg">
         <%= await t.includeStatic("../static/icons/baseline-open_in_browser-24px.svg") %>
       </div>
