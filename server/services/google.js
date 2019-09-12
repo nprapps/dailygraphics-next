@@ -21,7 +21,7 @@ module.exports = function(app) {
         return found;
       }
     },
-    auth: require("../../lib/googleAuth")
+    auth: require("../../lib/googleAuth").getAuthModule()
   };
 
   app.set("google", google);

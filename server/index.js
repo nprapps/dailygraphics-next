@@ -2,6 +2,7 @@ var bodyparser = require("body-parser");
 var express = require("express");
 var fs = require("fs").promises;
 var path = require("path");
+var getAuthType = require("../lib/googleAuth").getAuthType;
 
 var app = express();
 
@@ -40,8 +41,10 @@ module.exports = async function(config) {
   app.post("/graphic/:original/duplicate", require("./handlers/duplicateGraphic"));
 
   // Google integration
-  app.get("/authorize", require("./handlers/googleAuth").authorize);
-  app.get("/authenticate", require("./handlers/googleAuth").authenticate);
+  if (getAuthType() == "oauth") {
+    app.get("/authorize", require("./handlers/googleOAuth").authorize);
+    app.get("/authenticate", require("./handlers/googleOAuth").authenticate);
+  }
   app.post("/graphic/:slug/refresh-sheet", require("./handlers/evictSheet"));
 
   // catch-all for static assets

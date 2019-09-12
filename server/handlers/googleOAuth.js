@@ -4,7 +4,7 @@ var { URL } = require("url");
 var authorize = async function(request, response) {
   var app = request.app;
 
-  var { getClient, scopes } = app.get("google").auth;
+  var { getClient, scopes } = require("../../lib/googleOAuth");
 
   var host = request.hostname;
   var port = app.get("port");
@@ -26,7 +26,7 @@ var authorize = async function(request, response) {
 var authenticate = async function(request, response) {
   var app = request.app;
   var server = app.get("server");
-  var { getClient, updateTokenFile } = app.get("google").auth;
+  var { getClient, updateTokenFile } = require("../../lib/googleOAuth");
 
   var client = await getClient();
 
