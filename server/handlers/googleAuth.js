@@ -4,6 +4,11 @@ var { URL } = require("url");
 var authorize = async function(request, response) {
   var app = request.app;
 
+  if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+    response.send("You're using a service account, you don't need to authorize.");
+    return;
+  }
+
   var { getClient, scopes } = app.get("google").auth;
 
   var host = request.hostname;
