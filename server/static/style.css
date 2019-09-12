@@ -305,6 +305,7 @@ select {
 .preview-page .preview-container[data-width="sidebar"] { width: 180px }
 .preview-page .preview-container[data-width="mobile"] { width: 360px }
 .preview-page .preview-container[data-width="desktop"] { width: 730px }
+.preview-page .preview-container[data-width="fluid"] { border-width: 2px 0; }
 
 .preview-page .metadata {
   max-width: 700px;
