@@ -5,8 +5,6 @@ var path = require("path");
 var url = require("url");
 var ws = require("ws");
 
-var livereload = require("livereload");
-
 module.exports = function(app) {
   var config = app.get("config");
   if (config.argv.liveReload === false) return;

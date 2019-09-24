@@ -29,7 +29,6 @@
     "fsevents": "^2.0.7",
     "googleapis": "^35.0.0",
     "less": "^3.8.1",
-    "livereload": "^0.7.0",
     "lodash.escape": "^4.0.1",
     "lodash.template": "^4.4.0",
     "mime": "^2.3.1",
