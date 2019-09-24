@@ -21,6 +21,7 @@
     "browser-pack-flat": "^3.2.0",
     "browserify": "^16.2.3",
     "chalk": "^2.4.2",
+    "chokidar": "^3.1.1",
     "chrome-launcher": "^0.10.5",
     "common-shakeify": "^0.5.2",
     "exorcist": "^1.0.1",
