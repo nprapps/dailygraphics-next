@@ -25,6 +25,7 @@
     "common-shakeify": "^0.5.2",
     "exorcist": "^1.0.1",
     "express": "^4.16.4",
+    "fsevents": "^2.0.7",
     "googleapis": "^35.0.0",
     "less": "^3.8.1",
     "livereload": "^0.7.0",
