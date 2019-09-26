@@ -7,7 +7,7 @@ var init = async function() {
 
   var environmentWhitelist = [];
   if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
-    ["GOOGLE_OAUTH_CLIENT_ID", "GOOGLE_OAUTH_CONSUMER_SECRET"];
+    environmentalWhitelist = ["GOOGLE_OAUTH_CLIENT_ID", "GOOGLE_OAUTH_CONSUMER_SECRET"];
   }
 
   if (!config.deployTo || config.deployTo == "s3") {
