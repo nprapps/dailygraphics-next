@@ -1,6 +1,7 @@
 var path = require("path");
 var qs = require("querystring");
 var readJSON = require("../../lib/readJSON");
+var expand = require("../../lib/expandMatch");
 
 module.exports = async function(request, response) {
   var { app, user, query } = request;
@@ -12,13 +13,15 @@ module.exports = async function(request, response) {
   var manifest;
   manifest = (await readJSON(manifestPath)) || {};
   var { sheet } = manifest;
-  var queryParams = qs.encode(request.query);
+
+  var htmlFiles = await expand(path.join(config.root, slug), ".", ["*.html", "!_*.html"]);
+  var children = htmlFiles.length > 1 ? htmlFiles.map(f => f.relative) : false;
 
   var data = {
-    queryParams,
     slug,
     sheet,
     config,
+    children,
     deployed: false
   };
 

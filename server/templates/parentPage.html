@@ -77,8 +77,23 @@
     </form>
   </div>
 
-  <div class="preview-container" data-width="mobile">
-    <div data-pym-loader data-child-src="./index.html?<%= typeof queryParams != "undefined" ? queryParams : "" %>" id="preview">Loading...</div>
+
+  <div class="preview">
+
+    <% if (children) { %>
+    <div class="preview-select">
+      <select id="preview-select">
+        <% children.forEach(function(child) { %>
+        <option><%= child %></option>
+        <% }) %>
+      </select>
+    </div>
+    <% } %>
+
+    <div class="preview-container" data-width="mobile">
+      <div data-pym-loader data-child-src="./index.html" id="preview">Loading...</div>
+    </div>
+
   </div>
 
   <hr>
@@ -123,10 +138,11 @@
   <% if (!deployed) { %>
   <script type="module" src="/parentPage.js"></script>
   <% } %>
-  <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>
   <script>
 // this is here so that it still works on deployed pages
 var preview = document.querySelector(".preview-container");
+var embed = document.querySelector("#preview");
+var previewSelect = document.querySelector("#preview-select");
 var breakSelect = document.querySelector("select.breakpoint");
 
 breakSelect.addEventListener("change", function() {
@@ -141,6 +157,20 @@ if (window.location.hash) {
   breakSelect.value = w;
 }
 
+var here = new URL(window.location);
+var { search, searchParams } = here;
+var child = searchParams.get("preview") || "index.html";
+var childURL = `./${child}${search}`;
+embed.dataset.childSrc = childURL;
+previewSelect.value = child;
+
+previewSelect.addEventListener("change", function() {
+  var child = previewSelect.value;
+  var there = new URL(window.location);
+  there.searchParams.set("preview", child);
+  window.location.search = there.search;
+});
   </script>
+  <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>
 </body>
 </html>

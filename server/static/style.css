@@ -294,10 +294,24 @@ select {
   color: red;
 }
 
+.preview-page .preview {
+  margin: 32px auto;
+}
+
+.preview-page .preview-select {
+  padding: 20px;
+}
+
+.preview-page .preview-select select {
+  margin: auto;
+  display: block;
+}
+
+
 .preview-page .preview-container {
   border: 2px dashed var(--light-gray);
-  margin: 32px auto;
   /* exception so we can add borders with impunity */
+  margin: auto;
   box-sizing: content-box;
   width: 100%;
 }
