@@ -101,6 +101,7 @@
   <section class="metadata">
 
     <h2>Embed code</h2>
+    <% if (children) { %><h3>Default</h3><% } %>
     <textarea
       class="embed-code copy-on-click"
       readonly="readonly"
@@ -108,6 +109,17 @@
       cols="80"
       aria-label="Embed code"
     ><%- await t.process(`${config.templateRoot}/embed.html`, { config, slug }) %></textarea>
+    <%
+      if (children) for (var childPage of children.filter(c => c != "index.html")) { %>
+    <h3><%= childPage %></h3>
+    <textarea
+      class="embed-code copy-on-click"
+      readonly="readonly"
+      rows="4"
+      cols="80"
+      aria-label="Embed code"
+    ><%- await t.process(`${config.templateRoot}/embed.html`, { config, slug, childPage }) %></textarea>
+      <% } %>
 
     <%
     if (typeof COPY != "undefined") {
