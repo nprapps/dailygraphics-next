@@ -134,7 +134,7 @@
       readonly="readonly"
       rows="<%= 16 + Object.keys(COPY.labels).length * 3 %>"
       aria-label="Copyedit e-mail"
-    ><%= await t.process(`${config.templateRoot}/copyedit.html`, { COPY, config, slug, sheet }) %></textarea>
+    ><%= await t.process(`${config.templateRoot}/copyedit.html`, { COPY, config, slug, sheet, children }) %></textarea>
     <% } %>
 
     <h2>Direct link</h2>
