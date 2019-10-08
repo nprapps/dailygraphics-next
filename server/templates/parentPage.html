@@ -108,7 +108,7 @@
       rows="4"
       cols="80"
       aria-label="Embed code"
-    ><%- await t.process(`${config.templateRoot}/embed.html`, { config, slug }) %></textarea>
+    ><%- (await t.process(`${config.templateRoot}/embed.html`, { config, slug })).trim().replace(/[\s\n]+/g, " ") %></textarea>
     <%
       if (children) for (var childPage of children.filter(c => c != "index.html")) { %>
     <h3><%= childPage %></h3>
@@ -118,7 +118,7 @@
       rows="4"
       cols="80"
       aria-label="Embed code"
-    ><%- await t.process(`${config.templateRoot}/embed.html`, { config, slug, childPage }) %></textarea>
+    ><%- (await t.process(`${config.templateRoot}/embed.html`, { config, slug, childPage })).trim().replace(/[\s\n]+/g, " ") %></textarea>
       <% } %>
 
     <%
