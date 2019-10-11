@@ -189,6 +189,10 @@ This usually means your graphic requires a library that you don't have installed
 
 Oops! Looks like we added a dependency, and didn't let you know about it. Run ``npm i`` in the ``dailygraphics-next`` directory to install whatever was missing.
 
+*When I try to start the rig, it complains about "EMFILE: too many open files"*
+
+This is a problem that can occur on OS X due to the way it handles watching files. Update to the latest version of the rig and run an ``npm install``, or ``npm i fsevents`` to install a helper module if you're unable to update.
+
 Known issues
 ------------
 
