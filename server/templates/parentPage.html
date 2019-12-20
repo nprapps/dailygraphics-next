@@ -169,19 +169,21 @@ if (window.location.hash) {
   breakSelect.value = w;
 }
 
-var here = new URL(window.location);
-var { search, searchParams } = here;
-var child = searchParams.get("preview") || "index.html";
-var childURL = `./${child}${search}`;
-embed.dataset.childSrc = childURL;
-previewSelect.value = child;
+if (previewSelect) {
+  var here = new URL(window.location);
+  var { search, searchParams } = here;
+  var child = searchParams.get("preview") || "index.html";
+  var childURL = `./${child}${search}`;
+  embed.dataset.childSrc = childURL;
+  previewSelect.value = child;
 
-previewSelect.addEventListener("change", function() {
-  var child = previewSelect.value;
-  var there = new URL(window.location);
-  there.searchParams.set("preview", child);
-  window.location.search = there.search;
-});
+  previewSelect.addEventListener("change", function() {
+    var child = previewSelect.value;
+    var there = new URL(window.location);
+    there.searchParams.set("preview", child);
+    window.location.search = there.search;
+  });
+}
   </script>
   <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>
 </body>
