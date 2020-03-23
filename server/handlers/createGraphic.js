@@ -6,6 +6,7 @@ module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
   var { template, slug, createSheet, sheetID } = request.body;
+  
   if (!slug) {
     response.status(302);
     response.set("Location", "/?error=Missing slug for new graphic");
@@ -19,7 +20,8 @@ module.exports = async function(request, response) {
   livereload.close();
 
   // create files and restart watchers
-  var fullSlug = await create(config, template, slug, sheet);
+  var validSlug = slug.replace(/[^a-zA-Z0-9\-]/g, "");
+  var fullSlug = await create(config, template, validSlug, sheet);
   livereload.reopen();
 
   response.status(302);
