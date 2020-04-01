@@ -49,7 +49,7 @@ module.exports = function(app) {
 
   var timeout = null;
   var sendRefresh = function(file) {
-    if (timeout) return;
+    if (timeout) clearTimeout(timeout);
     timeout = setTimeout(function() {
       timeout = null;
       var command = JSON.stringify({
@@ -57,8 +57,8 @@ module.exports = function(app) {
         path: file,
         liveCSS: true
       });
-      websocket.clients
-        // .filter(client => client.readyState == ws.OPEN)
+      Array.from(websocket.clients)
+        .filter(client => client.readyState == ws.OPEN)
         .forEach(client => client.send(command));
     }, 200);
   };
