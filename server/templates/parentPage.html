@@ -137,14 +137,6 @@
     ><%= await t.process(`${config.templateRoot}/copyedit.html`, { COPY, config, slug, sheet, children }) %></textarea>
     <% } %>
 
-    <h2>Direct link</h2>
-
-    Underneath the graphic embed, in the text of the story, add a prompt with a direct link to the graphic (without this preview frame, embed code, etc.). You can copy/paste the text below directly into Seamus (new editor) and the formatting should be preserved.
-
-    <blockquote class="direct-link">
-      <%= await t.process(`${config.templateRoot}/link.html`, { config, slug }) %>
-    </blockquote>
-
   </section>
 
   <% if (!deployed) { %>
