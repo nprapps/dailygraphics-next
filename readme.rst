@@ -84,7 +84,7 @@ Authorizing Google access
 
 Similar to the original dailygraphics rig, you need to authorize this app's API access to access and create Drive files (for the spreadsheets that back each page). When the initial list page loads, it should redirect you to a Google log-in screen--just follow the instructions to complete the process. You'll need to create a Google API app, enable Drive access and store its authentication values in the ``GOOGLE_OAUTH_CLIENT_ID`` and ``GOOGLE_OAUTH_CONSUMER_SECRET`` environment variables. Your OAuth tokens are stored in your home directory as ``.google_oauth_tokens``.
 
-To do this step, you must run the rig on port 8000 (the default port). After you've done this step, you can run the rig on a different port.
+To authenticate for the first time, you must run the rig on port 8000 (the default port). After you've done this step, you can run the rig on a different port.
 
 Creating a graphic
 ------------------
@@ -124,7 +124,7 @@ Deployment
 
 Deployment should be as simple as configuring the bucket and path prefix in your ``config.json`` file, and then clicking the "deploy" button when previewing a particular graphic. However, understanding the mechanics of a deployment will help you debug new templates and deployment issues.
 
-When the server runs a deployemnt, it loads the ``manifest.json`` file from the graphic folder and uses the "files" array as a set of `minimatch globbing patterns <https://github.com/isaacs/minimatch>`_ to figure out which source files should actually be published. Note that unlike in the browser translation layer, where requests for ``.css`` are turned into ``.less``, the files array should actually specify ``.less`` filenames (they'll be translated back to CSS during the deploy). A typical deployment "files" array may look something like this, which grabs the main files for the graphic and any images or data that's located in the folder (not including the manifest itself)::
+When the server runs a deployment, it loads the ``manifest.json`` file from the graphic folder and uses the "files" array as a set of `minimatch globbing patterns <https://github.com/isaacs/minimatch>`_ to figure out which source files should actually be published. Note that unlike in the browser translation layer, where requests for ``.css`` are turned into ``.less``, the files array should actually specify ``.less`` filenames (they'll be translated back to CSS during the deploy). A typical deployment "files" array may look something like this, which grabs the main files for the graphic and any images or data that's located in the folder (not including the manifest itself)::
 
     "files": [
       "index.html",
