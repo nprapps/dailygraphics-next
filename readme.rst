@@ -156,6 +156,15 @@ It's possible to perform all necessary tasks from the web interface, but if you 
 
 For example, ``node cli create bar_chart testgraphic`` will create a graphic from the "bar_chart" template with the name "testgraphic". ``node cli`` or ``node cli help`` will list available commands and their arguments. Currently, commands exist for creating, copying and deploying graphics, but others will be added as the rig becomes more capable.
 
+Synchronizing large files
+-------------------------
+
+In some cases, you may have large files that you want to associate with a graphic and share across the team, but you don't want to check them into GitHub. In this case, the rig is capable of synchronizing files with S3.
+
+Any files placed in a ``synced/`` subfolder in a graphic can be transferred to and from S3 using the CLI command ``node cli sync GRAPHIC_SLUG``. For example, you might keep Illustrator templates for a graphic in ``graphic_slug/synced/illustrator``, so that your team can recreate this graphic if anything changes. You should probably exclude these from source control by adding ``*/synced`` to your ``.gitignore`` file. 
+
+Synchronized files are first compared on size, and then by date. If the sizes don't match, the newer file will be transferred to or from S3. Missing files on either side will also be reconciled. We do not currently support marking something for deletion--once it has been synchronized, it's painful to get rid of things, so be careful. If a file has changed but the size is the same, our comparison code will "see" it as the same on both sides, so in rare cases you may need to add or remove placeholder data from a file to make the system realize that it has changed.
+
 Migrating from the original dailygraphics rig
 ---------------------------------------------
 
