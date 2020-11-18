@@ -100,8 +100,16 @@ Each graphic is shown in a preview page, already embedded via Pym.js. The previe
 
 As resources are loaded, the server will process them according to their type:
 
-* HTML - processed using `Lodash templating <https://lodash.com/docs/4.17.11#template>`_. Sheets data is available as ``COPY``, just as in the classic rig, and filter functions are available on the ``t`` utility collection (e.g., ``t.classify(row.name)`` or ``t.comma(row.value)``). You can import template partials using ``await t.include("filename.html")``, where the filename is relative to the template doing the inclusion.
-* JS - transpiled with Babel to support `newer JS features <https://babeljs.io/docs/en/learn>`_ and bundled with Browserify. You can ``require()`` NPM modules into your scripts--they'll be loaded first from the graphic subfolder, if there's a ``node_modules`` there, and then from any modules installed in the graphics repo itself. Generally, you should use a local ``node_modules`` only in cases where your graphic requires a different library version from other graphics.
+* HTML - processed using `Lodash templating <https://lodash.com/docs/4.17.11#template>`_. 
+
+  * Sheets data is available as ``COPY``, just as in the classic rig, and filter functions are available on the ``t`` utility collection (e.g., ``t.classify(row.name)`` or ``t.comma(row.value)``). 
+  * You can import template partials using ``await t.include("filename.html")``, where the filename is relative to the template doing the inclusion. When templating HTML in loops, it's easier to use ``for (var item of list) { ... }`` over other methods, since these structures directly support ``await``.
+
+* JS - transpiled with Babel to support `newer JS features <https://babeljs.io/docs/en/learn>`_ and bundled with Browserify. 
+  
+  * You can ``require()`` NPM modules into your scripts--they'll be loaded first from the graphic subfolder, if there's a ``node_modules`` there, and then from any modules installed in the graphics repo itself. Generally, you should use a local ``node_modules`` only in cases where your graphic requires a different library version from other graphics.
+  * The rig also includes a Browserify transform to allow scripts to import text files as strings. For example, you might load the ``_list.html`` template partial via ``var listTemplate = require("./_list.html");``, where it can be used to dynamically generate content on the client. 
+
 * CSS - compiled from LESS files, based on filename (loading ``graphics.css`` will compile and load ``graphics.less`` from disk).
 
 Errors detected during JS or LESS compilation will be routed to the dev tools console for easy debugging if your browser supports WebSockets.
