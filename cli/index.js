@@ -24,7 +24,8 @@ var commands = {
   deploy: require("./deploy"),
   copy: require("./copy"),
   copyedit: require("./copyedit"),
-  sync: require("./sync")
+  sync: require("./sync"),
+  "try": require("./try")
 };
 
 var run = async function() {
