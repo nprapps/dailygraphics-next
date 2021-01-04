@@ -10,7 +10,7 @@ Commands available from the command line:
   - ${chalk.blue("create TYPE SLUG [SHEET]")} - create a graphic named SLUG from the template TYPE.
   - ${chalk.blue("copy ORIGINAL SLUG")} - copy ORIGINAL into a new graphic named SLUG, with a new backing sheet
   - ${chalk.blue("deploy SLUGS")} - deploy the chosen graphics to S3
-  - ${chalk.blue("sync SLUGS")} - sync assets for graphics with S3
+  - ${chalk.blue("sync SLUGS [--push|--pull]")} - sync assets for graphics with S3
   - ${chalk.blue("copyedit SLUGS")} - display the copy edit e-mail for the chosen SLUGS
   - ${chalk.blue("help")} - you're looking at it
 

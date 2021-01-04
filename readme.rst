@@ -173,6 +173,8 @@ Any files placed in a ``synced/`` subfolder in a graphic can be transferred to a
 
 Synchronized files are first compared on size, and then by date. If the sizes don't match, the newer file will be transferred to or from S3. Missing files on either side will also be reconciled. We do not currently support marking something for deletion--once it has been synchronized, it's painful to get rid of things, so be careful. If a file has changed but the size is the same, our comparison code will "see" it as the same on both sides, so in rare cases you may need to add or remove placeholder data from a file to make the system realize that it has changed.
 
+If you know that you want to transfer files one way, and you do not want to auto-resolve (for example, if all files should be uploaded but their size is the same as the remote version), you can use ``--push`` or ``--pull`` to force the sync operation to upload or download files, respectively.
+
 Migrating from the original dailygraphics rig
 ---------------------------------------------
 

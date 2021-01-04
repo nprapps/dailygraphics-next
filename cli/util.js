@@ -6,7 +6,7 @@ var completeSlug = async function(folder, fragment) {
   var matched = folders.filter(f => f.match(pattern));
   if (matched.length > 1) {
     throw `Multiple possible matches for ${fragment}:
-${matched.map(m => `  - ${m}`).join("\n")}`
+${matched.map(m => `  - ${m}`).join("\n")}`;
   }
   if (matched.length == 0) throw `Unable to find matching slug for ${fragment}`;
   var [ completed ] = matched;
