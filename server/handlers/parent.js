@@ -3,7 +3,7 @@ var qs = require("querystring");
 var readJSON = require("../../lib/readJSON");
 var expand = require("../../lib/expandMatch");
 
-module.exports = async function(request, response) {
+module.exports = async function(request, response, next) {
   var { app, user, query } = request;
   var config = app.get("config");
   var { getSheet } = app.get("google").sheets;
@@ -11,7 +11,11 @@ module.exports = async function(request, response) {
   var { slug } = request.params;
   var manifestPath = path.join(config.root, slug, "manifest.json");
   var manifest;
-  manifest = (await readJSON(manifestPath)) || {};
+  try {
+    manifest = await readJSON(manifestPath);
+  } catch (err) {
+    return response.status(500).send(`Error: Unable to read manifest.json for ${slug}`);
+  }
   var { sheet } = manifest;
 
   var htmlFiles = await expand(path.join(config.root, slug), ".", ["*.html", "!_*.html"]);
