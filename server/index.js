@@ -26,17 +26,6 @@ module.exports = async function(config) {
   app.use(bodyparser.json());
   app.use(bodyparser.urlencoded({ extended: true }));
 
-  // force trailing slashes
-  app.use(function(req, response, next) {
-    if (req.path.match(/\/[^\/.]+?$/)) {
-      var query = Object.keys(req.query).map(p => `${p}=${req.query[p]}`).join("&");
-      if (query) query = "?" + query;
-      response.redirect(req.path + "/" + query);
-      return;
-    }
-    next();
-  });
-
   // basic page loading
   app.get("/", require("./handlers/root"));
   app.get("/graphic/:slug/", require("./handlers/parent"));

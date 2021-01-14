@@ -4,6 +4,14 @@ var readJSON = require("../../lib/readJSON");
 var expand = require("../../lib/expandMatch");
 
 module.exports = async function(request, response, next) {
+  // force trailing slashes on graphics pages
+  if (request.path[request.path.length - 1] != "/") {
+    var qs = Object.keys(request.query).map(p => `${p}=${request.query[p]}`).join("&");
+    if (qs) qs = "?" + qs;
+    response.redirect(request.path + "/" + qs);
+    return;
+  }
+
   var { app, user, query } = request;
   var config = app.get("config");
   var { getSheet } = app.get("google").sheets;
