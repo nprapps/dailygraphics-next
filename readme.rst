@@ -17,18 +17,19 @@ All the good stuff from the classic rig, plus:
 Table of contents
 -----------------
 
-1. [Quickstart](#quickstart)
-1. [Getting started (in more detail)](#getting-started-in-more-detail)
-1. [Authorizing Google access](#authorizing-google-access)
-1. [Creating a graphic](#creating-a-graphic)
-1. [Preview graphic workspace](#preview-graphic-workspace)
-1. [Template creation](#template-creation)
-1. [Deployment](#deployment)
-1. [Using the CLI](#using-the-cli)
-1. [Synchronizing large files](#synchronizing-large-files)
-1. [Migrating from the original dailygraphics rig](#migrating-from-the-original-dailygraphics-rig)
-1. [Troubleshooting](#troubleshooting)
-1. [Known issues](#known-issues)
+  - `Quickstart`_
+  - `Getting started in more detail`_
+  - `Authorizing Google access`_
+  - `Creating a graphic`_
+  - `Preview graphic workspace`_
+  - `Template creation`_
+  - `Deployment`_
+  - `Using the CLI`_
+  - `Synchronizing large files`_
+  - `Migrating from the original dailygraphics rig`_
+  - `Troubleshooting`_
+  - `Known issues`_
+
 
 Quickstart
 ----------
@@ -47,8 +48,8 @@ Once you've done that:
 4. You should now have three sibling folders: the rig, the templates and a graphics repo. Configure ``config.json`` in the rig folder so that the paths for the graphics and template folders match the folders from steps 2 and 3.
 5. Run ``npm start`` to begin running the server, and open ``localhost:8000`` in your browser to view the admin UI.
 
-Getting started (in more detail)
---------------------------------
+Getting started in more detail
+------------------------------
 
 Configuration for this project is split between ``config.json`` (an example of which is provided) for values that are organization-specific but not sensitive, and environment variables for values that should be confidential.
 
