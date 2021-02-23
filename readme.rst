@@ -14,6 +14,22 @@ All the good stuff from the classic rig, plus:
 * Modern JS tooling, including Babel for new JS features and source maps for easier debugging
 * Improved Sheets integration, including typecasting for numerical/boolean values
 
+Table of contents
+-----------------
+
+1. [Quickstart](#quickstart)
+1. [Getting started (in more detail)](#getting-started-in-more-detail)
+1. [Authorizing Google access](#authorizing-google-access)
+1. [Creating a graphic](#creating-a-graphic)
+1. [Preview graphic workspace](#preview-graphic-workspace)
+1. [Template creation](#template-creation)
+1. [Deployment](#deployment)
+1. [Using the CLI](#using-the-cli)
+1. [Synchronizing large files](#synchronizing-large-files)
+1. [Migrating from the original dailygraphics rig](#migrating-from-the-original-dailygraphics-rig)
+1. [Troubleshooting](#troubleshooting)
+1. [Known issues](#known-issues)
+
 Quickstart
 ----------
 
@@ -117,6 +133,8 @@ Errors detected during JS or LESS compilation will be routed to the dev tools co
 Each graphic should also have a ``manifest.json`` file in its folder, which is used to store configuration data for Sheets and deployment. The "sheets" key in that file tells the server which Google Sheet to use for loading labels and data. It will also have a snapshot of the Node modules installed when it was created--this isn't used for anything, but is meant as a helpful record when recreating graphics later.
 
 For most graphics, the Google Sheet workbook will contain a "labels" sheet (for headline and chatter text), a "metadata" sheet (which populates the copy edit e-mail on the preview page), and "data" (which actually generates the graphics). However, the rig will download any sheet it finds, unless the name starts with an underscore, like "_scratch". You can use this to hide large working sheets from the rig, preventing them from slowing down the initial preview page with data that's not directly relevant to the graphic itself.
+
+One feature of the JS transpiling: If a Google Sheet contains the headers "key" and "value", the resulting data will be an object with a collection of key:value pairs. Any subsequent columns will be ignored. This can be seen in action in the "labels" sheet. Absent these headers, the data will be an array with each item being each row.
 
 Template creation
 -----------------
