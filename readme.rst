@@ -135,7 +135,7 @@ Each graphic should also have a ``manifest.json`` file in its folder, which is u
 
 For most graphics, the Google Sheet workbook will contain a "labels" sheet (for headline and chatter text), a "metadata" sheet (which populates the copy edit e-mail on the preview page), and "data" (which actually generates the graphics). However, the rig will download any sheet it finds, unless the name starts with an underscore, like "_scratch". You can use this to hide large working sheets from the rig, preventing them from slowing down the initial preview page with data that's not directly relevant to the graphic itself.
 
-One feature of the JS transpiling: If a Google Sheet contains the headers "key" and "value", the resulting data will be an object with a collection of key:value pairs. Any subsequent columns will be ignored. This can be seen in action in the "labels" sheet. Absent these headers, the data will be an array with each item being each row.
+One useful data structure tip: If a Google Sheet has a "key" header, it will be exposed to the template as a key/value store, with each row assigned to the respective key. If it has "key" and "value" columns, the value column will be assigned to the lookup directly, and other columns will be ignored. This can be seen in action in the "labels" sheet. Absent these headers, the data will be an array with each item being each row.
 
 Template creation
 -----------------
