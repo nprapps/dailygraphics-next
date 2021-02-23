@@ -1,4 +1,5 @@
 var deploy = require("../lib/deployGraphic");
+var { completeSlug } = require("./util");
 
 module.exports = async function(config, argv, slugs) {
   for (var slug of slugs) {
