@@ -62,6 +62,7 @@ button, .button {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   font-size: inherit;
 }
 
@@ -77,7 +78,13 @@ button[aria-pressed="true"] {
 }
 
 .inline-svg {
+  text-align: center;
   fill: currentColor;
+}
+
+.inline-svg svg {
+  display: block;
+  margin: auto;
 }
 
 button .tooltip,

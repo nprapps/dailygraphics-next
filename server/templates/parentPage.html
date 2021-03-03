@@ -44,11 +44,12 @@
     </button>
 
     <a target="_blank" class="prod-link button hide-deployed"
-      href="https://<%=  config.deployment.bucket %>/<%= config.deployment.prefix%>/<%= slug %>/preview.html">
+      href="<%= config.argv.target ? "http" : "https" %>://<%=  config.deployment.bucket %>/<%= config.deployment.prefix%>/<%= slug %>/preview.html">
       <div aria-hidden-="true" class="inline-svg">
         <%= await t.includeStatic("../static/icons/baseline-open_in_browser-24px.svg") %>
       </div>
-      <span class="tooltip">View in production</span>
+      <%= config.argv.target || "" %>
+      <span class="tooltip">View deployed preview</span>
     </a>
 
     <span class="spacer hide-deployed"></span>
@@ -64,7 +65,8 @@
       <div aria-hidden="true" class="inline-svg">
         <%= await t.includeStatic("../static/icons/baseline-cloud_upload-24px.svg") %>
       </div>
-      <span class="tooltip">Deploy to production</span>
+      <%= config.argv.target || "" %>
+      <span class="tooltip">Deploy</span>
     </button>
 
   </header>
