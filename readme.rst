@@ -133,9 +133,20 @@ Errors detected during JS or LESS compilation will be routed to the dev tools co
 
 Each graphic should also have a ``manifest.json`` file in its folder, which is used to store configuration data for Sheets and deployment. The "sheets" key in that file tells the server which Google Sheet to use for loading labels and data. It will also have a snapshot of the Node modules installed when it was created--this isn't used for anything, but is meant as a helpful record when recreating graphics later.
 
-For most graphics, the Google Sheet workbook will contain a "labels" sheet (for headline and chatter text), a "metadata" sheet (which populates the copy edit e-mail on the preview page), and "data" (which actually generates the graphics). However, the rig will download any sheet it finds, unless the name starts with an underscore, like "_scratch". You can use this to hide large working sheets from the rig, preventing them from slowing down the initial preview page with data that's not directly relevant to the graphic itself.
+Sheets integration
+------------------
+
+For most graphics, the Google Sheet workbook will contain a "labels" sheet (for headline and chatter text), a "metadata" sheet (which populates the copy edit e-mail on the preview page), and "data" (which actually generates the graphics). However, the rig will download any sheet it finds, unless the name starts with an underscore, like "_scratch". You can use this to hide large working sheets from the rig, preventing them from slowing down the initial preview page with data that's not directly relevant to the graphic itself. Likewise, columns that start with an underscore are ignored.
 
 One useful data structure tip: If a Google Sheet has a "key" header, it will be exposed to the template as a key/value store, with each row assigned to the respective key. If it has "key" and "value" columns, the value column will be assigned to the lookup directly, and other columns will be ignored. This can be seen in action in the "labels" sheet. Absent these headers, the data will be an array with each item being each row.
+
+By default, the rig automatically casts values from strings to native JS types (`true`/`false` and numbers) if possible. However, you can also manually specify a type annotation via the column name if you want to force a specific value type. To do so, set your column as `key:type` with one of the following type strings:
+
+* Strings: "text" or "string"
+* Numbers: "numeric", "float", or "number" (you can also use "int" to round the value)
+* Booleans: "bool" or "boolean" (synonyms like "true", "false", "yes", "no", or empty cells are all recognized)
+
+For example, to make sure that a "rankings" column is treated as a string of comma-separated numbers and not a single numerical value, you can rename it to "rankings:text".
 
 Template creation
 -----------------
