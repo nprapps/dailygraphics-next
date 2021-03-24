@@ -22,6 +22,7 @@ Table of contents
   - `Authorizing Google access`_
   - `Creating a graphic`_
   - `Preview graphic workspace`_
+  - `Sheets integration`_
   - `Template creation`_
   - `Deployment`_
   - `Using the CLI`_
