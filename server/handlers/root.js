@@ -4,8 +4,7 @@ var path = require("path");
 var getFolders = async function(dir) {
   var listing = await fs.readdir(dir);
   var matching = [];
-  for (var i = 0; i < listing.length; i++) {
-    var entry = listing[i];
+  for (var entry of listing) {
     if (entry.match(/^[._]|node_modules/)) continue;
     var stat = await fs.stat(path.join(dir, entry));
     if (!stat.isDirectory()) continue;
