@@ -1,4 +1,3 @@
-var compile = require("lodash.template");
 var path = require("path");
 
 var processHTML = require("../../lib/processHTML");

@@ -49,7 +49,6 @@ module.exports = function(app) {
     }
   };
 
-  // test on list route, as well as individual graphics
+  // test on individual graphics
   app.use("/graphic/:slug/$", check);
-  app.use("/$", check);
 };

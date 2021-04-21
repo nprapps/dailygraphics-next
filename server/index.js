@@ -6,6 +6,7 @@ var path = require("path");
 var app = express();
 
 module.exports = async function(config) {
+  console.log("Starting server...");
 
   app.set("config", config);
 
@@ -16,17 +17,20 @@ module.exports = async function(config) {
   app.set("server", server);
 
   // load services onto app
+  console.log("Loading services...");
   var services = await fs.readdir("server/services");
   services.forEach(s => {
     var initService = require(`./services/${s}`);
     initService(app);
   });
 
+  console.log("Setting middleware...");
   app.use(express.static("server/static"));
   app.use(bodyparser.json());
   app.use(bodyparser.urlencoded({ extended: true }));
 
   // basic page loading
+  console.log("Registering routes...");
   app.get("/", require("./handlers/root"));
   app.get("/graphic/:slug/", require("./handlers/parent"));
   app.get("/graphic/:slug/*.html", require("./handlers/child"));
@@ -47,5 +51,10 @@ module.exports = async function(config) {
   // catch-all for static assets
   app.get("/graphic/:slug/*", require("./handlers/files"));
 
+  // pre-connect to Google
+  console.log("Authorizing Sheets connection...");
+  await app.get("google").sheets.testConnection();
+
+  // all set!
   console.log(`You got this! Open http://localhost:${port} in your browser to begin.`);
 };
