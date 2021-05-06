@@ -51,10 +51,6 @@ module.exports = async function(config) {
   // catch-all for static assets
   app.get("/graphic/:slug/*", require("./handlers/files"));
 
-  // pre-connect to Google
-  console.log("Authorizing Sheets connection...");
-  await app.get("google").sheets.testConnection();
-
   // all set!
   console.log(`You got this! Open http://localhost:${port} in your browser to begin.`);
 };
