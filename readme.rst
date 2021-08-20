@@ -243,6 +243,11 @@ Oops! Looks like we added a dependency, and didn't let you know about it. Run ``
 
 This is a problem that can occur on OS X due to the way it handles watching files. Update to the latest version of the rig and run an ``npm install``, or ``npm i fsevents`` to install a helper module if you're unable to update.
 
+Development
+-----------
+
+A README with more in-depth documentation of how the application is structured is available in ``/server``. When working on the application, it's recommended to launch with ``npm run dev``, which will automatically restart the server whenever a change is made to its code.
+
 Known issues
 ------------
 

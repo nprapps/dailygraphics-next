@@ -1,4 +1,4 @@
-import "/remoteConsole.js";
+import "./remoteConsole.js";
 import { showToast } from "./toast.js";
 import { $ } from "./qsa.js";
 
@@ -44,12 +44,6 @@ deployButton.addEventListener("click", async function() {
     console.log(json.error);
   }
 });
-
-// var captureButton = $.one(".capture-fallback");
-// captureButton.addEventListener("click", async function() {
-//   var response = await fetch("./captureFallback", { method: "POST" });
-//   showToast("Captured fallback.png!");
-// });
 
 var showDuplicate = $.one(".show-duplicate");
 var duplicateShade = $.one(".copy.shade");

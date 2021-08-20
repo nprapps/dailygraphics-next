@@ -20,6 +20,8 @@ module.exports = async function(config) {
   console.log("Loading services...");
   var services = await fs.readdir("server/services");
   services.forEach(s => {
+    // ignore non-JS files like the README
+    if (!s.match(/js$/)) return;
     var initService = require(`./services/${s}`);
     initService(app);
   });

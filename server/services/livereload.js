@@ -60,7 +60,7 @@ module.exports = function(app) {
       Array.from(websocket.clients)
         .filter(client => client.readyState == ws.OPEN)
         .forEach(client => client.send(command));
-    }, 200);
+    }, 600);
   };
 
   var paused = false;
