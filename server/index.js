@@ -28,7 +28,7 @@ module.exports = async function(config) {
 
   console.log("Setting middleware...");
   app.use(express.static("server/static"));
-  app.use("/node_modules", express.static("node_modules"));
+  // app.use("/node_modules", express.static("node_modules"));
   app.use(bodyparser.json());
   app.use(bodyparser.urlencoded({ extended: true }));
 
@@ -53,6 +53,9 @@ module.exports = async function(config) {
 
   // catch-all for static assets
   app.get("/graphic/:slug/*", require("./handlers/files"));
+
+  // handle node modules
+  app.get("/node_modules/*", require("./handlers/nodeModules"));
 
   // all set!
   console.log(`You got this! Open http://localhost:${port} in your browser to begin.`);
