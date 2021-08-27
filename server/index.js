@@ -28,6 +28,7 @@ module.exports = async function(config) {
 
   console.log("Setting middleware...");
   app.use(express.static("server/static"));
+  app.use("/node_modules", express.static("node_modules"));
   app.use(bodyparser.json());
   app.use(bodyparser.urlencoded({ extended: true }));
 

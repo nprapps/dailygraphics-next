@@ -1,6 +1,7 @@
 import "./remoteConsole.js";
 import { showToast } from "./toast.js";
 import { $ } from "./qsa.js";
+import "/node_modules/@nprapps/sidechain/src/index.js";
 
 var delay = (d = 1000) => new Promise(ok => setTimeout(ok, d));
 

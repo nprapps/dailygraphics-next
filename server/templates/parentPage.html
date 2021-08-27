@@ -93,7 +93,8 @@
     <% } %>
 
     <div class="preview-container" data-width="mobile">
-      <div data-pym-loader data-child-src="./index.html" id="preview">Loading...</div>
+      <!-- <div data-pym-loader data-child-src="./index.html" id="preview">Loading...</div> -->
+      <side-chain src="./index.html" id="preview"></side-chain>
     </div>
 
   </div>
@@ -168,14 +169,16 @@ if (previewSelect) {
   var { search, searchParams } = here;
   var child = searchParams.get("preview") || "index.html";
   var childURL = `./${child}${search}`;
-  embed.dataset.childSrc = childURL;
+  embed.setAttribute("src", childURL);
   previewSelect.value = child;
 
   previewSelect.addEventListener("change", function() {
     var child = previewSelect.value;
     var there = new URL(window.location);
     there.searchParams.set("preview", child);
-    window.location.search = there.search;
+    window.history.replaceState(null, null, there.search);
+    var childURL = `./${child}${there.search}`;
+    embed.setAttribute("src", childURL);
   });
 }
   </script>
