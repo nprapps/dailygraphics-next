@@ -143,7 +143,10 @@
   </section>
 
   <% if (!deployed) { %>
+  <script type="module" src="/node_modules/@nprapps/sidechain/src/index.js"></script>
   <script type="module" src="/parentPage.js"></script>
+  <% } else { %>
+  <script src="https://apps.npr.org/sidechain/loader.js"></script>
   <% } %>
   <script>
 // this is here so that it still works on deployed pages
@@ -182,6 +185,5 @@ if (previewSelect) {
   });
 }
   </script>
-  <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>
 </body>
 </html>
