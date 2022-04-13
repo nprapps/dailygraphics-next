@@ -23,6 +23,7 @@ Table of contents
   - `Creating a graphic`_
   - `Preview graphic workspace`_
   - `Sheets integration`_
+  - `Docs integration`_
   - `Template creation`_
   - `Deployment`_
   - `Using the CLI`_
@@ -118,15 +119,15 @@ Each graphic is shown in a preview page, already embedded via Pym.js. The previe
 
 As resources are loaded, the server will process them according to their type:
 
-* HTML - processed using `Lodash templating <https://lodash.com/docs/4.17.11#template>`_. 
+* HTML - processed using `Lodash templating <https://lodash.com/docs/4.17.11#template>`_.
 
-  * Sheets data is available as ``COPY``, just as in the classic rig, and filter functions are available on the ``t`` utility collection (e.g., ``t.classify(row.name)`` or ``t.comma(row.value)``). 
+  * Sheets data is available as ``COPY``, just as in the classic rig, and filter functions are available on the ``t`` utility collection (e.g., ``t.classify(row.name)`` or ``t.comma(row.value)``).
   * You can import template partials using ``await t.include("filename.html")``, where the filename is relative to the template doing the inclusion. When templating HTML in loops, it's easier to use ``for (var item of list) { ... }`` over other methods, since these structures directly support ``await``.
 
-* JS - transpiled with Babel to support `newer JS features <https://babeljs.io/docs/en/learn>`_ and bundled with Browserify. 
-  
+* JS - transpiled with Babel to support `newer JS features <https://babeljs.io/docs/en/learn>`_ and bundled with Browserify.
+
   * You can ``require()`` NPM modules into your scripts--they'll be loaded first from the graphic subfolder, if there's a ``node_modules`` there, and then from any modules installed in the graphics repo itself. Generally, you should use a local ``node_modules`` only in cases where your graphic requires a different library version from other graphics.
-  * The rig also includes a Browserify transform to allow scripts to import text files as strings. For example, you might load the ``_list.html`` template partial via ``var listTemplate = require("./_list.html");``, where it can be used to dynamically generate content on the client. 
+  * The rig also includes a Browserify transform to allow scripts to import text files as strings. For example, you might load the ``_list.html`` template partial via ``var listTemplate = require("./_list.html");``, where it can be used to dynamically generate content on the client.
 
 * CSS - compiled from LESS files, based on filename (loading ``graphics.css`` will compile and load ``graphics.less`` from disk).
 
@@ -148,6 +149,11 @@ By default, the rig automatically casts values from strings to native JS types (
 * Booleans: "bool" or "boolean" (synonyms like "true", "false", "yes", "no", or empty cells are all recognized)
 
 For example, to make sure that a "rankings" column is treated as a string of comma-separated numbers and not a single numerical value, you can rename it to "rankings:text".
+
+Docs integration
+----------------
+
+A *secret feature* of the rig is that you can also load a Google Doc for your graphic, which can be useful for the rare text-heavy interactive. To do so, add a ``"doc"`` key to the manifest for a graphic. In your template, you'll now have access to a ``TEXT`` object with two keys: ``TEXT.raw`` will give you the direct text from the doc, and ``TEXT.parsed`` will be the ArchieML object (if it was able to be parsed). Links and some Docs formatting (bold, italics, underlines) will automatically be converted to HTML during the download process.
 
 Template creation
 -----------------
@@ -200,7 +206,7 @@ Synchronizing large files
 
 In some cases, you may have large files that you want to associate with a graphic and share across the team, but you don't want to check them into GitHub. In this case, the rig is capable of synchronizing files with S3.
 
-Any files placed in a ``synced/`` subfolder in a graphic can be transferred to and from S3 using the CLI command ``node cli sync GRAPHIC_SLUG``. For example, you might keep Illustrator templates for a graphic in ``graphic_slug/synced/illustrator``, so that your team can recreate this graphic if anything changes. You should probably exclude these from source control by adding ``*/synced`` to your ``.gitignore`` file. 
+Any files placed in a ``synced/`` subfolder in a graphic can be transferred to and from S3 using the CLI command ``node cli sync GRAPHIC_SLUG``. For example, you might keep Illustrator templates for a graphic in ``graphic_slug/synced/illustrator``, so that your team can recreate this graphic if anything changes. You should probably exclude these from source control by adding ``*/synced`` to your ``.gitignore`` file.
 
 Synchronized files are first compared on size, and then by date. If the sizes don't match, the newer file will be transferred to or from S3. Missing files on either side will also be reconciled. We do not currently support marking something for deletion--once it has been synchronized, it's painful to get rid of things, so be careful. If a file has changed but the size is the same, our comparison code will "see" it as the same on both sides, so in rare cases you may need to add or remove placeholder data from a file to make the system realize that it has changed.
 

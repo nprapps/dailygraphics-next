@@ -14,7 +14,7 @@ module.exports = async function(request, response, next) {
 
   var { app, user, query } = request;
   var config = app.get("config");
-  var { getSheet } = app.get("google").sheets;
+  var { getSheet, getDoc } = app.get("google").drive;
 
   var { slug } = request.params;
   var manifestPath = path.join(config.root, slug, "manifest.json");
@@ -24,7 +24,7 @@ module.exports = async function(request, response, next) {
   } catch (err) {
     return response.status(500).send(`Error: Unable to read manifest.json for ${slug}`);
   }
-  var { sheet } = manifest;
+  var { sheet, doc } = manifest;
 
   var htmlFiles = await expand(path.join(config.root, slug), ".", ["*.html", "!_*.html"]);
   var children = htmlFiles.length > 1 ? htmlFiles.map(f => f.relative) : false;
@@ -32,6 +32,7 @@ module.exports = async function(request, response, next) {
   var data = {
     slug,
     sheet,
+    doc,
     config,
     children,
     deployed: false
@@ -39,6 +40,10 @@ module.exports = async function(request, response, next) {
 
   if (sheet) {
     data.COPY = await getSheet(sheet, { force: !config.argv.forceSheetCache });
+  }
+
+  if (doc) {
+    data.TEXT = await getDoc(doc, { force: !config.argv.forceSheetCache });
   }
 
   response.render("parentPage.html", data);

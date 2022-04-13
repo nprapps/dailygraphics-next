@@ -36,6 +36,15 @@
     </a>
     <% } %>
 
+    <% if (typeof doc != "undefined") { %>
+      <a target="_blank" class="edit-doc button" href="https://docs.google.com/document/d/<%= doc %>/edit#gid=0">
+        <div aria-hidden="true" class="inline-svg">
+          <%= await t.includeStatic("../static/icons/baseline-folder_shared-24px.svg") %>
+        </div>
+        <span class="tooltip">Doc</span>
+      </a>
+      <% } %>
+
     <button class="refresh-sheet hide-deployed">
       <div aria-hidden="true" class="inline-svg">
         <%= await t.includeStatic("../static/icons/baseline-autorenew-24px.svg") %>
