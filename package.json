@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.1.6",
-    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-env": "^7.18.2",
     "@nprapps/betty": "^1.0.9",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^21.0.3",
