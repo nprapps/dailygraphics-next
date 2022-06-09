@@ -14,12 +14,15 @@ module.exports = async function(request, response) {
   var jsCache = app.get("cache").partition("js");
 
   try {
-    var cached = jsCache.get(sourceFile);
-    if (!cached) {
+    var output = jsCache.get(sourceFile);
+    if (!output) {
       var made = await makeJS(sourceFile, { root: config.root });
-      jsCache.set(sourceFile, made.src);
+      var { src, map } = made;
+      // add inline source map
+      src += `//# sourceMappingURL=${map.toUrl()}`;
+      output = src;
+      jsCache.set(sourceFile, src);
     }
-    var output = cached || made.src;
 
     response.set({
       "Content-Type": "application/javascript"
