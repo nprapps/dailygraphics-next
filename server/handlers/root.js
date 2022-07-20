@@ -32,7 +32,7 @@ var getMetadata = async function(data,dir) {
     if (manifest.parent) {
       var parent = manifest.parent;
     } else {
-      var parent = "";
+      var parent = [];
     }
 
     metadata[data[i]] = {

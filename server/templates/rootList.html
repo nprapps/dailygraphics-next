@@ -27,18 +27,52 @@
         <button type="submit">Create</button>
       </form>
     </div>
-    
-    <ol class="graphics-list">
-    <% graphics.forEach(function(g) {
-      console.log(graphicMetadata[g].templateType)
-     %>
-      <li data-slug="<%= g %>" class="item">
-        <div class="contents">
-          <a href="/graphic/<%= g %>/"><%= g %></a>
-        </div>
-    <% }); %>
-    </ol>
 
+    <div class="graphics-list">
+      <table id="state-table" role="table">
+        <thead role="rowgroup">
+          <tr role="row">
+            <th role="columnheader">
+              <div><div class="icon"></div></div>
+              <div class="header">Slug</div>
+            </th>
+            <th role="columnheader">
+              <div><div class="icon"></div></div>
+              <div class="header">Creation Date</div>
+            </th>
+            <th role="columnheader">
+              <div><div class="icon"></div></div>
+              <div class="header">Original template</div>
+            </th>
+            <th class="amt sort-header" role="columnheader">
+              <div><div class="icon"></div></div>
+              <div class="header">Lineage</div>
+            </th>
+          </tr>
+        </thead>
+       
+        <% graphics.forEach(function(g) {
+          var date = g.split("-")
+          var date = date[date.length -1]
+          var date = `${date.substring(4, 6)}/${date.substring(6, 8)}/${date.substring(0, 4)}`
+          var olds = ["🧓🏻","👴🏻","👵🏻","🧓🏼","👴🏼","👵🏼","🧓🏽","👴🏽","👵🏽","🧓🏾","👴🏾","👵🏾","🧓🏿","👴🏿","👵🏿"]
+          var randOld = olds[Math.floor(Math.random()*15)];
+          var lineage = graphicMetadata[g].parent.join(`<br>${randOld} `)
+         %>
+          <tr data-slug="<%= g %>" role="row">
+          <td data-slug="<%= g %>" class="item" role="cell" data-title="Slug">
+            <div class="contents">
+              <a href="/graphic/<%= g %>/"><%= g %></a>
+            </div>
+          </td>
+          <td role="cell" data-title="date"><%= date%></td>
+          <td role="cell" data-title="template"><%= graphicMetadata[g].templateType %></td>
+          <td role="cell" data-title="lineage"><%= lineage %></td>
+        </tr>
+        <% }); %>
+
+      </table>
+    </div>
     <script type="module" src="rootPage.js"></script>
   </body>
 </html>

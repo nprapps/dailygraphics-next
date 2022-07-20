@@ -258,7 +258,7 @@ select {
 }
 
 .root-list .graphics-list {
-  max-width: 400px;
+  /*max-width: 600px;*/
   margin: 40px auto;
 }
 
@@ -281,6 +281,37 @@ select {
 
 .root-list .create.shade input[name="createSheet"]:checked + input[name="sheetID"] {
   display: none;
+}
+
+
+/* Table view home page */
+
+
+/*// Base table styles*/
+div.graphics-list {
+  max-width: 1000px;
+}
+
+table {
+  border-collapse: collapse;
+  padding: 0;
+  width: 100%;
+  color: #666;
+}
+
+table th {  
+  line-height: 1.2;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+table td { 
+  vertical-align: top;   
+  margin: 2px 0;
+  padding: 2px;
+  font-size: 18px;
+  border-bottom: 1px dashed var(--light-gray);
+  height: 20px;
 }
 
 /* preview page */
