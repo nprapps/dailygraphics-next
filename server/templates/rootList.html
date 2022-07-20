@@ -29,7 +29,9 @@
     </div>
     
     <ol class="graphics-list">
-    <% graphics.forEach(function(g) { %>
+    <% graphics.forEach(function(g) {
+      console.log(graphicMetadata[g].templateType)
+     %>
       <li data-slug="<%= g %>" class="item">
         <div class="contents">
           <a href="/graphic/<%= g %>/"><%= g %></a>
