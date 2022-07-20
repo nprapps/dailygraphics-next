@@ -54,10 +54,8 @@
         <% graphics.forEach(function(g) {
           var date = g.split("-")
           var date = date[date.length -1]
-          var date = `${date.substring(4, 6)}/${date.substring(6, 8)}/${date.substring(0, 4)}`
-          var olds = ["🧓🏻","👴🏻","👵🏻","🧓🏼","👴🏼","👵🏼","🧓🏽","👴🏽","👵🏽","🧓🏾","👴🏾","👵🏾","🧓🏿","👴🏿","👵🏿"]
-          var randOld = olds[Math.floor(Math.random()*15)];
-          var lineage = graphicMetadata[g].parent.join(`<br>${randOld} `)
+          var date = `${date.substring(4, 6)}/${date.substring(6, 8)}/${date.substring(0, 4)}`          
+          var lineage = graphicMetadata[g].parent.join(`<br>👉`)
          %>
           <tr data-slug="<%= g %>" role="row">
           <td data-slug="<%= g %>" class="item" role="cell" data-title="Slug">
