@@ -290,7 +290,7 @@ select {
 
 /*// Base table styles*/
 div.graphics-list {
-  max-width: 600px;
+  max-width: 1000px;
 }
 
 table {
