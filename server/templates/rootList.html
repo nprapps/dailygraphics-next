@@ -57,16 +57,16 @@
           var date = `${date.substring(4, 6)}/${date.substring(6, 8)}/${date.substring(0, 4)}`          
           var lineage = graphicMetadata[g].parent.join(`<br>👉`)
          %>
-          <tr data-slug="<%= g %>" role="row">
-          <td data-slug="<%= g %>" class="item" role="cell" data-title="Slug">
-            <div class="contents">
-              <a href="/graphic/<%= g %>/"><%= g %></a>
-            </div>
-          </td>
-          <td role="cell" data-title="date"><%= date%></td>
-          <td role="cell" data-title="template"><%= graphicMetadata[g].templateType %></td>
-          <td role="cell" data-title="lineage"><%= lineage %></td>
-        </tr>
+          <tr data-slug="<%= g %>" class="item" role="row">
+            <td data-slug="<%= g %>" role="cell" data-title="Slug">
+              <div class="contents">
+                <a href="/graphic/<%= g %>/"><%= g %></a>
+              </div>
+            </td>
+            <td role="cell" data-title="date"><%= date%></td>
+            <td role="cell" data-title="template"><%= graphicMetadata[g].templateType %></td>
+            <td role="cell" data-title="lineage"><%= lineage %></td>
+          </tr>
         <% }); %>
 
       </table>

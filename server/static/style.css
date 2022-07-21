@@ -314,6 +314,10 @@ table td {
   height: 20px;
 }
 
+table tr.hide {
+  display: none;
+}
+
 /* preview page */
 
 .preview-page a.back {

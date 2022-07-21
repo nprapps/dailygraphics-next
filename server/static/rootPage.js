@@ -7,9 +7,11 @@ var graphicItems = $(".graphics-list .item");
 var filterGraphics = function() {
   var value = searchInput.value;
   var re = new RegExp(value);
-  graphicItems.forEach(li => {
-    var { slug } = li.dataset;
-    li.classList.toggle("hide", !slug.match(re));
+  console.log(re)
+
+  graphicItems.forEach(tr => {
+    var { slug } = tr.dataset;
+    tr.classList.toggle("hide", !slug.match(re));
   });
 };
 
