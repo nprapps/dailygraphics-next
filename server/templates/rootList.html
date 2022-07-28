@@ -51,7 +51,7 @@
                 <a href="/graphic/<%= g %>/"><%= g %></a>
               </div>
             </td>
-            <td role="cell" data-title="template"><%= graphicMetadata[g].templateType %></td>
+            <td role="cell" data-title="template"><%= graphicMetadata[g].templateType.replace(/(_|^)(\w)/g, (_, p, s) => " " + s.toUpperCase()) %></td>
           </tr>
         <% }); %>
 
