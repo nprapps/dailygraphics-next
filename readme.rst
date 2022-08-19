@@ -124,7 +124,7 @@ As resources are loaded, the server will process them according to their type:
   * Sheets data is available as ``COPY``, just as in the classic rig, and filter functions are available on the ``t`` utility collection (e.g., ``t.classify(row.name)`` or ``t.comma(row.value)``).
   * You can import template partials using ``await t.include("filename.html")``, where the filename is relative to the template doing the inclusion. When templating HTML in loops, it's easier to use ``for (var item of list) { ... }`` over other methods, since these structures directly support ``await``.
 
-* JS - transpiled with Babel to support `newer JS features <https://babeljs.io/docs/en/learn>`_ and bundled with Browserify.
+* JS - transpiled with Babel to support `newer JS features <https://babeljs.io/docs/en/learn>`_ and bundled with Rollup.
 
   * You can ``require()`` NPM modules into your scripts--they'll be loaded first from the graphic subfolder, if there's a ``node_modules`` there, and then from any modules installed in the graphics repo itself. Generally, you should use a local ``node_modules`` only in cases where your graphic requires a different library version from other graphics.
   * The rig also includes a Browserify transform to allow scripts to import text files as strings. For example, you might load the ``_list.html`` template partial via ``var listTemplate = require("./_list.html");``, where it can be used to dynamically generate content on the client.
