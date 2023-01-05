@@ -35,7 +35,7 @@
     "minimatch": "^3.0.4",
     "minimist": "^1.2.0",
     "nodemon": "^2.0.7",
-    "puppeteer-core": "^1.12.2",
+    "puppeteer-core": "^14.3.0",
     "rollup": "^2.70.1",
     "typogr": "^0.6.8",
     "ws": "^6.1.2"
