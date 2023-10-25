@@ -206,6 +206,8 @@ Synchronized files are first compared on size, and then by date. If the sizes do
 
 If you know that you want to transfer files one way, and you do not want to auto-resolve (for example, if all files should be uploaded but their size is the same as the remote version), you can use ``--push`` or ``--pull`` to force the sync operation to upload or download files, respectively.
 
+By default, files will sync with your ``live`` S3 bucket. If you'd like to specify a different target, such as stage, add the flag ``--target stage``. (So the full command would be ``node cli sync GRAPHIC_SLUG --target stage``)
+
 Migrating from the original dailygraphics rig
 ---------------------------------------------
 

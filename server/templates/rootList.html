@@ -37,6 +37,7 @@
               <div><div class="icon"></div></div>
               <div class="header">Slug</div>
             </th>
+
             <th role="columnheader">
               <div><div class="icon"></div></div>
               <div class="header">Creation Date</div>
@@ -52,12 +53,7 @@
           </tr>
         </thead>
        
-        <% graphics.forEach(function(g) {
-          var date = g.split("-")
-          var date = date[date.length -1]
-          var date = `${date.substring(4, 6)}/${date.substring(6, 8)}/${date.substring(0, 4)}`          
-          var lineage = graphicMetadata[g].parent.join(`<br>👉`)
-         %>
+        <% graphics.forEach(function(g) {%>
           <tr data-slug="<%= g %>" data-template="<%= graphicMetadata[g].templateType %>" class="item" role="row">
             <td data-slug="<%= g %>" role="cell" data-title="Slug">
               <div class="contents">
@@ -65,7 +61,7 @@
               </div>
             </td>
             <td role="cell" data-title="date"><%= date%></td>
-            <td role="cell" data-title="template"><%= graphicMetadata[g].templateType %></td>
+            <td role="cell" data-title="template"><%= graphicMetadata[g].templateType.replace(/(_|^)(\w)/g, (_, p, s) => " " + s.toUpperCase()) %></td>
             <td role="cell" data-title="lineage"><%= lineage %></td>
           </tr>
         <% }); %>

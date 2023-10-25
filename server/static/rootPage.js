@@ -8,6 +8,11 @@ var graphicItems = $(".graphics-list .item");
 
 var filterGraphics = function(inputBox,items,key) {
   var value = inputBox.value;
+  
+  if (key == "template") {
+    value = value.replaceAll(" ","_")
+  } 
+
   var re = new RegExp(value);
 
   items.forEach(tr => {

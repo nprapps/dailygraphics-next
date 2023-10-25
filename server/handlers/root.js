@@ -24,7 +24,7 @@ var getMetadata = async function(data,dir) {
   for (var i = 0; i < data.length; i++) {
     var manifestPath = path.join(dir, data[i], "manifest.json");
     var manifest = await readJSON(manifestPath);
-    if (manifest.templateType && manifest.templateType != "test") {
+    if (manifest.templateType) {
       var template = manifest.templateType;
     } else {
       template = "";
