@@ -53,16 +53,19 @@
           </tr>
         </thead>
        
-        <% graphics.forEach(function(g) {%>
+        <% graphics.forEach(function(g) {
+          console.log(graphicMetadata[g])
+
+        %>
           <tr data-slug="<%= g %>" data-template="<%= graphicMetadata[g].templateType %>" class="item" role="row">
             <td data-slug="<%= g %>" role="cell" data-title="Slug">
               <div class="contents">
                 <a href="/graphic/<%= g %>/"><%= g %></a>
               </div>
             </td>
-            <td role="cell" data-title="date"><%= date%></td>
+            
             <td role="cell" data-title="template"><%= graphicMetadata[g].templateType.replace(/(_|^)(\w)/g, (_, p, s) => " " + s.toUpperCase()) %></td>
-            <td role="cell" data-title="lineage"><%= lineage %></td>
+            
           </tr>
         <% }); %>
 
