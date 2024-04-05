@@ -1,5 +1,6 @@
 var fs = require("fs").promises;
 var path = require("path");
+var readJSON = require("../../lib/readJSON");
 
 var getFolders = async function(dir) {
   var listing = await fs.readdir(dir);
@@ -18,6 +19,32 @@ var getFolders = async function(dir) {
   return matching;
 };
 
+var getMetadata = async function(data,dir) {
+  var metadata = {};
+  for (var i = 0; i < data.length; i++) {
+    var manifestPath = path.join(dir, data[i], "manifest.json");
+    var manifest = await readJSON(manifestPath);
+    if (manifest.templateType) {
+      var template = manifest.templateType;
+    } else {
+      template = "";
+    }
+
+    if (manifest.parent) {
+      var parent = manifest.parent;
+    } else {
+      var parent = [];
+    }
+
+    metadata[data[i]] = {
+      "templateType":template,
+      "parent":parent
+    }
+  }
+  return metadata;
+};
+
+
 module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
@@ -25,5 +52,7 @@ module.exports = async function(request, response) {
   var graphics = await getFolders(config.root);
   var templates = await getFolders(config.templateRoot);
 
-  response.render("rootList.html", { graphics, templates });
+  var graphicMetadata = await getMetadata(graphics,config.root)
+
+  response.render("rootList.html", { graphics, templates, graphicMetadata });
 };
