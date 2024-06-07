@@ -55,12 +55,14 @@ Getting started in more detail
 
 Configuration for this project is split between ``config.json`` (an example of which is provided) for values that are organization-specific but not sensitive, and environment variables for values that should be confidential.
 
+**Google API app**
+
 We recognize that environment variables are not perfectly secure (since installed packages have access to them from the ``process`` global), but they're also impossible to check into GitHub accidentally. You should have set:
 
 * GOOGLE_OAUTH_CLIENT_ID
 * GOOGLE_OAUTH_CONSUMER_SECRET
 
-The Google OAuth variables should match the client ID and secret for an API app that can access your account. `This post <http://blog.apps.npr.org/2015/03/02/app-template-oauth.html>`_ has details on setting that up.
+The Google OAuth variables should match the client ID and secret for an API app that can access your account. `This post <http://blog.apps.npr.org/2015/03/02/app-template-oauth.html>`_ has details on setting that up. (Note: If you are an NPR News Apps user, you can skip this step. This API app already exists.)
 
 Alternatively, `service account authentication <https://developers.google.com/identity/protocols/OAuth2ServiceAccount>`_ is also supported. To create a service account and JSON key file, visit your project's `GCP web console <https://console.cloud.google.com/iam-admin/serviceaccounts>`_ to get started.
 
@@ -69,15 +71,21 @@ After creating the service account:
 1. Grant write access on your Drive folder (``driveFolder`` in ``config.json``) to the service account email address.
 2. Set GOOGLE_APPLICATION_CREDENTIALS to the file path of the JSON file containing your credentials.
 
+**Amazon S3**
+
 If you're deploying to S3, which is the default for the rig, you'll also need to set:
 
 * AWS_ACCESS_KEY_ID
 * AWS_SECRET_ACCESS_KEY
 * AWS_DEFAULT_REGION
 
+**Additional directories**
+
 In addition to the directory that contains this app, you'll also need two other directories. One is for the templates that are used to create each graphic (in the legacy rig, these were stored in the ``dailygraphics/graphic_templates`` folder). We provide a repo of templates used at NPR `here <https://github.com/nprapps/dailygraphics-templates>`_, and you should feel free to clone it. In the ``config.json file``, the "templateRoot" value should be the path to this folder.
 
 The other directory is for your graphics themselves, and it should be referenced with the "graphicsPath" key of your ``config.json`` file. This folder is also where you should install any libraries used by your graphics via NPM. For example, if you're using our templates, you'll want to run ``npm install d3-array d3-axis d3-scale d3-selection`` to get the most common D3 packages.
+
+**Command-line arguments**
 
 The server supports a number of command-line arguments to customize its behavior:
 
@@ -211,6 +219,8 @@ Any files placed in a ``synced/`` subfolder in a graphic can be transferred to a
 Synchronized files are first compared on size, and then by date. If the sizes don't match, the newer file will be transferred to or from S3. Missing files on either side will also be reconciled. We do not currently support marking something for deletion--once it has been synchronized, it's painful to get rid of things, so be careful. If a file has changed but the size is the same, our comparison code will "see" it as the same on both sides, so in rare cases you may need to add or remove placeholder data from a file to make the system realize that it has changed.
 
 If you know that you want to transfer files one way, and you do not want to auto-resolve (for example, if all files should be uploaded but their size is the same as the remote version), you can use ``--push`` or ``--pull`` to force the sync operation to upload or download files, respectively.
+
+By default, files will sync with your ``live`` S3 bucket. If you'd like to specify a different target, such as stage, add the flag ``--target stage``. (So the full command would be ``node cli sync GRAPHIC_SLUG --target stage``)
 
 Migrating from the original dailygraphics rig
 ---------------------------------------------
