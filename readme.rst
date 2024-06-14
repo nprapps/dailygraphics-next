@@ -149,6 +149,10 @@ By default, the rig automatically casts values from strings to native JS types (
 
 For example, to make sure that a "rankings" column is treated as a string of comma-separated numbers and not a single numerical value, you can rename it to "rankings:text".
 
+**Publishing Sheets to S3**
+
+NPR has a Google Sheets add-on that publishes sheets to S3 as JSON. This is useful if you'll be updating the data or content of a graphic — but not its code — after publication. For instructions on how to set it up, read the `Hollerith documentation <https://github.com/nprapps/hollerith>`_.
+
 Template creation
 -----------------
 
