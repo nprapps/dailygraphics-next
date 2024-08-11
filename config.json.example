@@ -13,6 +13,7 @@
       "prefix": "dailygraphics/graphics"
     }
   },
-  // this is the NPR Visuals Google Analytics property. update to use your own.
-  "analyticsID": "UA-5828686-75"
+    // this is the NPR Visuals Google Analytics property. update to use your own.
+  "ga4ID": "G-LLLW9F9XPC",
+  "analyticsID": "UA-5828686-75" //legacy UA ID
 }
