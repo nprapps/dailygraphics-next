@@ -11,7 +11,8 @@
     <header class="toolbar">
       <h1 class="title">daily.graphics</h1>
       <button class="new-graphic">new()</button>
-      <input type="search" placeholder="Search list" class="search-graphics"/>
+      <input type="search" placeholder="Search slugs" class="search-graphics"/>
+      <input type="search" placeholder="Search templates" class="search-templates"/>
     </header>
     <div class="create shade">
       <form method="POST" action="/graphic">
@@ -27,16 +28,46 @@
         <button type="submit">Create</button>
       </form>
     </div>
-    
-    <ol class="graphics-list">
-    <% graphics.forEach(function(g) { %>
-      <li data-slug="<%= g %>" class="item">
-        <div class="contents">
-          <a href="/graphic/<%= g %>/"><%= g %></a>
-        </div>
-    <% }); %>
-    </ol>
 
+    <div class="graphics-list">
+      <table id="state-table" role="table">
+        <thead role="rowgroup">
+          <tr role="row">
+            <th role="columnheader">
+              <div><div class="icon"></div></div>
+              <div class="header">Slug</div>
+            </th>
+            <!-- <th role="columnheader">
+              <div><div class="icon"></div></div>
+              <div class="header">Creation Date</div>
+            </th> -->
+            <th role="columnheader">
+              <div><div class="icon"></div></div>
+              <div class="header">Original template</div>
+            </th>
+            <th class="amt sort-header" role="columnheader">
+              <div><div class="icon"></div></div>
+              <div class="header">Lineage</div>
+            </th>
+          </tr>
+        </thead>
+       
+        <% graphics.forEach(function(g) {
+          let lineage = graphicMetadata[g].parent.join("👉")
+        %>
+          <tr data-slug="<%= g %>" data-template="<%= graphicMetadata[g].templateType %>" class="item" role="row">
+            <td data-slug="<%= g %>" role="cell" data-title="Slug">
+              <div class="contents">
+                <a href="/graphic/<%= g %>/"><%= g %></a>
+              </div>
+            </td>
+            <td role="cell" data-title="template"><%= graphicMetadata[g].templateType.replace(/(_|^)(\w)/g, (_, p, s) => " " + s.toUpperCase()) %></td>
+            <td role="cell" data-title="lineage"><%= lineage %></td>
+          </tr>
+        <% }); %>
+
+      </table>
+    </div>
     <script type="module" src="rootPage.js"></script>
   </body>
 </html>

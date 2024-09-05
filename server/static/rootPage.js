@@ -1,20 +1,31 @@
 import { showToast } from "./toast.js";
 import { $ } from "./qsa.js";
 
-var searchInput = $.one(".search-graphics");
+var slugInput = $.one(".search-graphics");
+var templateInput = $.one(".search-templates");
+
 var graphicItems = $(".graphics-list .item");
 
-var filterGraphics = function() {
-  var value = searchInput.value;
+var filterGraphics = function(inputBox,items,key) {
+  var value = inputBox.value;
+  
+  if (key == "template") {
+    value = value.replaceAll(" ","_")
+  } 
+
   var re = new RegExp(value);
-  graphicItems.forEach(li => {
-    var { slug } = li.dataset;
-    li.classList.toggle("hide", !slug.match(re));
+
+  items.forEach(tr => {
+    var thing = tr.dataset[key];
+    tr.classList.toggle("hide", !thing.match(re));
   });
 };
 
-searchInput.addEventListener("keyup", filterGraphics);
-filterGraphics();
+slugInput.addEventListener("keyup", () => filterGraphics(slugInput,graphicItems,"slug"));
+filterGraphics(slugInput,graphicItems,"slug");
+
+templateInput.addEventListener("keyup", () => filterGraphics(templateInput,graphicItems,"template"));
+filterGraphics(templateInput,graphicItems,"template");
 
 var createShade = $.one(".create.shade");
 var toggleCreate = $.one(".new-graphic");
