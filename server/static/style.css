@@ -297,6 +297,10 @@ select {
   color: green;
 }
 
+.preview-page .edit-doc.button {
+  color: blue;
+}
+
 .preview-page .prod-link.button {
   color: red;
 }

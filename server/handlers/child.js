@@ -7,23 +7,28 @@ module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
 
-  var { getSheet } = app.get("google").sheets;
+  var { getSheet, getDoc } = app.get("google").drive;
   var consoles = app.get("browserConsole");
 
   var { slug } = request.params;
 
   var manifestPath = path.join(config.root, slug, "manifest.json");
   var manifest = await readJSON(manifestPath);
-  var { sheet } = manifest;
+  var { sheet, doc } = manifest;
 
   var data = {
     slug,
     config,
-    COPY: {}
+    COPY: {},
+    TEXT: {}
   };
 
   if (sheet) {
     data.COPY = await getSheet(sheet);
+  }
+
+  if (doc) {
+    data.TEXT = await getDoc(doc);
   }
 
   var basename = request.params[0] + ".html";
