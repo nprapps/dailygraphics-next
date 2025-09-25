@@ -10,8 +10,13 @@ module.exports = async function(request, response) {
   // case sensitivity even on OS X
   var base = path.basename(file);
   var dir = path.dirname(file);
-  var listing = await fs.readdir(dir);
-  if (listing.indexOf(base) == -1) {
+  try {
+    var listing = await fs.readdir(dir);
+    if (listing.indexOf(base) == -1) {
+      throw new Error("case sensitivity violation");
+    }
+  } catch (err) {
+    // catch both case errors and just missing files
     response.status(404);
     return response.send();
   }

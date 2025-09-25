@@ -61,3 +61,43 @@ var duplicateSubmit = $.one(".copy.shade .submit");
 duplicateSubmit.addEventListener("click", function() {
   showToast("Duplicating graphic, please wait...");
 });
+
+var intercom = new BroadcastChannel("dailygraphics-next");
+var id = Date.now();
+intercom.postMessage({ type: "opened", path: window.location.pathname, id });
+
+intercom.addEventListener("message", async function(e) {
+  var message = e.data;
+  switch (message.type) {
+    case "opened":
+      if (message.path == window.location.pathname) {
+        intercom.postMessage({
+          type: "telefrag",
+          path: window.location.pathname,
+          id
+        });
+      }
+      break;
+
+    case "telefrag":
+      if (message.path == window.location.pathname) {
+        if (Notification.permission == "default") {
+          await Notification.requestPermission();
+        }
+        intercom.postMessage({
+          type: "focus",
+          id: message.id
+        });
+      }
+      break;
+
+    case "focus":
+      if (message.id == id) {
+        var slug = window.location.pathname.split("/").filter(s => s).pop();
+        var raise = new Notification(`Hey there! You have ${slug} open in another tab. Click here to open it.`);
+        document.addEventListener("visibilitychange", () => raise.close(), { once: true });
+        raise.addEventListener("click", () => window.focus());
+      }
+      break;
+  }
+})

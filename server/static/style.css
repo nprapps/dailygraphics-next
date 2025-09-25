@@ -64,50 +64,45 @@ button, .button {
   justify-content: center;
   align-items: center;
   font-size: inherit;
-}
 
-button:hover, button:focus,
-.button:hover, .button:focus {
-  outline: none;
-  border: 1px solid var(--middle-gray);
-}
+  &:hover, &:focus {
+    outline: none;
+    border: 1px solid var(--middle-gray);
 
-button[aria-pressed="true"] {
-  background: var(--blue);
-  color: var(--off-white);
+    .tooltip {
+      display: block;
+      opacity: 1;
+    }
+  }
+
+  &[aria-pressed="true"] {
+    background: var(--blue);
+    color: var(--off-white);
+  }
+
+  .tooltip {
+    opacity: 0;
+    position: absolute;
+    top: calc(100% + 4px);
+    right: -4px;
+    background: white;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, .1);
+    padding: 4px 8px;
+    pointer-events: none;
+    transition: opacity .1s .5s linear;
+    text-align: center;
+    color: var(--dark-gray);
+  }
 }
 
 .inline-svg {
   text-align: center;
   fill: currentColor;
-}
 
-.inline-svg svg {
-  display: block;
-  margin: auto;
-}
-
-button .tooltip,
-.button .tooltip {
-  opacity: 0;
-  position: absolute;
-  top: calc(100% + 4px);
-  right: -4px;
-  background: white;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, .1);
-  padding: 4px 8px;
-  pointer-events: none;
-  transition: opacity .1s .5s linear;
-  text-align: center;
-  color: var(--dark-gray);
-}
-
-button:hover .tooltip,
-button:focus .tooltip,
-.button:hover .tooltip,
-.button:focus .tooltip {
-  display: block;
-  opacity: 1;
+  & svg {
+    display: block;
+    margin: auto;
+  }
 }
 
 input {
@@ -136,48 +131,44 @@ select {
   z-index: 999;
   position: relative;
   flex-wrap: wrap;
-}
 
-.toolbar h1 {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 0;
-  display: inline;
-}
-
-.toolbar .title {
-  flex: 1;
-}
-
-@media (max-width: 900px) {
-  .toolbar {
+  @media (max-width: 900px) {
     justify-content: flex-end;
   }
 
-  .toolbar .title {
-    flex: 0 0 100%;
-    padding-bottom: 8px;
+  & h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    display: inline;
   }
-}
 
-.toolbar button,
-.toolbar .button,
-.toolbar select {
-  margin: 0 4px 0;
-  font-size: 12px;
-}
+  .title {
+    flex: 1;
 
-.toolbar input {
-  display: block;
-  font-size: 16px;
-  border: 0;
-  background: var(--off-white);
-  padding: 0 10px;
-}
+    @media (max-width: 900px) {
+      flex: 0 0 100%;
+      padding-bottom: 8px;
+    }
+  }
 
-.toolbar .spacer {
-  border-left: 1px solid var(--middle-gray);
-  margin: 0 8px;
+  .button, button, select {
+    margin: 0 4px 0;
+    font-size: 12px;
+  }
+
+  & input {
+    display: block;
+    font-size: 16px;
+    border: 0;
+    background: var(--off-white);
+    padding: 0 10px;
+  }
+
+  .spacer {
+    border-left: 1px solid var(--middle-gray);
+    margin: 0 8px;
+  }
 }
 
 @keyframes fade {
@@ -195,15 +186,15 @@ select {
   right: 0;
   padding: 16px 32px;
   display: none;
-}
 
-.toast.show {
-  display: block;
-  animation: fade 400ms linear;
-}
+  &.show {
+    display: block;
+    animation: fade 400ms linear;
+  }
 
-.toast[data-type="error"] {
-  background: var(--error);
+  &[data-type="error"] {
+    background: var(--error);
+  }
 }
 
 @keyframes slide-down {
@@ -220,148 +211,154 @@ select {
   box-shadow: 0 16px 8px rgba(0, 0, 0, .2);
   display: none;
   font-size: 16px;
-}
 
-.shade.show {
-  animation: slide-down 800ms;
-  display: block;
-}
+  &.show {
+    animation: slide-down 800ms;
+    display: block;
+  }
 
-.shade form {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
+  & form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
 
-.shade label {
-  font-size: 14px;
-  font-weight: normal;
-  margin-right: 0;
-  text-style: italic;
-}
+  & label {
+    font-size: 14px;
+    font-weight: normal;
+    margin-right: 0;
+    text-style: italic;
+  }
 
-.shade label,
-.shade input,
-.shade select,
-.shade button {
-  margin: 0 8px;
-}
+  & label, & input, & select, & button {
+    margin: 0 8px;
+  }
 
-.shade label + input[type="checkbox"] {
-  margin-left: 0;
+  & label + input[type="checkbox"] {
+    margin-left: 0;
+  }
 }
 
 /* home page */
 
 .root-list {
   background: var(--off-white);
-}
 
-.root-list .graphics-list {
-  max-width: 400px;
-  margin: 40px auto;
-}
+  .graphics-list {
+    max-width: 400px;
+    margin: 40px auto;
+  }
 
-.root-list li .contents {
-  display: flex;
-  justify-content: space-between;
-  margin: 2px 0;
-  padding: 2px;
-  font-size: 18px;
-  border-bottom: 1px dashed var(--light-gray);
-}
+  & li {
+    .contents {
+      display: flex;
+      justify-content: space-between;
+      margin: 2px 0;
+      padding: 2px;
+      font-size: 18px;
+      border-bottom: 1px dashed var(--light-gray);
+    }
 
-.root-list li.hide {
-  display: none;
-}
+    &.hide {
+      display: none;
+    }
+  }
 
-.root-list a {
-  text-decoration: none;
-}
+  & a {
+    text-decoration: none;
+  }
 
-.root-list .create.shade input[name="createSheet"]:checked + input[name="sheetID"] {
-  display: none;
+  .create.shade input[name="createSheet"]:checked + input[name="sheetID"] {
+    display: none;
+  }
 }
 
 /* preview page */
 
-.preview-page a.back {
-  font-size: 30px;
-  font-weight: bold;
-  margin-right: 10px;
-  text-decoration: none;
-  line-height: 1;
-}
+.preview-page {
 
-.preview-page .edit-sheet.button {
-  color: green;
-}
+  & a.back {
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: 10px;
+    text-decoration: none;
+    line-height: 1;
+  }
 
-.preview-page .prod-link.button {
-  color: red;
-}
+  .edit-sheet.button {
+    color: green;
+  }
 
-.preview-page .preview {
-  margin: 32px auto;
-}
+  .edit-doc.button {
+    color: blue;
+  }
 
-.preview-page .preview-select {
-  padding: 20px;
-}
+  .prod-link.button {
+    color: red;
+  }
 
-.preview-page .preview-select select {
-  margin: auto;
-  display: block;
-}
+  .preview {
+    margin: 32px auto;
+  }
 
+  .preview-select {
+    padding: 20px;
 
-.preview-page .preview-container {
-  border: 2px dashed var(--light-gray);
-  /* exception so we can add borders with impunity */
-  margin: auto;
-  box-sizing: content-box;
-  width: 100%;
-}
+    & select {
+      margin: auto;
+      display: block;
+    }
+  }
 
-.preview-page .preview-container[data-width="sidebar"] { width: 180px }
-.preview-page .preview-container[data-width="mobile"] { width: 360px }
-.preview-page .preview-container[data-width="medium"] { width: 650px }
-.preview-page .preview-container[data-width="desktop"] { width: 900px }
-.preview-page .preview-container[data-width="fluid"] { border-width: 2px 0; }
+  .preview-container {
+    border: 2px dashed var(--light-gray);
+    /* exception so we can add borders with impunity */
+    margin: auto;
+    box-sizing: content-box;
+    width: 100%;
 
-.preview-page .metadata {
-  max-width: 700px;
-  margin: auto;
-  padding: 16px;
-}
+    &[data-width="sidebar"] { width: 180px }
+    &[data-width="mobile"] { width: 360px }
+    &[data-width="medium"] { width: 650px }
+    &[data-width="desktop"] { width: 900px }
+    &[data-width="fluid"] { border-width: 2px 0; }
+  }
 
-.preview-page .copy-on-click {
-  border: none;
-  padding: 16px 8px;
-  background: var(--light-gray);
-  font-family: monospace;
-  display: block;
-  width: 100%;
-}
+  .metadata {
+    max-width: 700px;
+    margin: auto;
+    padding: 16px;
+  }
 
-.preview-page.deployed .hide-deployed {
-  display: none;
-}
+  .copy-on-click {
+    border: none;
+    padding: 16px 8px;
+    background: var(--light-gray);
+    font-family: monospace;
+    display: block;
+    width: 100%;
+  }
 
-.preview-page .direct-link {
-  background: var(--off-white);
-  display: block;
-  padding: 20px;
-  margin: 20px 0;
-}
+  &.deployed .hide-deployed {
+    display: none;
+  }
 
-.preview-page .direct-link a {
-  font-style: italic;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 14px;
-}
+  .direct-link {
+    background: var(--off-white);
+    display: block;
+    padding: 20px;
+    margin: 20px 0;
 
-.preview-page .deploy-graphic {
-  color: var(--production);
+    & a {
+      font-style: italic;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 14px;
+    }
+  }
+
+  .deploy-graphic {
+    color: var(--production);
+  }
+
 }

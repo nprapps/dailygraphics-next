@@ -4,18 +4,16 @@ var path = require("path");
 
 var configuration = require("../lib/configuration");
 
+
 var help = function() {
+  var helpable = Object.keys(commands).filter(c => commands[c].command)
+  var list = helpable.map(c => 
+    `${chalk.blue(commands[c].command)} - ${commands[c].description}`);
   console.log(`
 Commands available from the command line:
-  - ${chalk.blue("create TYPE SLUG [SHEET]")} - create a graphic named SLUG from the template TYPE.
-  - ${chalk.blue("copy ORIGINAL SLUG")} - copy ORIGINAL into a new graphic named SLUG, with a new backing sheet
-  - ${chalk.blue("deploy SLUGS")} - deploy the chosen graphics to S3
-  - ${chalk.blue("sync SLUGS [--push|--pull] [--target live|--target stage]")} - sync assets for graphics with S3
-  - ${chalk.blue("copyedit SLUGS")} - display the copy edit e-mail for the chosen SLUGS
-  - ${chalk.blue("help")} - you're looking at it
+${list.join("\n")}
 
-[BRACES] signal optional arguments.
-  `);
+[BRACES] signal optional arguments.`);
 };
 
 var commands = {

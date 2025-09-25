@@ -29,12 +29,12 @@
     </div>
     
     <ol class="graphics-list">
-    <% graphics.forEach(function(g) { %>
+    <% for (var g of graphics) { %>
       <li data-slug="<%= g %>" class="item">
         <div class="contents">
           <a href="/graphic/<%= g %>/"><%= g %></a>
         </div>
-    <% }); %>
+    <% } %>
     </ol>
 
     <script type="module" src="rootPage.js"></script>

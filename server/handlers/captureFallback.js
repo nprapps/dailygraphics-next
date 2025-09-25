@@ -15,6 +15,13 @@ module.exports = async function(request, response) {
 
   var puppet = puppetry(config);
 
+  if (config.argv.capture === false || config.capture === false) {
+    console.log("Not capturing fallback...");
+    response.status(200);
+    response.send();
+    return;
+  }
+
   try {
     console.log("Trying capture...");
     await puppet.snapGraphic(url, destination);

@@ -13,21 +13,26 @@ module.exports = function(app) {
     });
   });
 
+  var broadcast = function(message) {
+    server.clients.forEach(client => {
+      if (client.readyState == ws.OPEN) {
+        client.send(JSON.stringify(message));
+      }
+    })
+  }
+
   var makeLogLevel = function(method) {
     return function(...args) {
       console.log(method.toUpperCase() + ": ", ...args);
-      server.clients.forEach(client => {
-        if (client.readyState == ws.OPEN) {
-          client.send(JSON.stringify({ method, args }));
-        }
-      });
+      broadcast({ method, args });
     };
   };
 
   var c = {
     log: makeLogLevel("log"),
     warn: makeLogLevel("warn"),
-    error: makeLogLevel("error")
+    error: makeLogLevel("error"),
+    clear() { broadcast({ method: "clear", args: [] }) }
   };
 
   app.set("browserConsole", c);

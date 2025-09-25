@@ -11,3 +11,6 @@ module.exports = async function(config, argv, slugs) {
     }
   }
 };
+
+module.exports.command = "sync SLUGS [--push|--pull]";
+module.exports.description = "sync assets for graphics with S3, push or pull to override the automatic reconciliation";

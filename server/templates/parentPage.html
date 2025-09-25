@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<%
+  var deployBase = config.deployment.url ?
+    `https://${config.deployment.url}` :
+    `https://${config.deployment.bucket}/${config.deployment.prefix}/`;
+%>
 <html>
 <head>
   <meta charset="utf-8">
@@ -21,14 +26,13 @@
     </div>
 
     <select class="breakpoint" aria-label="Preview width">
-      <option value="sidebar">Sidebar (180px)</option>
-      <option value="mobile" selected>Mobile (360px)</option>
+      <option value="mobile">Mobile (360px)</option>
       <option value="medium" selected>Medium (650px)</option>
       <option value="desktop">Desktop (900px)</option>
       <option value="fluid">Fluid</option>
     </select>
 
-    <% if (typeof sheet != "undefined") { %>
+    <% if (typeof sheet != "undefined" && sheet) { %>
     <a target="_blank" class="edit-sheet button" href="https://docs.google.com/spreadsheets/d/<%= sheet %>/edit#gid=0">
       <div aria-hidden="true" class="inline-svg">
         <%= await t.includeStatic("../static/icons/baseline-folder_shared-24px.svg") %>
@@ -36,6 +40,15 @@
       <span class="tooltip">Sheet</span>
     </a>
     <% } %>
+
+    <% if (typeof doc != "undefined" && doc) { %>
+      <a target="_blank" class="edit-doc button" href="https://docs.google.com/document/d/<%= doc %>/edit#gid=0">
+        <div aria-hidden="true" class="inline-svg">
+          <%= await t.includeStatic("../static/icons/baseline-folder_shared-24px.svg") %>
+        </div>
+        <span class="tooltip">Doc</span>
+      </a>
+      <% } %>
 
     <button class="refresh-sheet hide-deployed">
       <div aria-hidden="true" class="inline-svg">
@@ -45,7 +58,7 @@
     </button>
 
     <a target="_blank" class="prod-link button hide-deployed"
-      href="<%= config.argv.target ? "http" : "https" %>://<%=  config.deployment.bucket %>/<%= config.deployment.prefix%>/<%= slug %>/preview.html">
+      href="<%= new URL(slug + "/preview.html", deployBase) %>">
       <div aria-hidden-="true" class="inline-svg">
         <%= await t.includeStatic("../static/icons/baseline-open_in_browser-24px.svg") %>
       </div>
@@ -57,7 +70,7 @@
 
     <button class="show-duplicate hide-deployed" aria-pressed="false">
       <div aria-hidden="true" class="inline-svg">
-        <%= await t.includeStatic("../static/icons/baseline-create_new_folder-24px.svg") %>
+        <%= await t.includeStatic("../static/icons/content-copy.svg") %>
       </div>
       <span class="tooltip">Duplicate this</span>
     </button>
@@ -83,7 +96,7 @@
 
   <div class="preview">
 
-    <% if (children) { %>
+    <% if (children.length > 1) { %>
     <div class="preview-select">
       <select id="preview-select">
         <% children.forEach(function(child) { %>
@@ -104,41 +117,26 @@
   <section class="metadata">
 
     <h2>Embed code</h2>
-    <% if (children) { %><h3>Default</h3><% } %>
-    <textarea
-      class="embed-code copy-on-click"
-      readonly="readonly"
-      rows="4"
-      cols="80"
-      aria-label="Embed code"
-    ><%- (await t.process(`${config.templateRoot}/embed.html`, { config, slug })).trim().replace(/[\s\n]+/g, " ") %></textarea>
-    <%
-      if (children) for (var childPage of children.filter(c => c != "index.html")) { %>
+    <% for (var childPage of children) { %>
     <h3><%= childPage %></h3>
     <textarea
       class="embed-code copy-on-click"
       readonly="readonly"
-      rows="4"
+      rows="3"
       cols="80"
       aria-label="Embed code"
     ><%- (await t.process(`${config.templateRoot}/embed.html`, { config, slug, childPage })).trim().replace(/[\s\n]+/g, " ") %></textarea>
-      <% } %>
+    <% } %>
 
-    <%
-    if (typeof COPY != "undefined" && COPY.labels && COPY.metadata) {
-    %>
-    <h2>Copyedit e-mail</h2>
 
-    <p>
-      Note: if you have a <var>metadata</var> tab in your sheets for this graphic, it will be used to fill in the blanks below.
+    <h2>External embeds</h2>
 
     <textarea
       class="copyedit-email copy-on-click"
       readonly="readonly"
-      rows="<%= 16 + Object.keys(COPY.labels).length * 3 %>"
+      rows="<%= 2 + children.length * 5 %>"
       aria-label="Copyedit e-mail"
-    ><%= await t.process(`${config.templateRoot}/copyedit.html`, { COPY, config, slug, sheet, children }) %></textarea>
-    <% } %>
+    ><%= await t.process(`${config.templateRoot}/copyedit.html`, { COPY, config, slug, sheet, children, deployBase }) %></textarea>
 
   </section>
 
@@ -164,19 +162,31 @@ if (window.location.hash) {
   breakSelect.value = w;
 }
 
+// add search params to the embed for testing
+if (window.location.search) {
+  var src = embed.getAttribute("src");
+  src += window.location.search;
+  embed.setAttribute("src", src);
+}
+
 if (previewSelect) {
   var here = new URL(window.location);
   var { search, searchParams } = here;
   var child = searchParams.get("preview") || "index.html";
   var childURL = `./${child}${search}`;
   embed.dataset.childSrc = childURL;
+  embed.setAttribute("src", childURL);
   previewSelect.value = child;
 
   previewSelect.addEventListener("change", function() {
     var child = previewSelect.value;
     var there = new URL(window.location);
     there.searchParams.set("preview", child);
-    window.location.search = there.search;
+    window.history.replaceState({}, false, there.toString());
+    var { search, searchParams } = there;
+    var child = searchParams.get("preview") || "index.html";
+    var childURL = `./${child}${search}`;
+    embed.setAttribute("src", childURL);
   });
 }
   </script>

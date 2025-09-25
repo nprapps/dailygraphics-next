@@ -26,3 +26,6 @@ ${email}
     }
   }
 }
+
+module.exports.command = "copyedit SLUGS";
+module.exports.description = "display the copy edit e-mail for the chosen SLUGS"

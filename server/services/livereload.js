@@ -24,6 +24,7 @@ module.exports = function(app) {
     // console.log("Livereload client connected");
 
     socket.on("message", function(message) {
+      if (message instanceof Buffer) message = message.toString("utf-8");
       if (typeof message == "string") message = JSON.parse(message);
       switch (message.command) {
         case "hello":
@@ -70,8 +71,10 @@ module.exports = function(app) {
     // todo - should we filter for specific extensions?
     // evict the cache
     var ext = path.extname(file).slice(1);
-    var cache = app.get("cache").partition(ext);
-    cache.clear();
+    var cache = app.get("cache")
+    if (cache.hasPartition(ext)) {
+      cache.partition(ext).clear();
+    }
     // tell clients about the reload (this is debounced)
     sendRefresh(file);
   };
