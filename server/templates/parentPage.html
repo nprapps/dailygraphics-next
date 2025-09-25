@@ -134,8 +134,32 @@
       <% } %>
 
     <%
-    if (typeof COPY != "undefined" && COPY.labels && COPY.metadata) {
-    %>
+      var copyedit = null;
+
+      // Look first to the spreadsheet for metadata info
+      if (typeof COPY != "undefined" && COPY.labels && COPY.metadata) {
+        copyedit = {
+          "source": "sheet",
+          "data": COPY,
+          "gdoc": sheet
+        }
+      }
+      // But if a doc exists and has metadata, refer to that instead
+      if (typeof TEXT != "undefined" && TEXT.parsed.metadata) {
+        copyedit = {
+          "source": "doc",
+          "data": TEXT.parsed,
+          "gdoc": doc
+        }
+      }
+
+      if (copyedit) {
+        var textarea_height = 16 * 3;
+        if (copyedit.source == "sheet") {
+          textarea_height += Object.keys(copyedit.data.labels).length;
+        }
+      %>
+
     <h2>Copyedit e-mail</h2>
 
     <p>
@@ -144,9 +168,10 @@
     <textarea
       class="copyedit-email copy-on-click"
       readonly="readonly"
-      rows="<%= 16 + Object.keys(COPY.labels).length * 3 %>"
+      rows="<%= textarea_height %>"
       aria-label="Copyedit e-mail"
-    ><%= await t.process(`${config.templateRoot}/copyedit.html`, { COPY, config, slug, sheet, children }) %></textarea>
+    ><%= await t.process(`${config.templateRoot}/copyedit.html`, { copyedit, config, slug, children }) %></textarea>
+
     <% } %>
 
   </section>
