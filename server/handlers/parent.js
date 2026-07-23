@@ -2,6 +2,7 @@ var path = require("path");
 var qs = require("querystring");
 var readJSON = require("../../lib/readJSON");
 var expand = require("../../lib/expandMatch");
+var fs = require("fs");
 
 module.exports = async function(request, response, next) {
   // force trailing slashes on graphics pages
@@ -28,6 +29,7 @@ module.exports = async function(request, response, next) {
 
   var htmlFiles = await expand(path.join(config.root, slug), ".", ["*.html", "!_*.html"]);
   var children = htmlFiles.length > 1 ? htmlFiles.map(f => f.relative) : false;
+  const docs_enabled = fs.existsSync(config.templateRoot + '/copyedit-v2.html');
 
   var data = {
     slug,
@@ -35,7 +37,8 @@ module.exports = async function(request, response, next) {
     doc,
     config,
     children,
-    deployed: false
+    deployed: false,
+    docsEnabled: docs_enabled
   };
 
   if (sheet) {
@@ -45,6 +48,8 @@ module.exports = async function(request, response, next) {
   if (doc) {
     data.TEXT = await getDoc(doc, { force: !config.argv.forceSheetCache });
   }
+
+  
 
   response.render("parentPage.html", data);
 };

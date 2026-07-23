@@ -133,6 +133,7 @@
     ><%- (await t.process(`${config.templateRoot}/embed.html`, { config, slug, childPage })).trim().replace(/[\s\n]+/g, " ") %></textarea>
       <% } %>
 
+    <% if (docsEnabled == true) { %> 
     <%
       var copyedit = null;
 
@@ -170,8 +171,9 @@
       readonly="readonly"
       rows="<%= textarea_height %>"
       aria-label="Copyedit e-mail"
-    ><%= await t.process(`${config.templateRoot}/copyedit.html`, { copyedit, config, slug, children }) %></textarea>
+    ><%= await t.process(`${config.templateRoot}/copyedit-v2.html`, { copyedit, config, slug, children }) %></textarea>
 
+    <% } %>
     <% } %>
 
   </section>
