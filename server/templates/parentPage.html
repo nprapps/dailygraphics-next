@@ -182,15 +182,27 @@ if (previewSelect) {
   embed.setAttribute("src", childURL);
   previewSelect.value = child;
 
+  function updatePreview(child) {
+    const parentURL = new URL(window.location.href)
+    parentURL.searchParams.set("preview", child);
+
+    const childURL = new URL(child, parentURL);
+    childURL.search = parentURL.search;
+    childURL.searchParams.delete("preview");
+
+    window.location.search = parentURL.search;
+  }
+
   previewSelect.addEventListener("change", function() {
     var child = previewSelect.value;
-    var there = new URL(window.location);
-    there.searchParams.set("preview", child);
-    window.history.replaceState({}, false, there.toString());
-    var { search, searchParams } = there;
-    var child = searchParams.get("preview") || "index.html";
-    var childURL = `./${child}${search}`;
-    embed.setAttribute("src", childURL);
+    updatePreview(child);
+    // var there = new URL(window.location);
+    // there.searchParams.set("preview", child);
+    // window.history.replaceState({}, false, there.toString());
+    // var { search, searchParams } = there;
+    // var child = searchParams.get("preview") || "index.html";
+    // var childURL = `./${child}${search}`;
+    // embed.setAttribute("src", childURL);
   });
 }
   </script>
