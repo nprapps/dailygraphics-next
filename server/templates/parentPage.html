@@ -133,7 +133,11 @@
     ><%- (await t.process(`${config.templateRoot}/embed.html`, { config, slug, childPage })).trim().replace(/[\s\n]+/g, " ") %></textarea>
       <% } %>
 
-    <% if (docsEnabled == true) { %> 
+    <% if (docsEnabled == false) { %>
+      <!-- 
+    NOTE: This update changes the way data is passed to the copyedit template. If you haven't updated to the newest version of dailygraphics-templates, with a copyedit-v2.html file, this disables the copyedit email generation.
+    -->
+     <% } else { %> 
     <%
       var copyedit = null;
 
