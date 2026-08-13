@@ -362,3 +362,80 @@ select {
   }
 
 }
+
+.preview-page .edit-sheet.button {
+  color: green;
+}
+
+.preview-page .edit-doc.button {
+  color: blue;
+}
+
+.preview-page .prod-link.button {
+  color: red;
+}
+
+.preview-page .preview {
+  margin: 32px auto;
+}
+
+.preview-page .preview-select {
+  padding: 20px;
+}
+
+.preview-page .preview-select select {
+  margin: auto;
+  display: block;
+}
+
+
+.preview-page .preview-container {
+  border: 2px dashed var(--light-gray);
+  /* exception so we can add borders with impunity */
+  margin: auto;
+  box-sizing: content-box;
+  width: 100%;
+}
+
+.preview-page .preview-container[data-width="sidebar"] { width: 180px }
+.preview-page .preview-container[data-width="mobile"] { width: 360px }
+.preview-page .preview-container[data-width="medium"] { width: 650px }
+.preview-page .preview-container[data-width="desktop"] { width: 900px }
+.preview-page .preview-container[data-width="fluid"] { border-width: 2px 0; }
+
+.preview-page .metadata {
+  max-width: 700px;
+  margin: auto;
+  padding: 16px;
+}
+
+.preview-page .copy-on-click {
+  border: none;
+  padding: 16px 8px;
+  background: var(--light-gray);
+  font-family: monospace;
+  display: block;
+  width: 100%;
+}
+
+.preview-page.deployed .hide-deployed {
+  display: none;
+}
+
+.preview-page .direct-link {
+  background: var(--off-white);
+  display: block;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.preview-page .direct-link a {
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.preview-page .deploy-graphic {
+  color: var(--production);
+}

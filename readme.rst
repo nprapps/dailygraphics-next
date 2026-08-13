@@ -23,6 +23,7 @@ Table of contents
   - `Creating a graphic`_
   - `Preview graphic workspace`_
   - `Sheets integration`_
+  - `Docs integration`_
   - `Template creation`_
   - `Deployment`_
   - `Using the CLI`_
