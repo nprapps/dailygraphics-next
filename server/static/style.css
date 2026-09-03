@@ -4,23 +4,51 @@
   --light-gray: #ddd;
   --middle-gray: #888;
   --dark-gray: #666;
+  --darkest-gray: #4d4d4d;
   --off-white: #f7f7f7;
-  --blue: #4774CC;
+  --blue-300: hsl(215, 75%, 63%);
+  --blue-400: hsl(214, 75%, 58%);
+  --blue-500: hsl(215, 91%, 45%);
+  --blue: var(--blue-500);
+  --red: #D8472B;
+  --dark-red: #A23520;
+
   --local: green;
   --staging: orange;
-  --production: red;
-  --error: darkred;
-  --dashes: 2px dashed #ddd;
+  --production: var(--red);
+  --error: var(--dark-red);
+
   font-family: sans-serif;
   line-height: 1.5;
+
+  --body-bg: #fff;
+  --body-color: var(--off-black);
+  --header-bg: var(--lightest-gray);
+  --border-color: var(--light-gray);
+  --link-color: var(--blue-500);
+  --link-hover: var(--blue-300);
+  --form-element-bg: var(--header-bg);
+
+  @media (prefers-color-scheme: dark) {
+    --body-bg: #212121;
+    --header-bg: var(--darkest-gray);
+    --border-color: var(--darkest-gray);
+    --body-color: var(--lightest-gray);
+    --link-color: var(--blue-300);
+    --link-hover: var(--blue-400);
+    --blue: var(--link-color);
+    --red: #D8472B;
+    --dark-red: #D8472B;
+  }
 }
 
 html, body {
+  background: var(--body-bg, #fff);
   padding: 0;
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
-  color: var(--off-black);
+  color: var(--body-color);
 }
 
 * {
@@ -38,13 +66,19 @@ html, body {
 }
 
 a, a.visited {
-  color: var(--blue);
+  color: var(--link-color);
+
+  &:hover, &:active {
+    color: var(--link-hover);
+  }
 }
 
 hr {
   margin: 8px auto;
   max-width: 50%;
-  border-top: 4px dotted var(--middle-gray);
+  background: none;
+  border: none;
+  border-top: 4px dotted var(--border-color);
 }
 
 button, .button {
@@ -56,7 +90,7 @@ button, .button {
   color: var(--blue);
   font-weight: bold;
   transition: all .1s linear;
-  background: white;
+  background: var(--body-bg);
   text-decoration: none;
   line-height: 1;
   display: flex;
@@ -67,7 +101,7 @@ button, .button {
 
   &:hover, &:focus {
     outline: none;
-    border: 1px solid var(--middle-gray);
+    border: 1px solid var(--link-hover);
 
     .tooltip {
       display: block;
@@ -111,20 +145,22 @@ input {
   font-size: inherit;
   font-family: inherit;
   padding: 4px;
+  background: var(--form-element-bg);
+  color: var(--body-color);
 }
 
 select {
   padding: 4px;
   font-size: inherit;
   font-family: inherit;
-  color: var(--blue);
+  color: var(--link-color);
   font-weight: bold;
+  background: var(--body-bg);
 }
 
 /* components */
-
 .toolbar {
-  background: var(--lightest-gray);
+  background: var(--header-bg);
   padding: 8px 16px;
   display: flex;
   justify-content: space-between;
@@ -161,8 +197,8 @@ select {
     display: block;
     font-size: 16px;
     border: 0;
-    background: var(--off-white);
     padding: 0 10px;
+    background: var(--body-bg);
   }
 
   .spacer {
@@ -239,10 +275,11 @@ select {
   }
 }
 
+
 /* home page */
 
 .root-list {
-  background: var(--off-white);
+  background: var(--body-bg);
 
   .graphics-list {
     max-width: 400px;
@@ -256,7 +293,7 @@ select {
       margin: 2px 0;
       padding: 2px;
       font-size: 18px;
-      border-bottom: 1px dashed var(--light-gray);
+      border-bottom: 1px dashed var(--border-color);
     }
 
     &.hide {
@@ -290,11 +327,11 @@ select {
   }
 
   .edit-doc.button {
-    color: blue;
+    color: var(--blue);
   }
 
   .prod-link.button {
-    color: red;
+    color: var(--red);
   }
 
   .preview {
@@ -311,7 +348,7 @@ select {
   }
 
   .preview-container {
-    border: 2px dashed var(--light-gray);
+    border: 2px dashed var(--border-color);
     /* exception so we can add borders with impunity */
     margin: auto;
     box-sizing: content-box;
@@ -333,10 +370,11 @@ select {
   .copy-on-click {
     border: none;
     padding: 16px 8px;
-    background: var(--light-gray);
     font-family: monospace;
     display: block;
     width: 100%;
+    background: var(--form-element-bg);
+    color: var(--body-color);
   }
 
   &.deployed .hide-deployed {
@@ -344,7 +382,7 @@ select {
   }
 
   .direct-link {
-    background: var(--off-white);
+    background: var(--form-element-bg);
     display: block;
     padding: 20px;
     margin: 20px 0;
@@ -361,81 +399,4 @@ select {
     color: var(--production);
   }
 
-}
-
-.preview-page .edit-sheet.button {
-  color: green;
-}
-
-.preview-page .edit-doc.button {
-  color: blue;
-}
-
-.preview-page .prod-link.button {
-  color: red;
-}
-
-.preview-page .preview {
-  margin: 32px auto;
-}
-
-.preview-page .preview-select {
-  padding: 20px;
-}
-
-.preview-page .preview-select select {
-  margin: auto;
-  display: block;
-}
-
-
-.preview-page .preview-container {
-  border: 2px dashed var(--light-gray);
-  /* exception so we can add borders with impunity */
-  margin: auto;
-  box-sizing: content-box;
-  width: 100%;
-}
-
-.preview-page .preview-container[data-width="sidebar"] { width: 180px }
-.preview-page .preview-container[data-width="mobile"] { width: 360px }
-.preview-page .preview-container[data-width="medium"] { width: 650px }
-.preview-page .preview-container[data-width="desktop"] { width: 900px }
-.preview-page .preview-container[data-width="fluid"] { border-width: 2px 0; }
-
-.preview-page .metadata {
-  max-width: 700px;
-  margin: auto;
-  padding: 16px;
-}
-
-.preview-page .copy-on-click {
-  border: none;
-  padding: 16px 8px;
-  background: var(--light-gray);
-  font-family: monospace;
-  display: block;
-  width: 100%;
-}
-
-.preview-page.deployed .hide-deployed {
-  display: none;
-}
-
-.preview-page .direct-link {
-  background: var(--off-white);
-  display: block;
-  padding: 20px;
-  margin: 20px 0;
-}
-
-.preview-page .direct-link a {
-  font-style: italic;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.preview-page .deploy-graphic {
-  color: var(--production);
 }
